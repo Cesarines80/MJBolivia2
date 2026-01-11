@@ -1,0 +1,149 @@
+<?php
+require_once '../config/config.php';
+require_once '../includes/auth.php';
+require_once '../includes/functions.php';
+
+// Establecer headers para JSON
+header('Content-Type: application/json');
+
+// Verificar autenticación
+$currentUser = Auth::getUser();
+if (!$currentUser) {
+    http_response_code(401);
+    echo json_encode(['success' => false, 'error' => 'No autorizado']);
+    exit;
+}
+
+// Obtener acción
+$action = $_GET['action'] ?? '';
+
+switch ($action) {
+    case 'get_carrusel':
+        $id = (int)($_GET['id'] ?? 0);
+        $item = Carrusel::getById($id);
+
+        if ($item) {
+            echo json_encode(['success' => true, 'data' => $item]);
+        } else {
+            echo json_encode(['success' => false, 'error' => 'Elemento no encontrado']);
+        }
+        break;
+
+    case 'get_evento':
+        $id = (int)($_GET['id'] ?? 0);
+        $item = Eventos::getById($id);
+
+        if ($item) {
+            echo json_encode(['success' => true, 'data' => $item]);
+        } else {
+            echo json_encode(['success' => false, 'error' => 'Evento no encontrado']);
+        }
+        break;
+
+    case 'get_galeria':
+        $id = (int)($_GET['id'] ?? 0);
+        $item = Galeria::getById($id);
+
+        if ($item) {
+            echo json_encode(['success' => true, 'data' => $item]);
+        } else {
+            echo json_encode(['success' => false, 'error' => 'Imagen no encontrada']);
+        }
+        break;
+
+    case 'get_contacto':
+        $id = (int)($_GET['id'] ?? 0);
+        $item = Contactos::getById($id);
+
+        if ($item) {
+            echo json_encode(['success' => true, 'data' => $item]);
+        } else {
+            echo json_encode(['success' => false, 'error' => 'Mensaje no encontrado']);
+        }
+        break;
+
+    case 'get_admin':
+        if (!Auth::checkRole(['superadmin'])) {
+            echo json_encode(['success' => false, 'error' => 'Permisos insuficientes']);
+            exit;
+        }
+
+        $id = (int)($_GET['id'] ?? 0);
+        $db = getDB();
+        $stmt = $db->prepare("SELECT id, nombre, email, rol, estado FROM administradores WHERE id = ?");
+        $stmt->execute([$id]);
+        $item = $stmt->fetch();
+
+        if ($item) {
+            echo json_encode(['success' => true, 'data' => $item]);
+        } else {
+            echo json_encode(['success' => false, 'error' => 'Administrador no encontrado']);
+        }
+        break;
+
+    case 'get_mision_vision':
+        $id = (int)($_GET['id'] ?? 0);
+        $item = MisionVision::getById($id);
+
+        if ($item) {
+            echo json_encode(['success' => true, 'data' => $item]);
+        } else {
+            echo json_encode(['success' => false, 'error' => 'Elemento no encontrado']);
+        }
+        break;
+
+    case 'get_eventos_usuario':
+        // Verificar que sea super admin
+        if (!Auth::checkRole(['superadmin', 'super_admin'])) {
+            echo json_encode(['success' => false, 'error' => 'Permisos insuficientes']);
+            exit;
+        }
+
+        $usuarioId = (int)($_GET['usuario_id'] ?? 0);
+
+        if ($usuarioId <= 0) {
+            echo json_encode(['success' => false, 'error' => 'ID de usuario inválido']);
+            exit;
+        }
+
+        $db = getDB();
+        $stmt = $db->prepare("
+            SELECT ea.evento_id, ea.usuario_id, ea.fecha_asignacion,
+                   e.nombre, e.estado,
+                   u.nombre_completo as asignado_por_nombre
+            FROM eventos_administradores ea
+            INNER JOIN eventos e ON ea.evento_id = e.id
+            LEFT JOIN usuarios u ON ea.asignado_por = u.id
+            WHERE ea.usuario_id = ? AND ea.activo = 1
+            ORDER BY ea.fecha_asignacion DESC
+        ");
+        $stmt->execute([$usuarioId]);
+        $eventos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Formatear fechas
+        foreach ($eventos as &$evento) {
+            $evento['fecha_asignacion'] = date('d/m/Y H:i', strtotime($evento['fecha_asignacion']));
+        }
+
+        echo json_encode(['success' => true, 'eventos' => $eventos]);
+        break;
+
+    case 'get_config':
+        $eventoId = (int)($_GET['evento_id'] ?? 0);
+
+        if ($eventoId <= 0) {
+            echo json_encode(['success' => false, 'error' => 'ID de evento inválido']);
+            exit;
+        }
+
+        $db = getDB();
+        $eventosManager = new EventosManager($db);
+        $config = $eventosManager->getConfig($eventoId);
+
+        echo json_encode($config);
+        break;
+
+    default:
+        echo json_encode(['success' => false, 'error' => 'Acción no válida']);
+        break;
+}

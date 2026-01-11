@@ -1,0 +1,375 @@
+
+[10-Jan-2026 18:14:02 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:14:25 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:14:34 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\dashboard.php on line 380
+[10-Jan-2026 18:14:34 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\dashboard.php on line 380
+[10-Jan-2026 18:14:34 America/Mexico_City] PHP Warning:  Undefined array key "fecha_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\dashboard.php on line 383
+[10-Jan-2026 18:14:34 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\dashboard.php on line 380
+[10-Jan-2026 18:14:34 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\dashboard.php on line 380
+[10-Jan-2026 18:14:34 America/Mexico_City] PHP Warning:  Undefined array key "fecha_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\dashboard.php on line 383
+[10-Jan-2026 18:14:36 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:14:42 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:14:44 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:14:45 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:14:45 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:14:45 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:14:46 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:14:46 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:14:47 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:15:12 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:15:15 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:15:16 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:15:16 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:15:17 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:15:20 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:15:21 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:15:21 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:15:22 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:15:22 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:15:26 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:15:28 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:15:28 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:15:28 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:17:40 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:18:01 America/Mexico_City] PHP Warning:  Undefined array key "imagen" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 682
+[10-Jan-2026 18:18:01 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:18:01 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:18:01 America/Mexico_City] PHP Warning:  Undefined array key "fecha_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 694
+[10-Jan-2026 18:18:01 America/Mexico_City] PHP Warning:  Undefined array key "hora_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 695
+[10-Jan-2026 18:18:01 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:18:01 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:18:01 America/Mexico_City] PHP Warning:  Undefined array key "imagen" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 682
+[10-Jan-2026 18:18:01 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:18:01 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:18:01 America/Mexico_City] PHP Warning:  Undefined array key "fecha_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 694
+[10-Jan-2026 18:18:01 America/Mexico_City] PHP Warning:  Undefined array key "hora_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 695
+[10-Jan-2026 18:18:01 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:18:01 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:18:01 America/Mexico_City] PHP Warning:  Undefined array key "imagen" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 682
+[10-Jan-2026 18:18:01 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:18:01 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:18:01 America/Mexico_City] PHP Warning:  Undefined array key "fecha_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 694
+[10-Jan-2026 18:18:01 America/Mexico_City] PHP Warning:  Undefined array key "hora_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 695
+[10-Jan-2026 18:18:01 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:18:01 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:18:21 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:18:22 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:18:23 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:18:23 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:18:29 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:18:29 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:00 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:02 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:03 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:04 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:04 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:04 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:06 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:07 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:07 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:07 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:07 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:08 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:08 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:08 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:08 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:11 America/Mexico_City] PHP Warning:  Undefined array key "imagen" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 682
+[10-Jan-2026 18:26:11 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:26:11 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:26:11 America/Mexico_City] PHP Warning:  Undefined array key "fecha_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 694
+[10-Jan-2026 18:26:11 America/Mexico_City] PHP Warning:  Undefined array key "hora_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 695
+[10-Jan-2026 18:26:11 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:26:11 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:26:11 America/Mexico_City] PHP Warning:  Undefined array key "imagen" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 682
+[10-Jan-2026 18:26:11 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:26:11 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:26:11 America/Mexico_City] PHP Warning:  Undefined array key "fecha_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 694
+[10-Jan-2026 18:26:11 America/Mexico_City] PHP Warning:  Undefined array key "hora_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 695
+[10-Jan-2026 18:26:11 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:26:11 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:26:11 America/Mexico_City] PHP Warning:  Undefined array key "imagen" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 682
+[10-Jan-2026 18:26:11 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:26:11 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:26:11 America/Mexico_City] PHP Warning:  Undefined array key "fecha_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 694
+[10-Jan-2026 18:26:11 America/Mexico_City] PHP Warning:  Undefined array key "hora_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 695
+[10-Jan-2026 18:26:11 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:26:11 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:26:23 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:24 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:25 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:45 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:45 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:46 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:47 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:48 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:48 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:48 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:50 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:51 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:51 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:51 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:52 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:52 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:52 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:26:54 America/Mexico_City] PHP Warning:  Undefined array key "imagen" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 682
+[10-Jan-2026 18:26:54 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:26:54 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:26:54 America/Mexico_City] PHP Warning:  Undefined array key "fecha_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 694
+[10-Jan-2026 18:26:54 America/Mexico_City] PHP Warning:  Undefined array key "hora_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 695
+[10-Jan-2026 18:26:54 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:26:54 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:26:54 America/Mexico_City] PHP Warning:  Undefined array key "imagen" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 682
+[10-Jan-2026 18:26:54 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:26:54 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:26:54 America/Mexico_City] PHP Warning:  Undefined array key "fecha_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 694
+[10-Jan-2026 18:26:54 America/Mexico_City] PHP Warning:  Undefined array key "hora_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 695
+[10-Jan-2026 18:26:54 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:26:54 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:26:54 America/Mexico_City] PHP Warning:  Undefined array key "imagen" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 682
+[10-Jan-2026 18:26:54 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:26:54 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:26:54 America/Mexico_City] PHP Warning:  Undefined array key "fecha_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 694
+[10-Jan-2026 18:26:54 America/Mexico_City] PHP Warning:  Undefined array key "hora_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 695
+[10-Jan-2026 18:26:54 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:26:54 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:27:03 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:27:13 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:27:13 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:27:14 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:28:55 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:30:24 America/Mexico_City] PHP Warning:  Undefined array key "imagen" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 682
+[10-Jan-2026 18:30:24 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:30:24 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:30:24 America/Mexico_City] PHP Warning:  Undefined array key "fecha_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 694
+[10-Jan-2026 18:30:24 America/Mexico_City] PHP Warning:  Undefined array key "hora_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 695
+[10-Jan-2026 18:30:24 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:30:24 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:30:24 America/Mexico_City] PHP Warning:  Undefined array key "imagen" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 682
+[10-Jan-2026 18:30:24 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:30:24 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:30:24 America/Mexico_City] PHP Warning:  Undefined array key "fecha_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 694
+[10-Jan-2026 18:30:24 America/Mexico_City] PHP Warning:  Undefined array key "hora_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 695
+[10-Jan-2026 18:30:24 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:30:24 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:30:24 America/Mexico_City] PHP Warning:  Undefined array key "imagen" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 682
+[10-Jan-2026 18:30:24 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:30:24 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:30:24 America/Mexico_City] PHP Warning:  Undefined array key "fecha_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 694
+[10-Jan-2026 18:30:24 America/Mexico_City] PHP Warning:  Undefined array key "hora_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 695
+[10-Jan-2026 18:30:24 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:30:24 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:35:21 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\dashboard.php on line 380
+[10-Jan-2026 18:35:21 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\dashboard.php on line 380
+[10-Jan-2026 18:35:21 America/Mexico_City] PHP Warning:  Undefined array key "fecha_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\dashboard.php on line 383
+[10-Jan-2026 18:35:21 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\dashboard.php on line 380
+[10-Jan-2026 18:35:21 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\dashboard.php on line 380
+[10-Jan-2026 18:35:21 America/Mexico_City] PHP Warning:  Undefined array key "fecha_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\dashboard.php on line 383
+[10-Jan-2026 18:35:21 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\dashboard.php on line 380
+[10-Jan-2026 18:35:21 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\dashboard.php on line 380
+[10-Jan-2026 18:35:21 America/Mexico_City] PHP Warning:  Undefined array key "fecha_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\dashboard.php on line 383
+[10-Jan-2026 18:35:52 America/Mexico_City] PHP Warning:  Undefined array key "imagen" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 682
+[10-Jan-2026 18:35:52 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:35:52 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:35:52 America/Mexico_City] PHP Warning:  Undefined array key "fecha_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 694
+[10-Jan-2026 18:35:52 America/Mexico_City] PHP Warning:  Undefined array key "hora_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 695
+[10-Jan-2026 18:35:52 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:35:52 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:35:52 America/Mexico_City] PHP Warning:  Undefined array key "imagen" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 682
+[10-Jan-2026 18:35:52 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:35:52 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:35:52 America/Mexico_City] PHP Warning:  Undefined array key "fecha_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 694
+[10-Jan-2026 18:35:52 America/Mexico_City] PHP Warning:  Undefined array key "hora_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 695
+[10-Jan-2026 18:35:52 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:35:52 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:35:52 America/Mexico_City] PHP Warning:  Undefined array key "imagen" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 682
+[10-Jan-2026 18:35:52 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:35:52 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:35:52 America/Mexico_City] PHP Warning:  Undefined array key "fecha_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 694
+[10-Jan-2026 18:35:52 America/Mexico_City] PHP Warning:  Undefined array key "hora_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 695
+[10-Jan-2026 18:35:52 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:35:52 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:36:08 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:36:10 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:36:11 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:36:11 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:36:11 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:36:12 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:36:13 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:36:13 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:36:14 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:36:14 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:36:14 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:36:14 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:36:14 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:36:15 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:36:25 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:36:28 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:36:30 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:36:31 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:36:32 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:36:35 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:37:28 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:37:37 America/Mexico_City] PHP Warning:  Undefined array key "imagen" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 682
+[10-Jan-2026 18:37:37 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:37:37 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:37:37 America/Mexico_City] PHP Warning:  Undefined array key "fecha_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 694
+[10-Jan-2026 18:37:37 America/Mexico_City] PHP Warning:  Undefined array key "hora_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 695
+[10-Jan-2026 18:37:37 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:37:37 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:37:37 America/Mexico_City] PHP Warning:  Undefined array key "imagen" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 682
+[10-Jan-2026 18:37:37 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:37:37 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:37:37 America/Mexico_City] PHP Warning:  Undefined array key "fecha_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 694
+[10-Jan-2026 18:37:37 America/Mexico_City] PHP Warning:  Undefined array key "hora_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 695
+[10-Jan-2026 18:37:37 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:37:37 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:37:37 America/Mexico_City] PHP Warning:  Undefined array key "imagen" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 682
+[10-Jan-2026 18:37:37 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:37:37 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 687
+[10-Jan-2026 18:37:37 America/Mexico_City] PHP Warning:  Undefined array key "fecha_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 694
+[10-Jan-2026 18:37:37 America/Mexico_City] PHP Warning:  Undefined array key "hora_evento" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 695
+[10-Jan-2026 18:37:37 America/Mexico_City] PHP Warning:  Undefined array key "titulo" in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:37:37 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\index.php on line 708
+[10-Jan-2026 18:40:12 America/Mexico_City] PHP Warning:  Undefined array key "user_id" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 248
+[10-Jan-2026 18:55:47 America/Mexico_City] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number in C:\xampp\htdocs\proyectos\MJBolivia2\includes\functions.php:362
+Stack trace:
+#0 C:\xampp\htdocs\proyectos\MJBolivia2\includes\functions.php(362): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\proyectos\MJBolivia2\admin\mision-vision.php(46): MisionVision::update(1, Array)
+#2 {main}
+  thrown in C:\xampp\htdocs\proyectos\MJBolivia2\includes\functions.php on line 362
+[10-Jan-2026 21:13:48 America/Mexico_City] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'web_institucional.sesiones' doesn't exist in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php:447
+Stack trace:
+#0 C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php(447): PDO->prepare('\n            IN...')
+#1 C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php(110): Auth->createSession(Array)
+#2 C:\xampp\htdocs\proyectos\MJBolivia2\fix_andres_login.php(97): Auth->login('andres', '123456')
+#3 {main}
+  thrown in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 447
+[10-Jan-2026 21:19:03 America/Mexico_City] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'web_institucional.sesiones' doesn't exist in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php:447
+Stack trace:
+#0 C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php(447): PDO->prepare('\n            IN...')
+#1 C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php(110): Auth->createSession(Array)
+#2 C:\xampp\htdocs\proyectos\MJBolivia2\fix_andres_login.php(97): Auth->login('andres', '123456')
+#3 {main}
+  thrown in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 447
+[10-Jan-2026 21:23:01 America/Mexico_City] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'web_institucional.sesiones' doesn't exist in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php:450
+Stack trace:
+#0 C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php(450): PDO->prepare('\n            IN...')
+#1 C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php(110): Auth->createSession(Array)
+#2 C:\xampp\htdocs\proyectos\MJBolivia2\logout_and_fix.php(145): Auth->login('andres', '123456')
+#3 {main}
+  thrown in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 450
+[10-Jan-2026 21:31:54 America/Mexico_City] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'web_institucional.sesiones' doesn't exist in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php:450
+Stack trace:
+#0 C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php(450): PDO->prepare('\n            IN...')
+#1 C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php(110): Auth->createSession(Array)
+#2 C:\xampp\htdocs\proyectos\MJBolivia2\logout_and_fix.php(145): Auth->login('andres', '123456')
+#3 {main}
+  thrown in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 450
+[10-Jan-2026 21:31:55 America/Mexico_City] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'web_institucional.sesiones' doesn't exist in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php:450
+Stack trace:
+#0 C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php(450): PDO->prepare('\n            IN...')
+#1 C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php(110): Auth->createSession(Array)
+#2 C:\xampp\htdocs\proyectos\MJBolivia2\logout_and_fix.php(145): Auth->login('andres', '123456')
+#3 {main}
+  thrown in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 450
+[10-Jan-2026 21:31:56 America/Mexico_City] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'web_institucional.sesiones' doesn't exist in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php:450
+Stack trace:
+#0 C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php(450): PDO->prepare('\n            IN...')
+#1 C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php(110): Auth->createSession(Array)
+#2 C:\xampp\htdocs\proyectos\MJBolivia2\logout_and_fix.php(145): Auth->login('andres', '123456')
+#3 {main}
+  thrown in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 450
+[10-Jan-2026 21:32:01 America/Mexico_City] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'web_institucional.sesiones' doesn't exist in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php:450
+Stack trace:
+#0 C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php(450): PDO->prepare('\n            IN...')
+#1 C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php(110): Auth->createSession(Array)
+#2 C:\xampp\htdocs\proyectos\MJBolivia2\logout_and_fix.php(145): Auth->login('andres', '123456')
+#3 {main}
+  thrown in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 450
+[10-Jan-2026 21:41:39 America/Mexico_City] PHP Warning:  Undefined array key "REMOTE_ADDR" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 63
+[10-Jan-2026 21:41:39 America/Mexico_City] PHP Warning:  Undefined array key "REMOTE_ADDR" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 100
+[10-Jan-2026 21:42:16 America/Mexico_City] PHP Warning:  Undefined array key "REMOTE_ADDR" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 63
+[10-Jan-2026 21:42:16 America/Mexico_City] PHP Warning:  Undefined array key "REMOTE_ADDR" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 100
+[10-Jan-2026 21:44:18 America/Mexico_City] PHP Warning:  Undefined array key "REMOTE_ADDR" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 63
+[10-Jan-2026 21:44:18 America/Mexico_City] PHP Warning:  Undefined array key "REMOTE_ADDR" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 122
+[10-Jan-2026 21:44:18 America/Mexico_City] PHP Warning:  session_regenerate_id(): Session ID cannot be regenerated after headers have already been sent in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 453
+[10-Jan-2026 21:44:18 America/Mexico_City] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'web_institucional.sesiones' doesn't exist in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php:465
+Stack trace:
+#0 C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php(465): PDO->prepare('\n            IN...')
+#1 C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php(125): Auth->createSession(Array)
+#2 C:\xampp\htdocs\proyectos\MJBolivia2\test_login_andres_final.php(36): Auth->login('andres', '123456')
+#3 {main}
+  thrown in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 465
+[10-Jan-2026 21:45:40 America/Mexico_City] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'web_institucional.sesiones' doesn't exist in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php:465
+Stack trace:
+#0 C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php(465): PDO->prepare('\n            IN...')
+#1 C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php(125): Auth->createSession(Array)
+#2 C:\xampp\htdocs\proyectos\MJBolivia2\admin\login.php(28): Auth->login('andres@andres.c...', '123456')
+#3 {main}
+  thrown in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 465
+[10-Jan-2026 22:42:08 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 103
+[10-Jan-2026 22:42:08 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 103
+[10-Jan-2026 22:42:08 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 170
+[10-Jan-2026 22:42:08 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 170
+[10-Jan-2026 22:42:08 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 255
+[10-Jan-2026 22:42:08 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 255
+[10-Jan-2026 22:42:08 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 259
+[10-Jan-2026 22:42:08 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 260
+[10-Jan-2026 22:42:08 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 266
+[10-Jan-2026 22:42:08 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 266
+[10-Jan-2026 22:42:08 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 473
+[10-Jan-2026 22:42:08 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 473
+[10-Jan-2026 22:42:12 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 100
+[10-Jan-2026 22:42:12 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 100
+[10-Jan-2026 22:42:12 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 161
+[10-Jan-2026 22:42:12 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 161
+[10-Jan-2026 22:56:23 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 103
+[10-Jan-2026 22:56:23 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 103
+[10-Jan-2026 22:56:23 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 170
+[10-Jan-2026 22:56:23 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 170
+[10-Jan-2026 22:56:23 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 255
+[10-Jan-2026 22:56:23 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 255
+[10-Jan-2026 22:56:23 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 259
+[10-Jan-2026 22:56:23 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 260
+[10-Jan-2026 22:56:23 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 266
+[10-Jan-2026 22:56:23 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 266
+[10-Jan-2026 22:56:23 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 473
+[10-Jan-2026 22:56:23 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 473
+[10-Jan-2026 22:57:21 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 103
+[10-Jan-2026 22:57:21 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 103
+[10-Jan-2026 22:57:21 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 170
+[10-Jan-2026 22:57:21 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 170
+[10-Jan-2026 22:57:21 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 255
+[10-Jan-2026 22:57:21 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 255
+[10-Jan-2026 22:57:21 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 259
+[10-Jan-2026 22:57:21 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 260
+[10-Jan-2026 22:57:21 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 266
+[10-Jan-2026 22:57:21 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 266
+[10-Jan-2026 22:57:21 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 473
+[10-Jan-2026 22:57:21 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 473
+[10-Jan-2026 22:57:22 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 103
+[10-Jan-2026 22:57:22 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 103
+[10-Jan-2026 22:57:22 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 170
+[10-Jan-2026 22:57:22 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 170
+[10-Jan-2026 22:57:22 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 255
+[10-Jan-2026 22:57:22 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 255
+[10-Jan-2026 22:57:22 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 259
+[10-Jan-2026 22:57:22 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 260
+[10-Jan-2026 22:57:22 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 266
+[10-Jan-2026 22:57:22 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 266
+[10-Jan-2026 22:57:22 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 473
+[10-Jan-2026 22:57:22 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 473
+[10-Jan-2026 23:19:53 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 100
+[10-Jan-2026 23:19:53 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 100
+[10-Jan-2026 23:19:53 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 161
+[10-Jan-2026 23:19:53 America/Mexico_City] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 161
+[11-Jan-2026 01:38:05 America/La_Paz] PHP Warning:  Undefined array key "REMOTE_ADDR" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 63
+[11-Jan-2026 01:38:05 America/La_Paz] PHP Warning:  Undefined array key "REMOTE_ADDR" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 122
+[11-Jan-2026 01:38:05 America/La_Paz] PHP Warning:  session_regenerate_id(): Session ID cannot be regenerated after headers have already been sent in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 453
+[11-Jan-2026 01:54:11 America/La_Paz] PHP Warning:  Undefined array key "REMOTE_ADDR" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 63
+[11-Jan-2026 01:54:11 America/La_Paz] PHP Warning:  Undefined array key "REMOTE_ADDR" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 122
+[11-Jan-2026 01:54:11 America/La_Paz] PHP Warning:  session_regenerate_id(): Session ID cannot be regenerated after headers have already been sent in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 453
+[11-Jan-2026 01:58:08 America/La_Paz] PHP Warning:  Undefined array key "REMOTE_ADDR" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 63
+[11-Jan-2026 01:59:09 America/La_Paz] PHP Warning:  Undefined array key "REMOTE_ADDR" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 63
+[11-Jan-2026 01:59:10 America/La_Paz] PHP Warning:  Undefined array key "REMOTE_ADDR" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 122
+[11-Jan-2026 01:59:10 America/La_Paz] PHP Warning:  session_regenerate_id(): Session ID cannot be regenerated after headers have already been sent in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 453
