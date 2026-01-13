@@ -139,11 +139,13 @@ class EventosManager
             return ['success' => false, 'message' => 'No se puede eliminar el evento porque tiene inscripciones'];
         }
 
+        // Log before delete to avoid foreign key issues
+        $auth->logActivity($_SESSION['admin_id'] ?? $_SESSION['user_id'], $eventoId, 'evento_eliminado', 'Evento eliminado ID: ' . $eventoId);
+
         $stmt = $this->db->prepare("DELETE FROM eventos WHERE id = ?");
         $result = $stmt->execute([$eventoId]);
 
         if ($result) {
-            $auth->logActivity($_SESSION['admin_id'] ?? $_SESSION['user_id'], $eventoId, 'evento_eliminado', 'Evento eliminado ID: ' . $eventoId);
             return ['success' => true];
         }
 

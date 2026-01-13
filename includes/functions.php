@@ -107,18 +107,39 @@ class Carrusel
 
     public static function delete($id)
     {
+        error_log("CARRUSEL DELETE: Starting deletion of ID $id");
+
         $db = getDB();
         $item = self::getById($id);
 
+        if (!$item) {
+            error_log("CARRUSEL DELETE: Item not found for ID $id");
+            return false;
+        }
+
+        error_log("CARRUSEL DELETE: Found item: " . json_encode($item));
+
         if ($item && $item['imagen']) {
             $filePath = UPLOADS_DIR . $item['imagen'];
+            error_log("CARRUSEL DELETE: Checking file: $filePath");
             if (file_exists($filePath)) {
-                unlink($filePath);
+                $deleted = unlink($filePath);
+                error_log("CARRUSEL DELETE: File deletion result: " . ($deleted ? 'SUCCESS' : 'FAILED'));
+            } else {
+                error_log("CARRUSEL DELETE: File does not exist: $filePath");
             }
         }
 
         $stmt = $db->prepare("DELETE FROM carrusel WHERE id = ?");
-        return $stmt->execute([$id]);
+        $result = $stmt->execute([$id]);
+        error_log("CARRUSEL DELETE: Database deletion result: " . ($result ? 'SUCCESS' : 'FAILED'));
+
+        if (!$result) {
+            $error = $stmt->errorInfo();
+            error_log("CARRUSEL DELETE: Database error: " . json_encode($error));
+        }
+
+        return $result;
     }
 
     public static function updateOrder($orders)
@@ -304,18 +325,39 @@ class Galeria
 
     public static function delete($id)
     {
+        error_log("GALERIA DELETE: Starting deletion of ID $id");
+
         $db = getDB();
         $item = self::getById($id);
 
+        if (!$item) {
+            error_log("GALERIA DELETE: Item not found for ID $id");
+            return false;
+        }
+
+        error_log("GALERIA DELETE: Found item: " . json_encode($item));
+
         if ($item && $item['imagen']) {
             $filePath = UPLOADS_DIR . $item['imagen'];
+            error_log("GALERIA DELETE: Checking file: $filePath");
             if (file_exists($filePath)) {
-                unlink($filePath);
+                $deleted = unlink($filePath);
+                error_log("GALERIA DELETE: File deletion result: " . ($deleted ? 'SUCCESS' : 'FAILED'));
+            } else {
+                error_log("GALERIA DELETE: File does not exist: $filePath");
             }
         }
 
         $stmt = $db->prepare("DELETE FROM galeria WHERE id = ?");
-        return $stmt->execute([$id]);
+        $result = $stmt->execute([$id]);
+        error_log("GALERIA DELETE: Database deletion result: " . ($result ? 'SUCCESS' : 'FAILED'));
+
+        if (!$result) {
+            $error = $stmt->errorInfo();
+            error_log("GALERIA DELETE: Database error: " . json_encode($error));
+        }
+
+        return $result;
     }
 }
 

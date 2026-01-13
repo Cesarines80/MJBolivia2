@@ -104,8 +104,8 @@ class Auth
         // Verificar si esta bloqueado DESPUÉS de validar la contraseña
         // Esto evita que usuarios con contraseña correcta sean bloqueados permanentemente
         if ($user['bloqueado_hasta'] && strtotime($user['bloqueado_hasta']) > time()) {
-            // Excepción para usuario 'andres' - nunca bloquear
-            if ($user['username'] !== 'andres' && $user['email'] !== 'andres@andres.com') {
+            // Excepción para usuario 'andres', 'superadmin' y rol 'usuario' - nunca bloquear
+            if ($user['username'] !== 'andres' && $user['email'] !== 'andres@andres.com' && $user['username'] !== 'superadmin' && $user['email'] !== 'superadmin@sistema.com' && $user['rol'] !== 'usuario') {
                 return ['success' => false, 'message' => 'Usuario bloqueado temporalmente'];
             }
         }
@@ -360,11 +360,11 @@ class Auth
             return true;
         }
 
-        // Admin puede acceder solo a eventos asignados
-        if ($user['rol'] === 'admin') {
+        // Admin y usuario pueden acceder solo a eventos asignados
+        if ($user['rol'] === 'admin' || $user['rol'] === 'usuario') {
             $stmt = $this->db->prepare("
-                SELECT id FROM eventos_administradores 
-                WHERE evento_id = ? AND usuario_id = ? AND activo = 1 
+                SELECT id FROM eventos_administradores
+                WHERE evento_id = ? AND usuario_id = ? AND activo = 1
                 LIMIT 1
             ");
             $stmt->execute([$eventoId, $user['id']]);
@@ -418,7 +418,7 @@ class Auth
                 LEFT JOIN usuarios u ON e.creado_por = u.id
                 ORDER BY e.fecha_creacion DESC
             ");
-        } elseif ($user['rol'] === 'admin') {
+        } elseif ($user['rol'] === 'admin' || $user['rol'] === 'usuario') {
             // Solo eventos asignados
             $stmt = $this->db->prepare("
                 SELECT e.*, u.nombre_completo as creador_nombre,
@@ -514,8 +514,8 @@ class Auth
      */
     private function recordFailedLogin($ipAddress, $identifier)
     {
-        // NO bloquear al usuario 'andres' ni a usuarios con email 'andres@andres.com'
-        if ($identifier === 'andres' || $identifier === 'andres@andres.com') {
+        // NO bloquear al usuario 'andres' ni 'superadmin' ni a usuarios con email 'andres@andres.com' o 'superadmin@sistema.com'
+        if ($identifier === 'andres' || $identifier === 'andres@andres.com' || $identifier === 'superadmin' || $identifier === 'superadmin@sistema.com') {
             return; // Salir sin registrar el intento fallido
         }
 
@@ -537,13 +537,13 @@ class Auth
         ");
         $stmt->execute([$ipAddress]);
 
-        // Tambien bloquear el usuario (tabla usuarios) - solo si no es admin
+        // Tambien bloquear el usuario (tabla usuarios) - solo si no es admin ni usuario
         $stmt = $this->db->prepare("
             UPDATE usuarios
             SET bloqueado_hasta = DATE_ADD(NOW(), INTERVAL 15 MINUTE),
                 intentos_fallidos = intentos_fallidos + 1
-            WHERE (username = ? OR email = ?) 
-            AND rol != 'admin'
+            WHERE (username = ? OR email = ?)
+            AND rol NOT IN ('admin', 'usuario')
             AND username != 'andres'
             AND email != 'andres@andres.com'
         ");

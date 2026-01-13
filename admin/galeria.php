@@ -6,7 +6,35 @@ require_once '../includes/functions.php';
 // Requerir autenticación
 Auth::requireLogin();
 
-// Procesar acciones
+// Procesar eliminación (GET request)
+if (isset($_GET['delete'])) {
+    // Verificar que sea super_admin o admin
+    if (!isset($_SESSION['user_id']) && !isset($_SESSION['is_admin'])) {
+        $_SESSION['error'] = 'Debes iniciar sesión para eliminar imágenes';
+        redirect('galeria.php');
+    }
+
+    $isAdmin = isset($_SESSION['is_admin']);
+    $userRole = $_SESSION['rol'] ?? $_SESSION['admin_rol'] ?? '';
+    $canDelete = $isAdmin || in_array($userRole, ['super_admin', 'superadmin', 'admin']);
+
+    if (!$canDelete) {
+        $_SESSION['error'] = 'No tienes permisos para eliminar imágenes. Rol actual: ' . $userRole . ', is_admin: ' . ($isAdmin ? 'sí' : 'no');
+        redirect('galeria.php');
+    }
+
+    $id = (int)$_GET['delete'];
+    if (Galeria::delete($id)) {
+        logActivity('DELETE_GALERIA', "ID: $id");
+        $_SESSION['success'] = 'Imagen eliminada correctamente';
+    } else {
+        $_SESSION['error'] = 'Error al eliminar la imagen';
+    }
+
+    redirect('galeria.php');
+}
+
+// Procesar acciones POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validar token CSRF
     if (!validateCSRFToken($_POST['csrf_token'] ?? '')) {
@@ -83,17 +111,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['success'] = 'Imagen actualizada correctamente';
         } else {
             $_SESSION['error'] = 'Error al actualizar la imagen';
-        }
-    }
-
-    // Eliminar imagen
-    if (isset($_GET['delete'])) {
-        $id = (int)$_GET['delete'];
-        if (Galeria::delete($id)) {
-            logActivity('DELETE_GALERIA', "ID: $id");
-            $_SESSION['success'] = 'Imagen eliminada correctamente';
-        } else {
-            $_SESSION['error'] = 'Error al eliminar la imagen';
         }
     }
 
@@ -357,7 +374,8 @@ $csrfToken = generateCSRFToken();
 
                     <!-- Botón agregar -->
                     <div class="mb-3 d-flex justify-content-between align-items-center">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAgregar">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#modalAgregar">
                             <i class="fas fa-plus"></i> Agregar Imagen
                         </button>
 
@@ -392,10 +410,17 @@ $csrfToken = generateCSRFToken();
                                                 onclick="editarImagen(<?php echo $item['id']; ?>)">
                                                 <i class="fas fa-edit"></i> Editar
                                             </button>
-                                            <button type="button" class="btn btn-danger btn-sm"
-                                                onclick="confirmarEliminar(<?php echo $item['id']; ?>, '<?php echo htmlspecialchars($item['titulo']); ?>')">
-                                                <i class="fas fa-trash"></i> Eliminar
-                                            </button>
+                                            <?php
+                                            $isAdmin = isset($_SESSION['is_admin']);
+                                            $userRole = $_SESSION['rol'] ?? $_SESSION['admin_rol'] ?? '';
+                                            $canDelete = $isAdmin || in_array($userRole, ['super_admin', 'superadmin', 'admin']);
+                                            if ($canDelete):
+                                            ?>
+                                                <button type="button" class="btn btn-danger btn-sm"
+                                                    onclick="confirmarEliminar(<?php echo $item['id']; ?>, '<?php echo htmlspecialchars($item['titulo']); ?>')">
+                                                    <i class="fas fa-trash"></i> Eliminar
+                                                </button>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>

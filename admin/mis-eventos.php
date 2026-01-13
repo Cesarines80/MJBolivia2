@@ -5,7 +5,7 @@ require_once __DIR__ . '/../config/config.php';
 Auth::requireLogin();
 
 // Verificar que tenga rol de admin o super_admin
-if (!Auth::checkRole(['superadmin', 'admin', 'super_admin'])) {
+if (!Auth::checkRole(['superadmin', 'admin', 'super_admin', 'usuario'])) {
     header('HTTP/1.0 403 Forbidden');
     die('Acceso denegado. No tienes permisos para acceder a esta página.');
 }
@@ -226,6 +226,7 @@ $csrf_token = generateCSRFToken();
                             }
 
                             $inscripcionAbierta = ($hoy >= $evento['fecha_inicio_inscripcion'] && $hoy <= $evento['fecha_fin_inscripcion']);
+                            $puedeInscribir = $inscripcionAbierta || Auth::checkRole(['usuario']);
                             ?>
                             <div class="col-md-6 col-lg-4 mb-4">
                                 <div class="card evento-card evento-<?php echo $evento['estado']; ?>">
@@ -260,7 +261,8 @@ $csrf_token = generateCSRFToken();
                                                 <small class="text-muted">Inscritos</small>
                                             </div>
                                             <div class="col-3">
-                                                <strong>Bs. <?php echo number_format($evento['total_recaudado'] ?? 0, 2); ?></strong><br>
+                                                <strong>Bs.
+                                                    <?php echo number_format($evento['total_recaudado'] ?? 0, 2); ?></strong><br>
                                                 <small class="text-muted">Recaudado</small>
                                             </div>
                                             <div class="col-3">
@@ -283,7 +285,7 @@ $csrf_token = generateCSRFToken();
                                                 target="_blank" class="btn btn-sm btn-info">
                                                 <i class="fas fa-file-alt"></i> Reportes
                                             </a>
-                                            <?php if ($inscripcionAbierta): ?>
+                                            <?php if ($puedeInscribir): ?>
                                                 <a href="<?php echo EVENTOS_URL; ?>inscribir.php?evento=<?php echo $evento['id']; ?>"
                                                     target="_blank" class="btn btn-sm btn-success">
                                                     <i class="fas fa-user-plus"></i> Inscribir

@@ -373,3 +373,50 @@ Stack trace:
 [11-Jan-2026 01:59:09 America/La_Paz] PHP Warning:  Undefined array key "REMOTE_ADDR" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 63
 [11-Jan-2026 01:59:10 America/La_Paz] PHP Warning:  Undefined array key "REMOTE_ADDR" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 122
 [11-Jan-2026 01:59:10 America/La_Paz] PHP Warning:  session_regenerate_id(): Session ID cannot be regenerated after headers have already been sent in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 453
+[12-Jan-2026 22:46:17 America/La_Paz] PHP Warning:  Undefined array key "REMOTE_ADDR" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 63
+[12-Jan-2026 22:46:17 America/La_Paz] PHP Warning:  Undefined array key "REMOTE_ADDR" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 100
+[12-Jan-2026 22:46:41 America/La_Paz] PHP Warning:  Undefined array key "REMOTE_ADDR" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 63
+[12-Jan-2026 22:46:41 America/La_Paz] PHP Warning:  Undefined array key "REMOTE_ADDR" in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 100
+[12-Jan-2026 22:50:13 America/La_Paz] PHP Warning:  session_regenerate_id(): Session ID cannot be regenerated after headers have already been sent in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 453
+[12-Jan-2026 22:59:14 America/La_Paz] PHP Warning:  session_regenerate_id(): Session ID cannot be regenerated after headers have already been sent in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 453
+[12-Jan-2026 23:00:14 America/La_Paz] PHP Warning:  session_regenerate_id(): Session ID cannot be regenerated after headers have already been sent in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 453
+[12-Jan-2026 23:02:53 America/La_Paz] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`web_institucional`.`log_actividades`, CONSTRAINT `log_actividades_ibfk_2` FOREIGN KEY (`evento_id`) REFERENCES `eventos` (`id`) ON DELETE SET NULL) in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php:583
+Stack trace:
+#0 C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php(583): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\proyectos\MJBolivia2\includes\eventos.php(146): Auth->logActivity(5, 1, 'evento_eliminad...', 'Evento eliminad...')
+#2 C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php(86): EventosManager->delete(1)
+#3 {main}
+  thrown in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 583
+[12-Jan-2026 23:03:47 America/La_Paz] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`web_institucional`.`log_actividades`, CONSTRAINT `log_actividades_ibfk_2` FOREIGN KEY (`evento_id`) REFERENCES `eventos` (`id`) ON DELETE SET NULL) in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php:583
+Stack trace:
+#0 C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php(583): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\proyectos\MJBolivia2\includes\eventos.php(146): Auth->logActivity(5, 3, 'evento_eliminad...', 'Evento eliminad...')
+#2 C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php(86): EventosManager->delete(3)
+#3 {main}
+  thrown in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 583
+[12-Jan-2026 23:04:26 America/La_Paz] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`web_institucional`.`log_actividades`, CONSTRAINT `log_actividades_ibfk_2` FOREIGN KEY (`evento_id`) REFERENCES `eventos` (`id`) ON DELETE SET NULL) in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php:583
+Stack trace:
+#0 C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php(583): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\proyectos\MJBolivia2\includes\eventos.php(146): Auth->logActivity(5, 4, 'evento_eliminad...', 'Evento eliminad...')
+#2 C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php(86): EventosManager->delete(4)
+#3 {main}
+  thrown in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 583
+[12-Jan-2026 23:39:39 America/La_Paz] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000]: General error: 1267 Illegal mix of collations (utf8mb4_general_ci,IMPLICIT) and (utf8mb4_unicode_ci,IMPLICIT) for operation '=' in C:\xampp\htdocs\proyectos\MJBolivia2\unblock_usuarios.php:32
+Stack trace:
+#0 C:\xampp\htdocs\proyectos\MJBolivia2\unblock_usuarios.php(32): PDOStatement->execute()
+#1 {main}
+  thrown in C:\xampp\htdocs\proyectos\MJBolivia2\unblock_usuarios.php on line 32
+[13-Jan-2026 00:32:44 America/La_Paz] CARRUSEL DELETE: Starting deletion of ID 4
+[13-Jan-2026 00:32:44 America/La_Paz] CARRUSEL DELETE: Found item: {"id":4,"titulo":"Test Debug 1768089149","descripcion":"Descripci\u00f3n de prueba","imagen":"","tipo":"imagen","url":"","orden":1,"estado":"activo","fecha_creacion":"2026-01-10 19:52:29"}
+[13-Jan-2026 00:32:44 America/La_Paz] CARRUSEL DELETE: Database deletion result: SUCCESS
+[13-Jan-2026 00:32:51 America/La_Paz] CARRUSEL DELETE: Starting deletion of ID 5
+[13-Jan-2026 00:32:51 America/La_Paz] CARRUSEL DELETE: Found item: {"id":5,"titulo":"Test Formulario 1768089149","descripcion":"Descripci\u00f3n desde formulario","imagen":"","tipo":"imagen","url":"","orden":2,"estado":"activo","fecha_creacion":"2026-01-10 19:52:29"}
+[13-Jan-2026 00:32:51 America/La_Paz] CARRUSEL DELETE: Database deletion result: SUCCESS
+[13-Jan-2026 00:32:54 America/La_Paz] CARRUSEL DELETE: Starting deletion of ID 7
+[13-Jan-2026 00:32:54 America/La_Paz] CARRUSEL DELETE: Found item: {"id":7,"titulo":"Test Formulario 1768089174","descripcion":"Descripci\u00f3n desde formulario","imagen":"","tipo":"imagen","url":"","orden":3,"estado":"activo","fecha_creacion":"2026-01-10 19:52:54"}
+[13-Jan-2026 00:32:54 America/La_Paz] CARRUSEL DELETE: Database deletion result: SUCCESS
+[13-Jan-2026 00:33:00 America/La_Paz] GALERIA DELETE: Starting deletion of ID 4
+[13-Jan-2026 00:33:00 America/La_Paz] GALERIA DELETE: Found item: {"id":4,"titulo":"Campamento","descripcion":"Campamento Mujeres2","imagen":"6962e96dd591d_1768089965.jpg","categoria":"general","fecha_creacion":"2026-01-10 20:06:05"}
+[13-Jan-2026 00:33:00 America/La_Paz] GALERIA DELETE: Checking file: C:\xampp\htdocs\proyectos\MJBolivia2\config/../assets/uploads/6962e96dd591d_1768089965.jpg
+[13-Jan-2026 00:33:00 America/La_Paz] GALERIA DELETE: File deletion result: SUCCESS
+[13-Jan-2026 00:33:00 America/La_Paz] GALERIA DELETE: Database deletion result: SUCCESS

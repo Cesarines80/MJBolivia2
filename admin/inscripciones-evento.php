@@ -4,8 +4,8 @@ require_once __DIR__ . '/../config/config.php';
 // Verificar autenticación
 Auth::requireLogin();
 
-// Verificar que tenga rol de admin o super_admin
-if (!Auth::checkRole(['superadmin', 'admin', 'super_admin'])) {
+// Verificar que tenga rol de admin o super_admin o usuario
+if (!Auth::checkRole(['superadmin', 'admin', 'super_admin', 'usuario'])) {
     header('HTTP/1.0 403 Forbidden');
     die('Acceso denegado. No tienes permisos para acceder a esta página.');
 }
@@ -234,12 +234,14 @@ $csrf_token = generateCSRFToken();
                             </li>
                         <?php endif; ?>
 
-                        <li class="nav-item">
-                            <a href="configuracion.php" class="nav-link">
-                                <i class="nav-icon fas fa-cogs"></i>
-                                <p>Configuracion</p>
-                            </a>
-                        </li>
+                        <?php if (Auth::checkRole(['super_admin', 'superadmin', 'admin'])): ?>
+                            <li class="nav-item">
+                                <a href="configuracion.php" class="nav-link">
+                                    <i class="nav-icon fas fa-cogs"></i>
+                                    <p>Configuracion</p>
+                                </a>
+                            </li>
+                        <?php endif; ?>
                     </ul>
                 </nav>
             </div>

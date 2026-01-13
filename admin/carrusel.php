@@ -6,7 +6,35 @@ require_once '../includes/functions.php';
 // Requerir autenticación
 Auth::requireLogin();
 
-// Procesar acciones
+// Procesar eliminación (GET request)
+if (isset($_GET['delete'])) {
+    // Verificar que sea super_admin o admin
+    if (!isset($_SESSION['user_id']) && !isset($_SESSION['is_admin'])) {
+        $_SESSION['error'] = 'Debes iniciar sesión para eliminar elementos del carrusel';
+        redirect('carrusel.php');
+    }
+
+    $isAdmin = isset($_SESSION['is_admin']);
+    $userRole = $_SESSION['rol'] ?? $_SESSION['admin_rol'] ?? '';
+    $canDelete = $isAdmin || in_array($userRole, ['super_admin', 'superadmin', 'admin']);
+
+    if (!$canDelete) {
+        $_SESSION['error'] = 'No tienes permisos para eliminar elementos del carrusel. Rol actual: ' . $userRole . ', is_admin: ' . ($isAdmin ? 'sí' : 'no');
+        redirect('carrusel.php');
+    }
+
+    $id = (int)$_GET['delete'];
+    if (Carrusel::delete($id)) {
+        logActivity('DELETE_CARRUSEL', "ID: $id");
+        $_SESSION['success'] = 'Elemento del carrusel eliminado correctamente';
+    } else {
+        $_SESSION['error'] = 'Error al eliminar el elemento';
+    }
+
+    redirect('carrusel.php');
+}
+
+// Procesar acciones POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validar token CSRF
     if (!validateCSRFToken($_POST['csrf_token'] ?? '')) {
@@ -89,17 +117,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['success'] = 'Elemento del carrusel actualizado correctamente';
         } else {
             $_SESSION['error'] = 'Error al actualizar el elemento';
-        }
-    }
-
-    // Eliminar item
-    if (isset($_GET['delete'])) {
-        $id = (int)$_GET['delete'];
-        if (Carrusel::delete($id)) {
-            logActivity('DELETE_CARRUSEL', "ID: $id");
-            $_SESSION['success'] = 'Elemento del carrusel eliminado correctamente';
-        } else {
-            $_SESSION['error'] = 'Error al eliminar el elemento';
         }
     }
 
@@ -379,10 +396,17 @@ $csrfToken = generateCSRFToken();
                                                 onclick="editarItem(<?php echo $item['id']; ?>)">
                                                 <i class="fas fa-edit"></i> Editar
                                             </button>
-                                            <button type="button" class="btn btn-danger btn-sm"
-                                                onclick="confirmarEliminar(<?php echo $item['id']; ?>, '<?php echo htmlspecialchars($item['titulo']); ?>')">
-                                                <i class="fas fa-trash"></i> Eliminar
-                                            </button>
+                                            <?php
+                                            $isAdmin = isset($_SESSION['is_admin']);
+                                            $userRole = $_SESSION['rol'] ?? $_SESSION['admin_rol'] ?? '';
+                                            $canDelete = $isAdmin || in_array($userRole, ['super_admin', 'superadmin', 'admin']);
+                                            if ($canDelete):
+                                            ?>
+                                                <button type="button" class="btn btn-danger btn-sm"
+                                                    onclick="confirmarEliminar(<?php echo $item['id']; ?>, '<?php echo htmlspecialchars($item['titulo']); ?>')">
+                                                    <i class="fas fa-trash"></i> Eliminar
+                                                </button>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>

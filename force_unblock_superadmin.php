@@ -122,7 +122,7 @@ try {
         echo "</div>";
 
         // Cerrar sesión
-        session_destroy();
+        // session_destroy();
     } else {
         echo "<div class='error'>";
         echo "<h3>❌ Error en Login</h3>";

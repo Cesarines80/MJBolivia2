@@ -4,8 +4,8 @@ require_once __DIR__ . '/../config/config.php';
 // Verificar autenticación
 Auth::requireLogin();
 
-// Verificar que tenga rol de admin o super_admin
-if (!Auth::checkRole(['superadmin', 'admin', 'super_admin'])) {
+// Verificar que tenga rol de admin o super_admin o usuario
+if (!Auth::checkRole(['superadmin', 'admin', 'super_admin', 'usuario'])) {
     header('HTTP/1.0 403 Forbidden');
     die('Acceso denegado. No tienes permisos para acceder a esta página.');
 }
@@ -458,7 +458,8 @@ $tipoReporte = $_GET['tipo'] ?? 'todos';
                                         <td><?php echo htmlspecialchars($inscrito['email']); ?></td>
                                         <td>Bs. <?php echo number_format($inscrito['monto_total'], 2); ?></td>
                                         <td>Bs. <?php echo number_format($inscrito['monto_pagado'], 2); ?></td>
-                                        <td><strong class="text-danger">Bs. <?php echo number_format($deuda, 2); ?></strong></td>
+                                        <td><strong class="text-danger">Bs. <?php echo number_format($deuda, 2); ?></strong>
+                                        </td>
                                         <td><?php echo $inscrito['tipo_inscripcion']; ?></td>
                                     </tr>
                                 <?php endforeach; ?>

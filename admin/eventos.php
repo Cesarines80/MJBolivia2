@@ -274,7 +274,7 @@ $csrf_token = generateCSRFToken();
                             </li>
                         <?php endif; ?>
 
-                        <?php if (Auth::checkRole(['super_admin', 'superadmin', 'admin'])): ?>
+                        <?php if (Auth::checkRole(['super_admin', 'superadmin', 'admin', 'usuario'])): ?>
                             <li class="nav-item">
                                 <a href="mis-eventos.php" class="nav-link">
                                     <i class="nav-icon fas fa-calendar-check"></i>

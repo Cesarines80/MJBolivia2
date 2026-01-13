@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if ($user['rol'] === 'superadmin' || $user['rol'] === 'super_admin') {
                 header('Location: dashboard.php');
-            } elseif ($user['rol'] === 'admin') {
+            } elseif ($user['rol'] === 'admin' || $user['rol'] === 'usuario') {
                 header('Location: mis-eventos.php');
             } else {
                 header('Location: dashboard.php');

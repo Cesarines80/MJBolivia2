@@ -27,6 +27,10 @@ if ($evento['estado'] !== 'activo') {
 $hoy = date('Y-m-d');
 $inscripcionAbierta = ($hoy >= $evento['fecha_inicio_inscripcion'] && $hoy <= $evento['fecha_fin_inscripcion']);
 
+// Permitir acceso a administradores del evento incluso fuera del periodo de inscripcion
+$esAdminEvento = isLoggedIn() && canAccessEvent($eventoId);
+$permitirInscripcion = $inscripcionAbierta || $esAdminEvento;
+
 // Obtener configuracion
 $config = $eventosManager->getConfig($eventoId);
 
@@ -214,7 +218,7 @@ $csrf_token = generateCSRFToken();
                     </div>
                 </div>
 
-                <?php if (!$inscripcionAbierta): ?>
+                <?php if (!$permitirInscripcion): ?>
                     <!-- Inscripcion Cerrada -->
                     <div class="card inscripcion-cerrada">
                         <div class="card-body text-center py-5">
