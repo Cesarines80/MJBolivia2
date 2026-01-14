@@ -2,36 +2,37 @@
 require_once '../config/config.php';
 require_once '../includes/auth.php';
 require_once '../includes/functions.php';
+require_once '../includes/galeria_imagenes.php';
 
 // Requerir autenticación
 Auth::requireLogin();
 
-// Procesar eliminación (GET request)
+// Obtener ID de la galería
+$id = isset($_GET['galeria_id']) ? (int)$_GET['galeria_id'] : 0;
+
+if (!$id) {
+    header('Location: galeria.php');
+    exit;
+}
+
+// Obtener el elemento de galería
+$galeria = Galeria::getById($id);
+
+if (!$galeria) {
+    header('Location: galeria.php');
+    exit;
+}
+
+// Procesar eliminación de imagen
 if (isset($_GET['delete'])) {
-    // Verificar que sea super_admin o admin
-    if (!isset($_SESSION['user_id']) && !isset($_SESSION['is_admin'])) {
-        $_SESSION['error'] = 'Debes iniciar sesión para eliminar imágenes';
-        redirect('galeria.php');
-    }
-
-    $isAdmin = isset($_SESSION['is_admin']);
-    $userRole = $_SESSION['rol'] ?? $_SESSION['admin_rol'] ?? '';
-    $canDelete = $isAdmin || in_array($userRole, ['super_admin', 'superadmin', 'admin']);
-
-    if (!$canDelete) {
-        $_SESSION['error'] = 'No tienes permisos para eliminar imágenes. Rol actual: ' . $userRole . ', is_admin: ' . ($isAdmin ? 'sí' : 'no');
-        redirect('galeria.php');
-    }
-
-    $id = (int)$_GET['delete'];
-    if (Galeria::delete($id)) {
-        logActivity('DELETE_GALERIA', "ID: $id");
+    $imageId = (int)$_GET['delete'];
+    if (GaleriaImagenes::deleteGalleryImage($imageId)) {
         $_SESSION['success'] = 'Imagen eliminada correctamente';
     } else {
         $_SESSION['error'] = 'Error al eliminar la imagen';
     }
-
-    redirect('galeria.php');
+    header('Location: galeria-imagenes.php?id=' . $id);
+    exit;
 }
 
 // Procesar acciones POST
@@ -39,15 +40,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validar token CSRF
     if (!validateCSRFToken($_POST['csrf_token'] ?? '')) {
         $_SESSION['error'] = 'Token de seguridad inválido';
-        redirect('galeria.php');
+        header('Location: galeria-imagenes.php?id=' . $id);
+        exit;
     }
 
     // Agregar imagen
     if (isset($_POST['action']) && $_POST['action'] === 'add') {
         $data = [
-            'titulo' => cleanInput($_POST['titulo']),
+            'titulo' => cleanInput($_POST['titulo'] ?? ''),
             'descripcion' => cleanInput($_POST['descripcion'] ?? ''),
-            'categoria' => cleanInput($_POST['categoria'] ?? 'general')
+            'orden' => (int)($_POST['orden'] ?? 0)
         ];
 
         // Subir imagen
@@ -55,40 +57,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $upload = uploadFile($_FILES['imagen']);
             if ($upload['success']) {
                 $data['imagen'] = $upload['filename'];
+                if (GaleriaImagenes::addGalleryImage($id, $data)) {
+                    $_SESSION['success'] = 'Imagen agregada correctamente';
+                } else {
+                    $_SESSION['error'] = 'Error al agregar la imagen';
+                }
             } else {
                 $_SESSION['error'] = $upload['error'];
-                redirect('galeria.php');
             }
         } else {
-            // Si no se subió imagen, usar un placeholder o dejar vacío
-            $data['imagen'] = '';
-        }
-
-        if (Galeria::create($data)) {
-            logActivity('CREATE_GALERIA', "Título: {$data['titulo']}");
-            $_SESSION['success'] = 'Imagen agregada a la galería correctamente';
-        } else {
-            $_SESSION['error'] = 'Error al agregar la imagen';
+            $_SESSION['error'] = 'Debe seleccionar una imagen';
         }
     }
 
     // Editar imagen
     if (isset($_POST['action']) && $_POST['action'] === 'edit') {
-        $id = (int)$_POST['id'];
+        $imageId = (int)$_POST['image_id'];
         $data = [
-            'titulo' => cleanInput($_POST['titulo']),
+            'titulo' => cleanInput($_POST['titulo'] ?? ''),
             'descripcion' => cleanInput($_POST['descripcion'] ?? ''),
-            'categoria' => cleanInput($_POST['categoria'] ?? 'general')
+            'orden' => (int)($_POST['orden'] ?? 0)
         ];
-
-        // Obtener item actual para preservar la imagen si no se cambia
-        $oldItem = Galeria::getById($id);
 
         // Subir nueva imagen si se seleccionó
         if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
-            // Eliminar imagen anterior
-            if ($oldItem && $oldItem['imagen']) {
-                $oldPath = UPLOADS_DIR . $oldItem['imagen'];
+            $oldImage = GaleriaImagenes::getGalleryImageById($imageId);
+            if ($oldImage && $oldImage['imagen']) {
+                $oldPath = UPLOADS_DIR . $oldImage['imagen'];
                 if (file_exists($oldPath)) {
                     unlink($oldPath);
                 }
@@ -99,29 +94,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $data['imagen'] = $upload['filename'];
             } else {
                 $_SESSION['error'] = $upload['error'];
-                redirect('galeria.php');
+                header('Location: galeria-imagenes.php?id=' . $id);
+                exit;
             }
-        } else {
-            // Si no se subió nueva imagen, mantener la imagen existente
-            $data['imagen'] = $oldItem['imagen'] ?? '';
         }
 
-        if (Galeria::update($id, $data)) {
-            logActivity('UPDATE_GALERIA', "ID: $id, Título: {$data['titulo']}");
+        if (GaleriaImagenes::updateGalleryImage($imageId, $data)) {
             $_SESSION['success'] = 'Imagen actualizada correctamente';
         } else {
             $_SESSION['error'] = 'Error al actualizar la imagen';
         }
     }
 
-    redirect('galeria.php');
+    header('Location: galeria-imagenes.php?id=' . $id);
+    exit;
 }
 
-// Obtener todas las imágenes de la galería
-$galeria = Galeria::getAll();
-
-// Obtener categorías únicas
-$categorias = Galeria::getCategorias();
+// Obtener imágenes de la galería
+$imagenes = GaleriaImagenes::getGalleryImages($id);
 
 // Obtener usuario actual
 $currentUser = Auth::getUser();
@@ -135,15 +125,13 @@ $csrfToken = generateCSRFToken();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Galería - Administración</title>
+    <title>Imágenes de Galería - Administración</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Theme style -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
 
@@ -160,27 +148,28 @@ $csrfToken = generateCSRFToken();
             background: #f8f9fa;
         }
 
-        .gallery-item {
+        .gallery-image-item {
             position: relative;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             cursor: pointer;
+            background: white;
         }
 
-        .gallery-item:hover {
+        .gallery-image-item:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
 
-        .gallery-item img {
+        .gallery-image-item img {
             width: 100%;
-            height: 250px;
+            height: 200px;
             object-fit: cover;
         }
 
-        .gallery-overlay {
+        .gallery-image-overlay {
             position: absolute;
             top: 0;
             left: 0;
@@ -194,39 +183,13 @@ $csrfToken = generateCSRFToken();
             transition: opacity 0.3s ease;
         }
 
-        .gallery-item:hover .gallery-overlay {
+        .gallery-image-item:hover .gallery-image-overlay {
             opacity: 1;
         }
 
-        .category-filter {
-            margin-bottom: 20px;
-        }
-
-        .category-btn {
-            margin: 5px;
-            border-radius: 20px;
-        }
-
-        .masonry-grid {
-            column-count: 3;
-            column-gap: 20px;
-        }
-
-        @media (max-width: 992px) {
-            .masonry-grid {
-                column-count: 2;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .masonry-grid {
-                column-count: 1;
-            }
-        }
-
-        .masonry-item {
-            break-inside: avoid;
-            margin-bottom: 20px;
+        .main-gallery-image {
+            border: 3px solid #8B7EC8;
+            box-shadow: 0 0 0 3px rgba(139, 126, 200, 0.3);
         }
     </style>
 </head>
@@ -342,12 +305,13 @@ $csrfToken = generateCSRFToken();
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Administración de Galería</h1>
+                            <h1 class="m-0">Imágenes de: <?php echo htmlspecialchars($galeria['titulo']); ?></h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Galería</li>
+                                <li class="breadcrumb-item"><a href="galeria.php">Galería</a></li>
+                                <li class="breadcrumb-item active">Imágenes</li>
                             </ol>
                         </div>
                     </div>
@@ -374,80 +338,82 @@ $csrfToken = generateCSRFToken();
                         </div>
                     <?php endif; ?>
 
-                    <!-- Botón agregar -->
-                    <div class="mb-3 d-flex justify-content-between align-items-center">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAgregar">
-                            <i class="fas fa-plus"></i> Agregar Imagen
-                        </button>
-
-                        <!-- Filtros de categoría -->
-                        <div class="category-filter">
-                            <button type="button" class="btn btn-outline-primary category-btn active" data-category="">
-                                Todas
-                            </button>
-                            <?php foreach ($categorias as $categoria): ?>
-                                <button type="button" class="btn btn-outline-primary category-btn"
-                                    data-category="<?php echo $categoria; ?>">
-                                    <?php echo htmlspecialchars($categoria); ?>
-                                </button>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-
-                    <!-- Galería -->
-                    <div class="masonry-grid" id="galeriaContainer">
-                        <?php foreach ($galeria as $item): ?>
-                            <div class="masonry-item gallery-item" data-category="<?php echo $item['categoria']; ?>">
-                                <img src="<?php echo UPLOADS_URL . $item['imagen']; ?>"
-                                    alt="<?php echo htmlspecialchars($item['titulo']); ?>">
-                                <div class="gallery-overlay">
-                                    <div class="text-center text-white">
-                                        <h5><?php echo htmlspecialchars($item['titulo']); ?></h5>
-                                        <?php if ($item['descripcion']): ?>
-                                            <p class="mb-3"><?php echo limitText($item['descripcion'], 100); ?></p>
-                                        <?php endif; ?>
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-warning btn-sm"
-                                                onclick="editarImagen(<?php echo $item['id']; ?>)">
-                                                <i class="fas fa-edit"></i> Editar
-                                            </button>
-                                            <a href="galeria-imagenes.php?galeria_id=<?php echo $item['id']; ?>"
-                                                class="btn btn-info btn-sm">
-                                                <i class="fas fa-images"></i> Gestionar Imágenes
-                                            </a>
-                                            <?php
-                                            $isAdmin = isset($_SESSION['is_admin']);
-                                            $userRole = $_SESSION['rol'] ?? $_SESSION['admin_rol'] ?? '';
-                                            $canDelete = $isAdmin || in_array($userRole, ['super_admin', 'superadmin', 'admin']);
-                                            if ($canDelete):
-                                            ?>
-                                                <button type="button" class="btn btn-danger btn-sm"
-                                                    onclick="confirmarEliminar(<?php echo $item['id']; ?>, '<?php echo htmlspecialchars($item['titulo']); ?>')">
-                                                    <i class="fas fa-trash"></i> Eliminar
-                                                </button>
-                                            <?php endif; ?>
+                    <!-- Imagen principal de la galería -->
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Imagen Principal</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="gallery-image-item main-gallery-image">
+                                                <img src="<?php echo UPLOADS_URL . $galeria['imagen']; ?>"
+                                                    alt="<?php echo htmlspecialchars($galeria['titulo']); ?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h4><?php echo htmlspecialchars($galeria['titulo']); ?></h4>
+                                            <p><?php echo htmlspecialchars($galeria['descripcion']); ?></p>
+                                            <p><strong>Categoría:</strong>
+                                                <?php echo htmlspecialchars($galeria['categoria']); ?></p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="p-3 bg-white">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <span
-                                            class="badge badge-secondary"><?php echo htmlspecialchars($item['categoria']); ?></span>
-                                        <small class="text-muted">
-                                            <i class="fas fa-calendar"></i>
-                                            <?php echo formatDate($item['fecha_creacion']); ?>
-                                        </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botón agregar -->
+                    <div class="mb-3">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAgregar">
+                            <i class="fas fa-plus"></i> Agregar Imagen
+                        </button>
+                        <a href="galeria.php" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Volver a Galería
+                        </a>
+                    </div>
+
+                    <!-- Galería de imágenes -->
+                    <div class="row">
+                        <?php foreach ($imagenes as $imagen): ?>
+                            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                                <div class="gallery-image-item">
+                                    <img src="<?php echo UPLOADS_URL . $imagen['imagen']; ?>"
+                                        alt="<?php echo htmlspecialchars($imagen['titulo'] ?? 'Imagen de galería'); ?>">
+                                    <div class="gallery-image-overlay">
+                                        <div class="text-center text-white">
+                                            <?php if ($imagen['titulo']): ?>
+                                                <h6><?php echo htmlspecialchars($imagen['titulo']); ?></h6>
+                                            <?php endif; ?>
+                                            <div class="btn-group mt-2">
+                                                <button type="button" class="btn btn-warning btn-sm"
+                                                    onclick="editarImagen(<?php echo $imagen['id']; ?>)">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-danger btn-sm"
+                                                    onclick="confirmarEliminar(<?php echo $imagen['id']; ?>, '<?php echo htmlspecialchars($imagen['titulo'] ?? 'imagen'); ?>')">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
+                                </div>
+                                <div class="mt-2">
+                                    <small class="text-muted">
+                                        <?php echo formatDate($imagen['fecha_creacion']); ?>
+                                    </small>
                                 </div>
                             </div>
                         <?php endforeach; ?>
                     </div>
 
-                    <?php if (empty($galeria)): ?>
+                    <?php if (empty($imagenes)): ?>
                         <div class="text-center py-5">
-                            <i class="fas fa-photo-video fa-5x text-muted mb-3"></i>
-                            <h4 class="text-muted">No hay imágenes en la galería</h4>
-                            <p class="text-muted">Agrega tu primera imagen haciendo clic en el botón "Agregar Imagen"</p>
+                            <i class="fas fa-images fa-5x text-muted mb-3"></i>
+                            <h4 class="text-muted">No hay imágenes adicionales</h4>
+                            <p class="text-muted">Agrega imágenes adicionales para mostrar en la página de detalle</p>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -458,7 +424,8 @@ $csrfToken = generateCSRFToken();
         <div class="modal fade" id="modalAgregar" tabindex="-1">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                    <form action="galeria.php" method="post" enctype="multipart/form-data">
+                    <form action="galeria-imagenes.php?galeria_id=<?php echo $id; ?>" method="post"
+                        enctype="multipart/form-data">
                         <div class="modal-header">
                             <h5 class="modal-title">Agregar Imagen a la Galería</h5>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -468,8 +435,8 @@ $csrfToken = generateCSRFToken();
                             <input type="hidden" name="action" value="add">
 
                             <div class="form-group">
-                                <label>Título *</label>
-                                <input type="text" name="titulo" class="form-control" required>
+                                <label>Título</label>
+                                <input type="text" name="titulo" class="form-control">
                             </div>
 
                             <div class="form-group">
@@ -478,29 +445,14 @@ $csrfToken = generateCSRFToken();
                             </div>
 
                             <div class="form-group">
-                                <label>Imagen de Portada *</label>
+                                <label>Imagen *</label>
                                 <input type="file" name="imagen" class="form-control" accept="image/*" required>
-                                <small class="text-muted">Esta será la imagen principal del álbum. Máximo 5MB</small>
+                                <small class="text-muted">Máximo 5MB</small>
                             </div>
 
                             <div class="form-group">
-                                <label>Categoría</label>
-                                <div class="input-group">
-                                    <select name="categoria" id="selectCategoria" class="form-control">
-                                        <option value="general">General</option>
-                                        <?php foreach ($categorias as $cat): ?>
-                                            <option value="<?php echo $cat; ?>"><?php echo htmlspecialchars($cat); ?>
-                                            </option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                    <div class="input-group-append">
-                                        <button type="button" class="btn btn-outline-secondary" data-toggle="modal"
-                                            data-target="#modalNuevaCategoria">
-                                            <i class="fas fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <small class="text-muted">O crea una nueva categoría</small>
+                                <label>Orden</label>
+                                <input type="number" name="orden" class="form-control" value="0" min="0">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -518,7 +470,8 @@ $csrfToken = generateCSRFToken();
         <div class="modal fade" id="modalEditar" tabindex="-1">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                    <form action="galeria.php" method="post" enctype="multipart/form-data">
+                    <form action="galeria-imagenes.php?id=<?php echo $id; ?>" method="post"
+                        enctype="multipart/form-data">
                         <div class="modal-header">
                             <h5 class="modal-title">Editar Imagen</h5>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -526,11 +479,11 @@ $csrfToken = generateCSRFToken();
                         <div class="modal-body">
                             <input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>">
                             <input type="hidden" name="action" value="edit">
-                            <input type="hidden" name="id" id="edit_id">
+                            <input type="hidden" name="image_id" id="edit_image_id">
 
                             <div class="form-group">
-                                <label>Título *</label>
-                                <input type="text" name="titulo" id="edit_titulo" class="form-control" required>
+                                <label>Título</label>
+                                <input type="text" name="titulo" id="edit_titulo" class="form-control">
                             </div>
 
                             <div class="form-group">
@@ -547,13 +500,8 @@ $csrfToken = generateCSRFToken();
                             </div>
 
                             <div class="form-group">
-                                <label>Categoría</label>
-                                <select name="categoria" id="edit_categoria" class="form-control">
-                                    <option value="general">General</option>
-                                    <?php foreach ($categorias as $cat): ?>
-                                        <option value="<?php echo $cat; ?>"><?php echo htmlspecialchars($cat); ?></option>
-                                    <?php endforeach; ?>
-                                </select>
+                                <label>Orden</label>
+                                <input type="number" name="orden" id="edit_orden" class="form-control" min="0">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -563,30 +511,6 @@ $csrfToken = generateCSRFToken();
                             </button>
                         </div>
                     </form>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal Nueva Categoría -->
-        <div class="modal fade" id="modalNuevaCategoria" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Nueva Categoría</h5>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>Nombre de la categoría</label>
-                            <input type="text" id="nuevaCategoriaNombre" class="form-control">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" onclick="agregarNuevaCategoria()">
-                            <i class="fas fa-plus"></i> Agregar
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -627,13 +551,12 @@ $csrfToken = generateCSRFToken();
     <script>
         // Función para editar imagen
         function editarImagen(id) {
-            alert("Función editarImagen llamada con ID: " + id);
-            $.get('ajax.php?action=get_galeria&id=' + id, function(data) {
+            $.get('ajax.php?action=get_galeria_imagen&id=' + id, function(data) {
                 if (data.success) {
-                    $('#edit_id').val(data.data.id);
+                    $('#edit_image_id').val(data.data.id);
                     $('#edit_titulo').val(data.data.titulo);
                     $('#edit_descripcion').val(data.data.descripcion);
-                    $('#edit_categoria').val(data.data.categoria);
+                    $('#edit_orden').val(data.data.orden);
 
                     // Mostrar imagen actual
                     $('#edit_imagen_preview').html(
@@ -649,60 +572,9 @@ $csrfToken = generateCSRFToken();
         // Función para confirmar eliminación
         function confirmarEliminar(id, titulo) {
             $('#eliminar_titulo').text(titulo);
-            $('#eliminar_link').attr('href', 'galeria.php?delete=' + id);
+            $('#eliminar_link').attr('href', 'galeria-imagenes.php?id=<?php echo $id; ?>&delete=' + id);
             $('#modalEliminar').modal('show');
         }
-
-        // Filtros por categoría
-        $('.category-btn').on('click', function() {
-            const category = $(this).data('category');
-
-            // Actualizar botón activo
-            $('.category-btn').removeClass('active btn-primary').addClass('btn-outline-primary');
-            $(this).removeClass('btn-outline-primary').addClass('active btn-primary');
-
-            // Filtrar elementos
-            if (category === '') {
-                $('.gallery-item').show();
-            } else {
-                $('.gallery-item').hide();
-                $('.gallery-item[data-category="' + category + '"]').show();
-            }
-        });
-
-        // Agregar nueva categoría
-        function agregarNuevaCategoria() {
-            const nombre = $('#nuevaCategoriaNombre').val().trim();
-            if (nombre) {
-                // Verificar si ya existe
-                let existe = false;
-                $('#selectCategoria option').each(function() {
-                    if ($(this).val().toLowerCase() === nombre.toLowerCase()) {
-                        existe = true;
-                        return false;
-                    }
-                });
-
-                if (!existe) {
-                    $('#selectCategoria').append('<option value="' + nombre + '">' + nombre + '</option>');
-                    $('#selectCategoria').val(nombre);
-                    $('#modalNuevaCategoria').modal('hide');
-                    $('#nuevaCategoriaNombre').val('');
-                } else {
-                    alert('La categoría ya existe');
-                }
-            } else {
-                alert('Ingresa un nombre para la categoría');
-            }
-        }
-
-        // Enter en input de nueva categoría
-        $('#nuevaCategoriaNombre').on('keypress', function(e) {
-            if (e.which === 13) {
-                e.preventDefault();
-                agregarNuevaCategoria();
-            }
-        });
     </script>
 </body>
 

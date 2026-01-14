@@ -174,18 +174,18 @@ class Eventos
     public static function getUpcoming($limit = 6)
     {
         $db = getDB();
-        $sql = "SELECT 
+        $sql = "SELECT
                     id,
-                    nombre as titulo,
+                    titulo,
                     descripcion,
-                    fecha_inicio as fecha_evento,
-                    DATE_FORMAT(fecha_inicio, '%H:%i') as hora_evento,
+                    fecha_evento,
+                    hora_evento,
                     lugar,
-                    imagen_portada as imagen,
+                    imagen,
                     estado
                 FROM eventos
-                WHERE fecha_inicio >= CURDATE() AND estado = 'activo'
-                ORDER BY fecha_inicio ASC
+                WHERE fecha_evento >= CURDATE() AND estado = 'activo'
+                ORDER BY fecha_evento ASC
                 LIMIT $limit";
 
         $stmt = $db->query($sql);

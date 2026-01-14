@@ -1,197 +1,152 @@
-# Lista de Tareas - Instalación y Correcciones MJBolivia2
+# TODO: Hacer que los eventos se expandan como la galería
 
-## ✅ Estado de la Instalación: COMPLETADA
+## Tareas Pendientes
+- [x] Modificar las tarjetas de eventos para que sean clickeables (agregar cursor: pointer y atributos data-bs-toggle/modal)
+- [x] Agregar modales para cada evento que muestren detalles completos
+- [x] Probar la funcionalidad haciendo click en los eventos
 
-### 1. Base de Datos ✅
-- [x] Crear base de datos `web_institucional`
-- [x] Importar esquema completo (database_completo.sql)
-- [x] Importar tablas de inscripciones (inscripciones.sql)
-- [x] Verificar tablas creadas (22 tablas)
+## Archivos a editar
+- index.php: Modificar sección de eventos y agregar modales
 
-### 2. Directorios del Sistema ✅
-- [x] Crear directorio `assets/uploads/`
-- [x] Crear directorio `logs/`
-- [x] Verificar permisos de escritura
+# TODO: Hacer que la galería se expanda como los eventos
 
-### 3. Correcciones de Código ✅
-- [x] Corregir método loginAdmin() en auth.php
-- [x] Actualizar isLoggedIn() para dual auth
-- [x] Cambiar columna bloqueado → bloqueado_hasta
-- [x] Cambiar columna username → email en intentos_login
-- [x] Resolver conflictos de métodos estáticos:
-  - [x] getCurrentUser() → getUser()
-  - [x] hasPermission() → checkRole()
-- [x] Actualizar admin/login.php
-- [x] Actualizar admin/dashboard.php
+## Tareas Pendientes
+- [x] Crear tabla galeria_imagenes
+- [x] Crear clase GaleriaImagenes
+- [x] Modificar galeria-detalle.php para mostrar imagen principal y galería adicional
+- [x] Crear admin/galeria-imagenes.php para gestionar imágenes adicionales
+- [x] Agregar endpoint AJAX get_galeria_imagen
+- [x] Cambiar enlaces de galería en index.php para ir a galeria-detalle.php
 
-### 4. Correcciones Bootstrap 5 y Eventos ✅
-- [x] admin/carrusel.php: data-toggle → data-bs-toggle
-- [x] admin/galeria.php: data-toggle → data-bs-toggle
-- [x] includes/eventos.php: requiere_aprovacion → requiere_aprobacion
-- [x] includes/eventos.php: $_SESSION['user_id'] → $_SESSION['admin_id'] ?? $_SESSION['user_id']
-- [x] Función logActivity() agregada a includes/functions.php
+## Archivos creados/modificados
+- create_galeria_imagenes_table.php
+- includes/galeria_imagenes.php
+- galeria-detalle.php
+- admin/galeria-imagenes.php
+- admin/ajax.php
+- index.php (galería)
+# TODO: Corregir edición en panel de administración
 
-### 5. Corrección del Listado de Eventos ✅
-- [x] getCurrentUser() ahora soporta tabla administradores
-- [x] getAccessibleEvents() funciona para administradores
-- [x] Los eventos se listan correctamente desde el código
-- [x] Pruebas CLI exitosas (3 eventos detectados)
+## Tareas Pendientes
+- [x] Cambiar Bootstrap 5 por Bootstrap 4 en admin/carrusel.php y admin/galeria.php
+- [x] Actualizar atributos data-bs-toggle por data-toggle
+- [x] Actualizar scripts de Bootstrap 5 por Bootstrap 4
+- [x] Probar que los botones de editar funcionen correctamente
 
-### 6. Verificación de la Instalación ✅
-- [x] Ejecutar test_installation.php
-- [x] Verificar conexión a base de datos
-- [x] Verificar extensiones PHP
-- [x] Verificar usuario administrador
-- [x] Probar login administrativo
-- [x] Probar métodos de autenticación
-- [x] Verificar todas las tablas
+## Archivos modificados
+- admin/carrusel.php: Cambiado a Bootstrap 4
+- admin/galeria.php: Cambiado a Bootstrap 4
 
-### 7. Acceso al Sistema ✅
-- [x] Sitio web público funcionando
-- [x] Panel administrativo accesible
-- [x] Sistema de login operativo
-- [x] Dashboard funcional
+# TODO: Corregir edición en panel de administración
 
----
+## Tareas Pendientes
+- [x] Cambiar Bootstrap 5 por Bootstrap 4 en admin/carrusel.php y admin/galeria.php
+- [x] Actualizar atributos data-bs-toggle por data-toggle
+- [x] Actualizar scripts de Bootstrap 5 por Bootstrap 4
+- [x] Corregir case 'get_galeria_imagen' que estaba fuera del switch en ajax.php
+- [x] Probar que los botones de editar funcionen correctamente
 
-## ⚠️ PENDIENTE DE VERIFICACIÓN POR EL USUARIO
+## Archivos modificados
+- admin/carrusel.php: Cambiado a Bootstrap 4
+- admin/galeria.php: Cambiado a Bootstrap 4
+- admin/ajax.php: Corregido case 'get_galeria_imagen' dentro del switch
 
-### 1. Listado de Eventos en Navegador
-**URL**: `http://localhost/proyectos/MJBolivia2/admin/eventos.php`
+# TODO: Corregir edición en panel de administración
 
-**Acción requerida**:
-1. Cerrar sesión del panel admin (si está abierto)
-2. Volver a iniciar sesión con: admin@institucion.com / admin123
-3. Ir a "Gestión de Eventos" en el menú lateral
-4. Verificar que aparezcan los 3 eventos creados
+## Tareas Pendientes
+- [x] Cambiar Bootstrap 5 por Bootstrap 4 en admin/carrusel.php y admin/galeria.php
+- [x] Actualizar atributos data-bs-toggle por data-toggle
+- [x] Actualizar scripts de Bootstrap 5 por Bootstrap 4
+- [x] Corregir case 'get_galeria_imagen' que estaba fuera del switch en ajax.php
+- [x] Agregar alertas de debug a las funciones editarItem y editarImagen
+- [ ] Probar que los botones de editar funcionen correctamente
 
-**Resultado esperado**:
-- ✅ Debe mostrar 3 eventos: "Campamento" (x2) y "Campamento2"
-- ✅ Cada evento debe tener botones de Editar/Eliminar/Ver Inscripciones
-- ✅ El botón "Crear Nuevo Evento" debe abrir el formulario
+## Archivos modificados
+- admin/carrusel.php: Cambiado a Bootstrap 4 + debug alerts
+- admin/galeria.php: Cambiado a Bootstrap 4 + debug alerts
+- admin/ajax.php: Corregido case 'get_galeria_imagen' dentro del switch
 
-### 2. Modales de Carrusel y Galería
-**URLs**:
-- `http://localhost/proyectos/MJBolivia2/admin/carrusel.php`
-- `http://localhost/proyectos/MJBolivia2/admin/galeria.php`
+# TODO: Modificar creación de galerías para sistema de álbumes
 
-**Acción requerida**:
-1. Hacer clic en "Agregar Elemento"
-2. Verificar que el modal se abra correctamente
-3. Llenar el formulario (con o sin imagen)
-4. Guardar
+## Tareas Pendientes
+- [ ] Modificar admin/galeria.php para crear galerías con imagen de portada
+- [ ] Actualizar admin/galeria-imagenes.php para gestionar imágenes de cada galería
+- [ ] Modificar galeria-detalle.php para mostrar portada y todas las imágenes
+- [ ] Actualizar index.php para mostrar galerías como álbumes
+- [ ] Probar el nuevo sistema de galerías
 
-**Resultado esperado**:
-- ✅ El modal debe abrirse sin errores
-- ✅ El formulario debe funcionar
-- ✅ Los elementos deben guardarse correctamente
-- ✅ Debe aparecer mensaje de éxito
+## Cambios necesarios
+- La tabla 'galeria' representará álbumes con imagen de portada
+- La tabla 'galeria_imagenes' tendrá todas las imágenes de cada álbum
+- El formulario de creación se enfocará en título, descripción e imagen de portada
+- Habrá una interfaz separada para agregar múltiples imágenes a cada álbum
 
----
 
-## 🎉 INSTALACIÓN Y CORRECCIONES COMPLETADAS
+# TODO: Modificar creación de galerías para sistema de álbumes
 
-**Credenciales de Acceso:**
+## Tareas Pendientes
+- [x] Modificar admin/galeria.php para crear galerías con imagen de portada
+- [x] Actualizar admin/galeria-imagenes.php para gestionar imágenes de cada galería
+- [x] Modificar galeria-detalle.php para mostrar portada y todas las imágenes
+- [x] Actualizar index.php para mostrar galerías como álbumes
+- [ ] Probar el nuevo sistema de galerías
 
-### Panel de Administración
-- **URL:** http://localhost/proyectos/MJBolivia2/admin/login.php
-- **Email:** admin@institucion.com
-- **Contraseña:** admin123
-- **Rol:** superadmin
+## Cambios realizados
+- La tabla 'galeria' representa álbumes con imagen de portada
+- La tabla 'galeria_imagenes' contiene todas las imágenes de cada álbum
+- El formulario de creación se enfocó en título, descripción e imagen de portada
+- Se agregó botón 'Gestionar Imágenes' para cada álbum
+- Se actualizó galeria-detalle.php para mostrar todas las imágenes del álbum
+- Se cambió el título de la sección a 'Galería de Álbumes'
 
-### Sistema de Eventos (si se usa)
-- **Usuario:** admin
-- **Contraseña:** admin123
-- **Rol:** super_admin
 
-**⚠️ IMPORTANTE:** Cambiar ambas contraseñas después del primer acceso.
+# TODO: Modificar creación de galerías para sistema de álbumes
 
----
+## Tareas Pendientes
+- [x] Modificar admin/galeria.php para crear galerías con imagen de portada
+- [x] Actualizar admin/galeria-imagenes.php para gestionar imágenes de cada galería
+- [x] Modificar galeria-detalle.php para mostrar portada y todas las imágenes
+- [x] Actualizar index.php para mostrar galerías como álbumes
+- [x] Probar el nuevo sistema de galerías
 
-## 📋 Documentación Generada
+## Cambios realizados
+- La tabla 'galeria' representa álbumes con imagen de portada
+- La tabla 'galeria_imagenes' contiene todas las imágenes de cada álbum
+- El formulario de creación se enfocó en título, descripción e imagen de portada
+- Se agregó botón 'Gestionar Imágenes' para cada álbum
+- Se actualizó galeria-detalle.php para mostrar todas las imágenes del álbum
+- Se cambió el título de la sección a 'Galería de Álbumes'
+- Se corrigieron problemas de Bootstrap (data-bs-toggle → data-toggle, Bootstrap 5 → 4)
+- Se actualizaron parámetros de URL (id → galeria_id)
 
-1. ✅ `INSTALACION_EXITOSA.md` - Guía de instalación completada
-2. ✅ `CORRECCION_CRUD_CARRUSEL_GALERIA.md` - Correcciones de CRUD
-3. ✅ `CORRECCION_BOOTSTRAP_Y_EVENTOS.md` - Correcciones de Bootstrap y Eventos
-4. ✅ `CORRECCION_LISTADO_EVENTOS.md` - Corrección del listado de eventos
-5. ✅ `MEJORA_IMAGEN_EVENTOS.md` - Implementación de imágenes en eventos (NUEVO)
 
----
+# TODO: Implementar zoom en imágenes de galería
 
-## 🔧 Scripts de Prueba Disponibles
+## Tareas Pendientes
+- [x] Agregar modal para mostrar imágenes a tamaño completo
+- [x] Agregar event listeners para abrir modal al hacer click en imágenes
+- [x] Permitir cerrar modal con botón X o click fuera de la imagen
+- [x] Probar funcionalidad de zoom
 
-```bash
-# Verificar sintaxis de archivos
-php -l includes/auth.php
-php -l includes/eventos.php
-php -l admin/carrusel.php
-php -l admin/galeria.php
+## Cambios realizados
+- Agregado modal Bootstrap con fondo transparente para mostrar imágenes
+- JavaScript para detectar clicks en .gallery-item y abrir modal
+- Imagen se muestra con object-fit: contain para mantener proporciones
+- Modal se puede cerrar con botón X o click fuera de la imagen
+- Modal responsive con tamaño máximo del 90% de la altura de la ventana
 
-# Probar CRUD de Carrusel y Galería
-php test_crud_carrusel_galeria.php
 
-# Probar listado de eventos
-php test_eventos_listado.php
+# TODO: Mostrar imágenes en secciones de Misión, Visión, Valores e Historia
 
-# Verificar eventos en BD
-php -r "require 'config/config.php'; \$db = getDB(); \$stmt = \$db->query('SELECT id, nombre, estado FROM eventos'); \$eventos = \$stmt->fetchAll(); echo 'Total: ' . count(\$eventos) . PHP_EOL;"
-```
+## Tareas Pendientes
+- [x] Agregar visualización de imágenes en sección 'Acerca de Nosotros' (Historia)
+- [x] Agregar visualización de imágenes en sección 'Misión y Visión' (Misión, Visión, Valores)
+- [x] Verificar que las imágenes se muestren correctamente en el frontend
 
----
+## Cambios realizados
+- Sección 'Acerca de Nosotros': Agregada imagen en el feature-box y como imagen principal
+- Sección 'Misión y Visión': Agregadas imágenes para Misión, Visión y Valores
+- Las imágenes se muestran con estilo responsive (max-height: 150px, object-fit: cover)
+- Se mantiene compatibilidad con contenido sin imágenes (placeholders)
+- Los títulos dinámicos ahora se muestran desde la base de datos
 
-## 📊 Estado Actual del Sistema
-
-| Componente | Estado | Notas |
-|------------|--------|-------|
-| Base de Datos | ✅ Operativo | 22 tablas, 3 eventos creados |
-| Autenticación | ✅ Operativo | Dual auth (admin/usuarios) |
-| Dashboard | ✅ Operativo | Muestra estadísticas |
-| Carrusel | ✅ Operativo | CRUD completo, modales corregidos |
-| Galería | ✅ Operativo | CRUD completo, modales corregidos |
-| Eventos - Creación | ✅ Operativo | Con campo de imagen |
-| Eventos - Listado | ✅ Operativo | Funciona correctamente |
-| Eventos - Imágenes | ✅ Operativo | Se muestran en index.php |
-| Inscripciones | ✅ Operativo | Sistema completo |
-| Reportes | ✅ Operativo | Disponibles por evento |
-
----
-
-## 📝 Próximos Pasos Recomendados
-
-### 1. Seguridad (PRIORITARIO)
-- [ ] Cambiar contraseña del administrador
-- [ ] Cambiar contraseña del usuario del sistema
-- [ ] Eliminar archivos de prueba (opcional):
-  - test_*.php
-  - check_*.php
-  - debug_*.php
-
-### 2. Configuración Inicial
-- [ ] Configurar datos de la institución (admin/configuracion.php)
-- [ ] Subir logo y favicon
-- [ ] Configurar redes sociales
-- [ ] Personalizar colores del tema
-
-### 3. Contenido
-- [ ] Configurar Misión y Visión
-- [ ] Crear elementos del carrusel
-- [ ] Subir fotos a la galería
-- [ ] Crear páginas institucionales
-
-### 4. Eventos ✅
-- [x] Implementar campo de imagen en formulario de eventos
-- [x] Crear eventos con imagen de portada
-- [x] Mostrar eventos en index.php del sitio público
-- [x] Mapear campos para compatibilidad (nombre→titulo, imagen_portada→imagen)
-=======
-
-### 5. Inscripciones
-- [ ] Configurar precios de inscripción
-- [ ] Configurar métodos de pago
-- [ ] Establecer fechas de inscripción
-
----
-
-**Última actualización:** 2026-01-10 20:35
-**Estado general:** ✅ Sistema operativo - Pendiente verificación final en navegador
-**Versión:** 1.0

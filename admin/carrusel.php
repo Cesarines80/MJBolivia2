@@ -156,6 +156,8 @@ $csrfToken = generateCSRFToken();
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Theme style -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
 
@@ -236,7 +238,7 @@ $csrfToken = generateCSRFToken();
 
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link" data-bs-toggle="dropdown" href="#">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="fas fa-user-circle"></i>
                         <span class="ml-1"><?php echo htmlspecialchars($currentUser['nombre']); ?></span>
                     </a>
@@ -361,12 +363,10 @@ $csrfToken = generateCSRFToken();
 
                     <!-- Botón agregar -->
                     <div class="mb-3">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#modalAgregar">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAgregar">
                             <i class="fas fa-plus"></i> Agregar Elemento
                         </button>
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                            data-bs-target="#modalOrdenar">
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalOrdenar">
                             <i class="fas fa-sort"></i> Ordenar Elementos
                         </button>
                     </div>
@@ -624,12 +624,13 @@ $csrfToken = generateCSRFToken();
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
 
     <script>
         // Función para editar item
         function editarItem(id) {
+            alert("Función editarItem llamada con ID: " + id);
             // Obtener datos del item
             $.get('ajax.php?action=get_carrusel&id=' + id, function(data) {
                 if (data.success) {

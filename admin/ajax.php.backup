@@ -51,18 +51,6 @@ switch ($action) {
         }
         break;
 
-    case 'get_galeria_imagen':
-        require_once '../includes/galeria_imagenes.php';
-        $id = (int)($_GET['id'] ?? 0);
-        $item = GaleriaImagenes::getGalleryImageById($id);
-
-        if ($item) {
-            echo json_encode(['success' => true, 'data' => $item]);
-        } else {
-            echo json_encode(['success' => false, 'error' => 'Imagen no encontrada']);
-        }
-        break;
-
     case 'get_contacto':
         $id = (int)($_GET['id'] ?? 0);
         $item = Contactos::getById($id);
@@ -159,3 +147,15 @@ switch ($action) {
         echo json_encode(['success' => false, 'error' => 'Acción no válida']);
         break;
 }
+
+    case 'get_galeria_imagen':
+        require_once '../includes/galeria_imagenes.php';
+        $id = (int)($_GET['id'] ?? 0);
+        $item = GaleriaImagenes::getGalleryImageById($id);
+
+        if ($item) {
+            echo json_encode(['success' => true, 'data' => $item]);
+        } else {
+            echo json_encode(['success' => false, 'error' => 'Imagen no encontrada']);
+        }
+        break;

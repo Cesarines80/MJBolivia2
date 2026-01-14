@@ -420,3 +420,110 @@ Stack trace:
 [13-Jan-2026 00:33:00 America/La_Paz] GALERIA DELETE: Checking file: C:\xampp\htdocs\proyectos\MJBolivia2\config/../assets/uploads/6962e96dd591d_1768089965.jpg
 [13-Jan-2026 00:33:00 America/La_Paz] GALERIA DELETE: File deletion result: SUCCESS
 [13-Jan-2026 00:33:00 America/La_Paz] GALERIA DELETE: Database deletion result: SUCCESS
+[13-Jan-2026 13:26:42 America/La_Paz] CARRUSEL DELETE: Starting deletion of ID 9
+[13-Jan-2026 13:26:42 America/La_Paz] CARRUSEL DELETE: Found item: {"id":9,"titulo":"Campamento","descripcion":"Campamento Juvenil","imagen":"6962e9445f240_1768089924.jpg","tipo":"imagen","url":"","orden":4,"estado":"activo","fecha_creacion":"2026-01-10 20:05:24"}
+[13-Jan-2026 13:26:42 America/La_Paz] CARRUSEL DELETE: Checking file: C:\xampp\htdocs\proyectos\MJBolivia2\config/../assets/uploads/6962e9445f240_1768089924.jpg
+[13-Jan-2026 13:26:42 America/La_Paz] CARRUSEL DELETE: File deletion result: SUCCESS
+[13-Jan-2026 13:26:42 America/La_Paz] CARRUSEL DELETE: Database deletion result: SUCCESS
+[13-Jan-2026 13:26:59 America/La_Paz] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'web_institucional.sesiones' doesn't exist in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php:465
+Stack trace:
+#0 C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php(465): PDO->prepare('\n            IN...')
+#1 C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php(125): Auth->createSession(Array)
+#2 C:\xampp\htdocs\proyectos\MJBolivia2\admin\login.php(28): Auth->login('superadmin', 'superadmin123')
+#3 {main}
+  thrown in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 465
+[13-Jan-2026 13:27:29 America/La_Paz] CARRUSEL DELETE: Starting deletion of ID 10
+[13-Jan-2026 13:27:29 America/La_Paz] CARRUSEL DELETE: Found item: {"id":10,"titulo":"Liderazgo Espiritual","descripcion":"campamento","imagen":"6965c2d6b7f61_1768276694.jpeg","tipo":"imagen","url":"","orden":3,"estado":"activo","fecha_creacion":"2026-01-12 23:58:14"}
+[13-Jan-2026 13:27:29 America/La_Paz] CARRUSEL DELETE: Checking file: C:\xampp\htdocs\proyectos\MJBolivia2\config/../assets/uploads/6965c2d6b7f61_1768276694.jpeg
+[13-Jan-2026 13:27:29 America/La_Paz] CARRUSEL DELETE: File deletion result: SUCCESS
+[13-Jan-2026 13:27:29 America/La_Paz] CARRUSEL DELETE: Database deletion result: SUCCESS
+[13-Jan-2026 13:28:01 America/La_Paz] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'web_institucional.sesiones' doesn't exist in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php:465
+Stack trace:
+#0 C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php(465): PDO->prepare('\n            IN...')
+#1 C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php(125): Auth->createSession(Array)
+#2 C:\xampp\htdocs\proyectos\MJBolivia2\admin\login.php(28): Auth->login('rox@rox.com', '123456')
+#3 {main}
+  thrown in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 465
+[13-Jan-2026 13:29:33 America/La_Paz] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'web_institucional.sesiones' doesn't exist in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php:465
+Stack trace:
+#0 C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php(465): PDO->prepare('\n            IN...')
+#1 C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php(125): Auth->createSession(Array)
+#2 C:\xampp\htdocs\proyectos\MJBolivia2\admin\login.php(28): Auth->login('andres@andres.c...', '123456')
+#3 {main}
+  thrown in C:\xampp\htdocs\proyectos\MJBolivia2\includes\auth.php on line 465
+[13-Jan-2026 23:43:22 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\eventos\inscribir.php on line 80
+[13-Jan-2026 23:43:22 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\eventos\inscribir.php on line 80
+[13-Jan-2026 23:43:22 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\eventos\inscribir.php on line 171
+[13-Jan-2026 23:43:22 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\eventos\inscribir.php on line 171
+[14-Jan-2026 00:47:18 America/La_Paz] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'web_institucional.eventos_galeria' doesn't exist in C:\xampp\htdocs\proyectos\MJBolivia2\includes\eventos_galeria.php:14
+Stack trace:
+#0 C:\xampp\htdocs\proyectos\MJBolivia2\includes\eventos_galeria.php(14): PDO->prepare('SELECT * FROM e...')
+#1 C:\xampp\htdocs\proyectos\MJBolivia2\evento-detalle.php(26): EventosGaleria::getGalleryImages(5)
+#2 {main}
+  thrown in C:\xampp\htdocs\proyectos\MJBolivia2\includes\eventos_galeria.php on line 14
+[14-Jan-2026 00:47:25 America/La_Paz] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'web_institucional.eventos_galeria' doesn't exist in C:\xampp\htdocs\proyectos\MJBolivia2\includes\eventos_galeria.php:14
+Stack trace:
+#0 C:\xampp\htdocs\proyectos\MJBolivia2\includes\eventos_galeria.php(14): PDO->prepare('SELECT * FROM e...')
+#1 C:\xampp\htdocs\proyectos\MJBolivia2\evento-detalle.php(26): EventosGaleria::getGalleryImages(5)
+#2 {main}
+  thrown in C:\xampp\htdocs\proyectos\MJBolivia2\includes\eventos_galeria.php on line 14
+[14-Jan-2026 00:51:15 America/La_Paz] PHP Warning:  Undefined array key "costo" in C:\xampp\htdocs\proyectos\MJBolivia2\evento-detalle.php on line 376
+[14-Jan-2026 00:54:03 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 00:54:03 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 00:54:03 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 00:54:03 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 00:54:03 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 00:54:03 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 01:01:17 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\usuarios.php on line 564
+[14-Jan-2026 01:01:17 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\usuarios.php on line 564
+[14-Jan-2026 01:01:17 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\usuarios.php on line 564
+[14-Jan-2026 01:01:17 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\usuarios.php on line 564
+[14-Jan-2026 01:01:17 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\usuarios.php on line 564
+[14-Jan-2026 01:01:17 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\usuarios.php on line 564
+[14-Jan-2026 01:01:23 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\mis-eventos.php on line 234
+[14-Jan-2026 01:01:23 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\mis-eventos.php on line 234
+[14-Jan-2026 01:01:23 America/La_Paz] PHP Warning:  Undefined array key "fecha_inicio" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\mis-eventos.php on line 244
+[14-Jan-2026 01:01:23 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\mis-eventos.php on line 234
+[14-Jan-2026 01:01:23 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\mis-eventos.php on line 234
+[14-Jan-2026 01:01:23 America/La_Paz] PHP Warning:  Undefined array key "fecha_inicio" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\mis-eventos.php on line 244
+[14-Jan-2026 01:01:23 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\mis-eventos.php on line 234
+[14-Jan-2026 01:01:23 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\mis-eventos.php on line 234
+[14-Jan-2026 01:01:23 America/La_Paz] PHP Warning:  Undefined array key "fecha_inicio" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\mis-eventos.php on line 244
+[14-Jan-2026 01:02:02 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 01:02:02 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 01:02:02 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 01:02:02 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 01:02:02 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 01:02:02 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 01:14:36 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 01:14:36 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 01:14:36 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 01:14:36 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 01:14:36 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 01:14:36 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 12:27:07 America/La_Paz] GALERIA DELETE: Starting deletion of ID 1
+[14-Jan-2026 12:27:07 America/La_Paz] GALERIA DELETE: Found item: {"id":1,"titulo":"Imagen de Prueba 1768088320","descripcion":"Descripci\u00f3n de prueba","imagen":"6963948940c75_1768133769.jpeg","categoria":"prueba","fecha_creacion":"2026-01-10 19:38:40"}
+[14-Jan-2026 12:27:07 America/La_Paz] GALERIA DELETE: Checking file: C:\xampp\htdocs\proyectos\MJBolivia2\config/../assets/uploads/6963948940c75_1768133769.jpeg
+[14-Jan-2026 12:27:07 America/La_Paz] GALERIA DELETE: File deletion result: SUCCESS
+[14-Jan-2026 12:27:07 America/La_Paz] GALERIA DELETE: Database deletion result: SUCCESS
+[14-Jan-2026 12:35:26 America/La_Paz] GALERIA DELETE: Starting deletion of ID 5
+[14-Jan-2026 12:35:26 America/La_Paz] GALERIA DELETE: Found item: {"id":5,"titulo":"Liderazgo Espiritual","descripcion":"fdsfsf fsdfsd 222222222222","imagen":"6965c2fb490d0_1768276731.jpeg","categoria":"general","fecha_creacion":"2026-01-12 23:58:51"}
+[14-Jan-2026 12:35:26 America/La_Paz] GALERIA DELETE: Checking file: C:\xampp\htdocs\proyectos\MJBolivia2\config/../assets/uploads/6965c2fb490d0_1768276731.jpeg
+[14-Jan-2026 12:35:26 America/La_Paz] GALERIA DELETE: File deletion result: SUCCESS
+[14-Jan-2026 12:35:26 America/La_Paz] GALERIA DELETE: Database deletion result: SUCCESS
+[14-Jan-2026 12:42:10 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 12:42:10 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 12:42:10 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 12:42:10 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 12:42:10 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 12:42:10 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 12:49:14 America/La_Paz] PHP Warning:  Undefined array key "costo" in C:\xampp\htdocs\proyectos\MJBolivia2\evento-detalle.php on line 376
+[14-Jan-2026 12:49:24 America/La_Paz] PHP Warning:  Undefined array key "costo" in C:\xampp\htdocs\proyectos\MJBolivia2\evento-detalle.php on line 376
+[14-Jan-2026 12:52:57 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 12:52:57 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 12:52:57 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 12:52:57 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 12:52:57 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 12:52:57 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\eventos.php on line 384
+[14-Jan-2026 13:15:53 America/La_Paz] PHP Warning:  Undefined array key "costo" in C:\xampp\htdocs\proyectos\MJBolivia2\evento-detalle.php on line 376
+[14-Jan-2026 13:15:59 America/La_Paz] PHP Warning:  Undefined array key "costo" in C:\xampp\htdocs\proyectos\MJBolivia2\evento-detalle.php on line 376

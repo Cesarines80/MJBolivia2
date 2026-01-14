@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../config/config.php';
+require_once __DIR__ . '/../includes/eventos_galeria.php';
 
 // Verificar autenticación
 Auth::requireLogin();
@@ -52,6 +53,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $result = $eventosManager->create($data);
             if ($result['success']) {
+                $eventoId = $result['id'];
+
+                // Procesar imágenes de la galería
+                if (isset($_FILES['imagenes_galeria']) && !empty($_FILES['imagenes_galeria']['name'][0])) {
+                    $galeriaFiles = $_FILES['imagenes_galeria'];
+                    $numFiles = count($galeriaFiles['name']);
+
+                    for ($i = 0; $i < $numFiles; $i++) {
+                        if ($galeriaFiles['error'][$i] === UPLOAD_ERR_OK) {
+                            // Crear un array de archivo individual para uploadFile
+                            $singleFile = [
+                                'name' => $galeriaFiles['name'][$i],
+                                'type' => $galeriaFiles['type'][$i],
+                                'tmp_name' => $galeriaFiles['tmp_name'][$i],
+                                'error' => $galeriaFiles['error'][$i],
+                                'size' => $galeriaFiles['size'][$i]
+                            ];
+
+                            $upload = uploadFile($singleFile);
+                            if ($upload['success']) {
+                                // Guardar en la tabla eventos_galeria
+                                EventosGaleria::addGalleryImage($eventoId, [
+                                    'imagen' => $upload['filename'],
+                                    'titulo' => '',
+                                    'descripcion' => '',
+                                    'orden' => $i
+                                ]);
+                            }
+                        }
+                    }
+                }
+
                 $_SESSION['success'] = 'Evento creado exitosamente';
             } else {
                 $_SESSION['error'] = $result['message'] ?? 'Error al crear el evento';
@@ -467,6 +500,13 @@ $csrf_token = generateCSRFToken();
                             <input type="file" class="form-control-file" name="imagen_portada" accept="image/*">
                             <small class="form-text text-muted">Formatos permitidos: JPG, PNG, GIF, WEBP. Tamaño máximo:
                                 5MB</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Imágenes de la Galería</label>
+                            <input type="file" class="form-control-file" name="imagenes_galeria[]" accept="image/*"
+                                multiple>
+                            <small class="form-text text-muted">Selecciona múltiples imágenes para la galería del
+                                evento. Formatos permitidos: JPG, PNG, GIF, WEBP. Tamaño máximo por imagen: 5MB</small>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
