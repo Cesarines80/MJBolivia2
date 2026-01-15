@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     switch ($action) {
         case 'crear':
             $data = [
-                'nombre' => cleanInput($_POST['nombre']),
+                'titulo' => cleanInput($_POST['titulo']),
                 'descripcion' => cleanInput($_POST['descripcion']),
                 'fecha_inicio' => $_POST['fecha_inicio'],
                 'fecha_fin' => $_POST['fecha_fin'],
@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case 'actualizar':
             $eventoId = intval($_POST['evento_id']);
             $data = [
-                'nombre' => cleanInput($_POST['nombre']),
+                'titulo' => cleanInput($_POST['titulo']),
                 'descripcion' => cleanInput($_POST['descripcion']),
                 'fecha_inicio' => $_POST['fecha_inicio'],
                 'fecha_fin' => $_POST['fecha_fin'],
@@ -381,7 +381,7 @@ $csrf_token = generateCSRFToken();
                             <div class="col-md-6 col-lg-4 mb-4">
                                 <div class="card evento-card evento-<?php echo $evento['estado']; ?>">
                                     <div class="card-header">
-                                        <h3 class="card-title"><?php echo htmlspecialchars($evento['nombre']); ?></h3>
+                                        <h3 class="card-title"><?php echo htmlspecialchars($evento['titulo']); ?></h3>
                                         <div class="card-tools">
                                             <span
                                                 class="badge badge-<?php echo $evento['estado'] == 'activo' ? 'success' : ($evento['estado'] == 'inactivo' ? 'danger' : 'secondary'); ?>">
@@ -481,7 +481,7 @@ $csrf_token = generateCSRFToken();
                             <div class="col-md-8">
                                 <div class="form-group">
                                     <label>Nombre del Evento *</label>
-                                    <input type="text" class="form-control" name="nombre" required>
+                                    <input type="text" class="form-control" name="titulo" required>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -582,7 +582,7 @@ $csrf_token = generateCSRFToken();
                             <div class="col-md-8">
                                 <div class="form-group">
                                     <label>Nombre del Evento *</label>
-                                    <input type="text" class="form-control" name="nombre" id="editNombre" required>
+                                    <input type="text" class="form-control" name="titulo" id="editTitulo" required>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -759,7 +759,7 @@ $csrf_token = generateCSRFToken();
     <script>
         function editarEvento(evento) {
             $('#editEventoId').val(evento.id);
-            $('#editNombre').val(evento.nombre);
+            $('#editTitulo').val(evento.titulo);
             $('#editDescripcion').val(evento.descripcion);
             $('#editLugar').val(evento.lugar);
             $('#editFechaInicio').val(evento.fecha_inicio);

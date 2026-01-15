@@ -26,7 +26,7 @@ class EventosManager
 
         $stmt = $this->db->prepare("
             INSERT INTO eventos (
-                nombre, descripcion, fecha_inicio, fecha_fin,
+                titulo, descripcion, fecha_inicio, fecha_fin,
                 fecha_inicio_inscripcion, fecha_fin_inscripcion,
                 lugar, imagen_portada, estado, creado_por,
                 costo_inscripcion, costo_alojamiento
@@ -34,7 +34,7 @@ class EventosManager
         ");
 
         $result = $stmt->execute([
-            $data['nombre'],
+            $data['titulo'],
             $data['descripcion'] ?? '',
             $data['fecha_inicio'],
             $data['fecha_fin'],
@@ -59,7 +59,7 @@ class EventosManager
 
             // Log de actividad
             if ($auth) {
-                $auth->logActivity($_SESSION['admin_id'] ?? $_SESSION['user_id'], $eventoId, 'evento_creado', 'Evento creado: ' . $data['nombre']);
+                $auth->logActivity($_SESSION['admin_id'] ?? $_SESSION['user_id'], $eventoId, 'evento_creado', 'Evento creado: ' . $data['titulo']);
             }
 
             return ['success' => true, 'evento_id' => $eventoId];
@@ -82,7 +82,7 @@ class EventosManager
 
         $stmt = $this->db->prepare("
             UPDATE eventos SET
-                nombre = ?,
+                titulo = ?,
                 descripcion = ?,
                 fecha_inicio = ?,
                 fecha_fin = ?,
@@ -96,7 +96,7 @@ class EventosManager
         ");
 
         $result = $stmt->execute([
-            $data['nombre'],
+            $data['titulo'],
             $data['descripcion'] ?? '',
             $data['fecha_inicio'],
             $data['fecha_fin'],
@@ -111,7 +111,7 @@ class EventosManager
 
         if ($result) {
             if ($auth) {
-                $auth->logActivity($_SESSION['admin_id'] ?? $_SESSION['user_id'], $eventoId, 'evento_actualizado', 'Evento actualizado: ' . $data['nombre']);
+                $auth->logActivity($_SESSION['admin_id'] ?? $_SESSION['user_id'], $eventoId, 'evento_actualizado', 'Evento actualizado: ' . $data['titulo']);
             }
             return ['success' => true];
         }
