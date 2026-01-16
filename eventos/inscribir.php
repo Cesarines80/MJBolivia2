@@ -322,20 +322,114 @@ $csrf_token = generateCSRFToken();
                                             <option value="Beca">Beca</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-6">
-                                        <label for="alojamiento" class="form-label">
-                                            ¿Requiere Alojamiento? *
-                                            <small class="text-muted">(+Bs.
-                                                <?php echo number_format($evento['costo_alojamiento'] ?? 0, 2); ?>)</small>
-                                        </label>
-                                        <select class="form-select" id="alojamiento" name="alojamiento" required
-                                            onchange="calcularMonto()">
-                                            <option value="No">No</option>
-                                            <option value="Si">Sí (+Bs.
-                                                <?php echo number_format($evento['costo_alojamiento'] ?? 0, 2); ?>)</option>
-                                        </select>
-                                    </div>
+                                    <?php
+                                    $tieneAlojamiento = !empty($evento['alojamiento_opcion1_desc']) ||
+                                        !empty($evento['alojamiento_opcion2_desc']) ||
+                                        !empty($evento['alojamiento_opcion3_desc']);
+                                    ?>
+                                    <?php if ($tieneAlojamiento): ?>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Opciones de Alojamiento *</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="alojamiento"
+                                                    id="alojamiento_no" value="No" checked onchange="calcularMonto()">
+                                                <label class="form-check-label" for="alojamiento_no">
+                                                    No requiere alojamiento
+                                                </label>
+                                            </div>
+                                            <?php if (!empty($evento['alojamiento_opcion1_desc'])): ?>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="alojamiento"
+                                                        id="alojamiento_opcion1"
+                                                        value="<?php echo htmlspecialchars($evento['alojamiento_opcion1_desc']); ?>"
+                                                        onchange="calcularMonto()">
+                                                    <label class="form-check-label" for="alojamiento_opcion1">
+                                                        <?php echo htmlspecialchars($evento['alojamiento_opcion1_desc']); ?> (+Bs.
+                                                        <?php echo number_format($evento['alojamiento_opcion1_costo'] ?? 0, 2); ?>)
+                                                    </label>
+                                                </div>
+                                            <?php endif; ?>
+                                            <?php if (!empty($evento['alojamiento_opcion2_desc'])): ?>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="alojamiento"
+                                                        id="alojamiento_opcion2"
+                                                        value="<?php echo htmlspecialchars($evento['alojamiento_opcion2_desc']); ?>"
+                                                        onchange="calcularMonto()">
+                                                    <label class="form-check-label" for="alojamiento_opcion2">
+                                                        <?php echo htmlspecialchars($evento['alojamiento_opcion2_desc']); ?> (+Bs.
+                                                        <?php echo number_format($evento['alojamiento_opcion2_costo'] ?? 0, 2); ?>)
+                                                    </label>
+                                                </div>
+                                            <?php endif; ?>
+                                            <?php if (!empty($evento['alojamiento_opcion3_desc'])): ?>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="alojamiento"
+                                                        id="alojamiento_opcion3"
+                                                        value="<?php echo htmlspecialchars($evento['alojamiento_opcion3_desc']); ?>"
+                                                        onchange="calcularMonto()">
+                                                    <label class="form-check-label" for="alojamiento_opcion3">
+                                                        <?php echo htmlspecialchars($evento['alojamiento_opcion3_desc']); ?> (+Bs.
+                                                        <?php echo number_format($evento['alojamiento_opcion3_costo'] ?? 0, 2); ?>)
+                                                    </label>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
+
+                                <!-- Criterios de Descuentos -->
+                                <?php
+                                $tieneDescuentosEdad = (!empty($evento['edad_rango1_min']) && !empty($evento['edad_rango1_max'])) ||
+                                    (!empty($evento['edad_rango2_min']) && !empty($evento['edad_rango2_max']));
+                                $tieneDescuentosFecha = (!empty($config['descuento_fecha1']) || !empty($config['descuento_fecha2']) || !empty($config['descuento_fecha3']));
+                                $tieneDescuentos = $tieneDescuentosEdad || $tieneDescuentosFecha;
+                                ?>
+                                <?php if ($tieneDescuentos): ?>
+                                    <div class="alert alert-info mb-3">
+                                        <h6 class="mb-2"><i class="fas fa-tags"></i> Criterios de Descuentos Aplicables</h6>
+
+                                        <?php if ($tieneDescuentosEdad): ?>
+                                            <div class="mb-2">
+                                                <strong>Descuentos por Edad:</strong>
+                                                <ul class="mb-1">
+                                                    <?php if (!empty($evento['edad_rango1_min']) && !empty($evento['edad_rango1_max'])): ?>
+                                                        <li>Edad <?php echo $evento['edad_rango1_min']; ?> -
+                                                            <?php echo $evento['edad_rango1_max']; ?> años: Bs.
+                                                            <?php echo number_format($evento['costo_rango1'], 2); ?></li>
+                                                    <?php endif; ?>
+                                                    <?php if (!empty($evento['edad_rango2_min']) && !empty($evento['edad_rango2_max'])): ?>
+                                                        <li>Edad <?php echo $evento['edad_rango2_min']; ?> -
+                                                            <?php echo $evento['edad_rango2_max']; ?> años: Bs.
+                                                            <?php echo number_format($evento['costo_rango2'], 2); ?></li>
+                                                    <?php endif; ?>
+                                                </ul>
+                                            </div>
+                                        <?php endif; ?>
+
+                                        <?php if ($tieneDescuentosFecha): ?>
+                                            <div class="mb-2">
+                                                <strong>Descuentos por Fecha de Inscripción:</strong>
+                                                <ul class="mb-1">
+                                                    <?php if (!empty($config['descuento_fecha1'])): ?>
+                                                        <li>Hasta el <?php echo formatDate($config['descuento_fecha1']); ?>: Bs.
+                                                            <?php echo number_format($config['descuento_costo1'], 2); ?></li>
+                                                    <?php endif; ?>
+                                                    <?php if (!empty($config['descuento_fecha2'])): ?>
+                                                        <li>Hasta el <?php echo formatDate($config['descuento_fecha2']); ?>: Bs.
+                                                            <?php echo number_format($config['descuento_costo2'], 2); ?></li>
+                                                    <?php endif; ?>
+                                                    <?php if (!empty($config['descuento_fecha3'])): ?>
+                                                        <li>Hasta el <?php echo formatDate($config['descuento_fecha3']); ?>: Bs.
+                                                            <?php echo number_format($config['descuento_costo3'], 2); ?></li>
+                                                    <?php endif; ?>
+                                                </ul>
+                                            </div>
+                                        <?php endif; ?>
+
+                                        <small class="text-muted">Los descuentos se aplican automáticamente según
+                                            corresponda.</small>
+                                    </div>
+                                <?php endif; ?>
 
                                 <!-- Campo para Código de Pago (QR/Depósito) -->
                                 <div class="row mb-3" id="campo_codigo_pago" style="display: none;">
@@ -427,11 +521,19 @@ $csrf_token = generateCSRFToken();
     <script>
         function calcularMonto() {
             var tipoInscripcion = document.getElementById('tipo_inscripcion').value;
-            var alojamiento = document.getElementById('alojamiento').value;
+            var alojamientoRadios = document.getElementsByName('alojamiento');
+            var alojamientoSeleccionado = '';
+            for (var i = 0; i < alojamientoRadios.length; i++) {
+                if (alojamientoRadios[i].checked) {
+                    alojamientoSeleccionado = alojamientoRadios[i].value;
+                    break;
+                }
+            }
             var montoPagado = document.getElementById('monto_pagado');
             var totalDisplay = document.getElementById('total_display');
             var rowAlojamiento = document.getElementById('row_alojamiento');
             var costoInscripcionDisplay = document.getElementById('costo_inscripcion_display');
+            var costoAlojamientoDisplay = document.getElementById('costo_alojamiento_display');
             var campoCodigo = document.getElementById('campo_codigo_pago');
             var inputCodigo = document.getElementById('codigo_pago');
             var labelCodigo = document.getElementById('label_codigo_pago');
@@ -439,10 +541,46 @@ $csrf_token = generateCSRFToken();
 
             // Usar los costos del evento específico
             var costoInscripcion = <?php echo $evento['costo_inscripcion'] ?? 0; ?>;
-            var costoAlojamiento = <?php echo $evento['costo_alojamiento'] ?? 0; ?>;
+            var costoAlojamiento = 0;
 
-            var total = costoInscripcion;
-            var costoInscripcionActual = costoInscripcion;
+            // Datos de rangos de edad
+            var edadRango1Min = <?php echo $evento['edad_rango1_min'] ?? 'null'; ?>;
+            var edadRango1Max = <?php echo $evento['edad_rango1_max'] ?? 'null'; ?>;
+            var costoRango1 = <?php echo $evento['costo_rango1'] ?? 0; ?>;
+            var edadRango2Min = <?php echo $evento['edad_rango2_min'] ?? 'null'; ?>;
+            var edadRango2Max = <?php echo $evento['edad_rango2_max'] ?? 'null'; ?>;
+            var costoRango2 = <?php echo $evento['costo_rango2'] ?? 0; ?>;
+
+            // Determinar costo de alojamiento basado en la opción seleccionada
+            if (alojamientoSeleccionado === '<?php echo addslashes($evento['alojamiento_opcion1_desc'] ?? ''); ?>') {
+                costoAlojamiento = <?php echo $evento['alojamiento_opcion1_costo'] ?? 0; ?>;
+            } else if (alojamientoSeleccionado === '<?php echo addslashes($evento['alojamiento_opcion2_desc'] ?? ''); ?>') {
+                costoAlojamiento = <?php echo $evento['alojamiento_opcion2_costo'] ?? 0; ?>;
+            } else if (alojamientoSeleccionado === '<?php echo addslashes($evento['alojamiento_opcion3_desc'] ?? ''); ?>') {
+                costoAlojamiento = <?php echo $evento['alojamiento_opcion3_costo'] ?? 0; ?>;
+            }
+
+            // Calcular edad del participante
+            var fechaNacimiento = new Date(document.getElementById('fecha_nacimiento').value);
+            var hoy = new Date();
+            var edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+            var mes = hoy.getMonth() - fechaNacimiento.getMonth();
+            if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+                edad--;
+            }
+
+            // Determinar costo base según rangos de edad
+            var costoInscripcionActual = costoInscripcion; // Costo por defecto
+
+            if (edadRango1Min !== null && edadRango1Max !== null &&
+                edad >= edadRango1Min && edad <= edadRango1Max) {
+                costoInscripcionActual = costoRango1;
+            } else if (edadRango2Min !== null && edadRango2Max !== null &&
+                edad >= edadRango2Min && edad <= edadRango2Max) {
+                costoInscripcionActual = costoRango2;
+            }
+
+            var total = costoInscripcionActual;
 
             // Mostrar/ocultar campo de código según tipo de pago
             if (tipoInscripcion === 'QR') {
@@ -465,21 +603,19 @@ $csrf_token = generateCSRFToken();
             if (tipoInscripcion === 'Beca') {
                 costoInscripcionActual = 0;
                 total = 0;
-                // Para becas, el alojamiento también es gratis
-                if (alojamiento === 'Si') {
+                costoAlojamiento = 0;
+                if (alojamientoSeleccionado !== 'No') {
                     rowAlojamiento.style.display = '';
-                    // Actualizar el display del alojamiento para mostrar que es gratis
-                    document.getElementById('costo_alojamiento_display').textContent = 'Bs. 0.00';
+                    costoAlojamientoDisplay.textContent = 'Bs. 0.00';
                 } else {
                     rowAlojamiento.style.display = 'none';
                 }
             } else {
                 // Para pagos normales, sumar el costo de alojamiento si aplica
-                if (alojamiento === 'Si') {
+                if (alojamientoSeleccionado !== 'No') {
                     total += costoAlojamiento;
                     rowAlojamiento.style.display = '';
-                    // Restaurar el costo real del alojamiento
-                    document.getElementById('costo_alojamiento_display').textContent = 'Bs. ' + costoAlojamiento.toFixed(2);
+                    costoAlojamientoDisplay.textContent = 'Bs. ' + costoAlojamiento.toFixed(2);
                 } else {
                     rowAlojamiento.style.display = 'none';
                 }
@@ -502,9 +638,10 @@ $csrf_token = generateCSRFToken();
             }
         }
 
-        // Calcular monto al cargar la pagina
+        // Calcular monto al cargar la pagina y cuando cambie la fecha de nacimiento
         document.addEventListener('DOMContentLoaded', function() {
             calcularMonto();
+            document.getElementById('fecha_nacimiento').addEventListener('change', calcularMonto);
         });
     </script>
 </body>

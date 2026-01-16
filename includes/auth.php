@@ -344,6 +344,22 @@ class Auth
     }
 
     /**
+     * Auto-desactivar eventos expirados (más de 10 días después de la fecha de creación)
+     */
+    private function autoDeactivateExpiredEvents()
+    {
+        $tenDaysAgo = date('Y-m-d', strtotime('-10 days'));
+
+        $stmt = $this->db->prepare("
+            UPDATE eventos
+            SET estado = 'inactivo'
+            WHERE estado = 'activo'
+            AND fecha_creacion < ?
+        ");
+        $stmt->execute([$tenDaysAgo]);
+    }
+
+    /**
      * Verificar si el usuario puede acceder a un evento especifico
      */
     public function canAccessEvent($eventoId)
@@ -393,16 +409,24 @@ class Auth
         $user = $this->getCurrentUser();
         if (!$user) return [];
 
+        // Auto-desactivar eventos expirados
+        $this->autoDeactivateExpiredEvents();
+
         // Si es administrador del sistema (tabla administradores)
         if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']) {
             // Los administradores ven todos los eventos
             $stmt = $this->db->query("
-                SELECT e.*, 
+                SELECT e.*,
                        COALESCE(u.nombre_completo, a.nombre, 'Sistema') as creador_nombre,
-                       (SELECT COUNT(*) FROM inscripciones_eventos ie WHERE ie.evento_id = e.id) as total_inscritos
+                       (SELECT COUNT(*) FROM inscripciones_eventos ie WHERE ie.evento_id = e.id) as total_inscritos,
+                       GROUP_CONCAT(DISTINCT COALESCE(ua.nombre_completo, aa.nombre) SEPARATOR ', ') as admin_nombres
                 FROM eventos e
                 LEFT JOIN usuarios u ON e.creado_por = u.id
                 LEFT JOIN administradores a ON e.creado_por = a.id
+                LEFT JOIN eventos_administradores ea ON e.id = ea.evento_id AND ea.activo = 1
+                LEFT JOIN usuarios ua ON ea.usuario_id = ua.id
+                LEFT JOIN administradores aa ON ea.usuario_id = aa.id
+                GROUP BY e.id
                 ORDER BY e.fecha_creacion DESC
             ");
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -413,20 +437,29 @@ class Auth
             // Todos los eventos
             $stmt = $this->db->query("
                 SELECT e.*, u.nombre_completo as creador_nombre,
-                       (SELECT COUNT(*) FROM inscripciones_eventos ie WHERE ie.evento_id = e.id) as total_inscritos
+                       (SELECT COUNT(*) FROM inscripciones_eventos ie WHERE ie.evento_id = e.id) as total_inscritos,
+                       GROUP_CONCAT(DISTINCT COALESCE(ua.nombre_completo, aa.nombre) SEPARATOR ', ') as admin_nombres
                 FROM eventos e
                 LEFT JOIN usuarios u ON e.creado_por = u.id
+                LEFT JOIN eventos_administradores ea ON e.id = ea.evento_id AND ea.activo = 1
+                LEFT JOIN usuarios ua ON ea.usuario_id = ua.id
+                LEFT JOIN administradores aa ON ea.usuario_id = aa.id
+                GROUP BY e.id
                 ORDER BY e.fecha_creacion DESC
             ");
         } elseif ($user['rol'] === 'admin' || $user['rol'] === 'usuario') {
             // Solo eventos asignados
             $stmt = $this->db->prepare("
                 SELECT e.*, u.nombre_completo as creador_nombre,
-                       (SELECT COUNT(*) FROM inscripciones_eventos ie WHERE ie.evento_id = e.id) as total_inscritos
+                       (SELECT COUNT(*) FROM inscripciones_eventos ie WHERE ie.evento_id = e.id) as total_inscritos,
+                       GROUP_CONCAT(DISTINCT COALESCE(ua.nombre_completo, aa.nombre) SEPARATOR ', ') as admin_nombres
                 FROM eventos e
                 LEFT JOIN usuarios u ON e.creado_por = u.id
                 INNER JOIN eventos_administradores ea ON e.id = ea.evento_id
+                LEFT JOIN usuarios ua ON ea.usuario_id = ua.id
+                LEFT JOIN administradores aa ON ea.usuario_id = aa.id
                 WHERE ea.usuario_id = ? AND ea.activo = 1
+                GROUP BY e.id
                 ORDER BY e.fecha_creacion DESC
             ");
             $stmt->execute([$user['id']]);
@@ -434,10 +467,15 @@ class Auth
             // Solo eventos activos
             $stmt = $this->db->query("
                 SELECT e.*, u.nombre_completo as creador_nombre,
-                       (SELECT COUNT(*) FROM inscripciones_eventos ie WHERE ie.evento_id = e.id) as total_inscritos
+                       (SELECT COUNT(*) FROM inscripciones_eventos ie WHERE ie.evento_id = e.id) as total_inscritos,
+                       GROUP_CONCAT(DISTINCT COALESCE(ua.nombre_completo, aa.nombre) SEPARATOR ', ') as admin_nombres
                 FROM eventos e
                 LEFT JOIN usuarios u ON e.creado_por = u.id
+                LEFT JOIN eventos_administradores ea ON e.id = ea.evento_id AND ea.activo = 1
+                LEFT JOIN usuarios ua ON ea.usuario_id = ua.id
+                LEFT JOIN administradores aa ON ea.usuario_id = aa.id
                 WHERE e.estado = 'activo'
+                GROUP BY e.id
                 ORDER BY e.fecha_creacion DESC
             ");
         }

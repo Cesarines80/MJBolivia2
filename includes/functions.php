@@ -181,7 +181,7 @@ class Eventos
                     fecha_evento,
                     hora_evento,
                     lugar,
-                    imagen,
+                    imagen_portada as imagen,
                     estado
                 FROM eventos
                 WHERE fecha_evento >= CURDATE() AND estado = 'activo'

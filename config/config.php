@@ -13,19 +13,14 @@ define('DB_NAME', 'web_institucional');
 // Configuracion del sistema
 define('SITE_NAME', 'Sistema de Gestion de Eventos');
 
-// Detectar URL base dinámicamente
-$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
-$host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-$scriptName = $_SERVER['SCRIPT_NAME'] ?? '/index.php';
-$dir = dirname($scriptName);
-if ($dir == '/' || $dir == '\\' || $dir == '.') $dir = '';
-define('SITE_URL', $protocol . '://' . $host . $dir . '/');
+// URL base del sitio (ajustar según el entorno)
+define('SITE_URL', 'http://localhost/proyectos/MJBolivia2/');
 
 define('ADMIN_URL', SITE_URL . 'admin/');
 define('INSCRIPCIONES_URL', SITE_URL . 'inscripciones/');
 define('EVENTOS_URL', SITE_URL . 'eventos/');
 define('UPLOADS_DIR', __DIR__ . '/../assets/uploads/');
-define('UPLOADS_URL', '/assets/uploads/');
+define('UPLOADS_URL', SITE_URL . 'assets/uploads/');
 
 // Configuracion de roles y permisos
 define('ROLES', [

@@ -15,6 +15,31 @@ class EventosManager
     }
 
     /**
+     * Generar color aleatorio para el evento
+     */
+    private function generateRandomColor()
+    {
+        $colors = [
+            '#FF6B6B',
+            '#4ECDC4',
+            '#45B7D1',
+            '#96CEB4',
+            '#FFEAA7',
+            '#DDA0DD',
+            '#98D8C8',
+            '#F7DC6F',
+            '#BB8FCE',
+            '#85C1E9',
+            '#F8C471',
+            '#82E0AA',
+            '#F1948A',
+            '#85C1E9',
+            '#D7BDE2'
+        ];
+        return $colors[array_rand($colors)];
+    }
+
+    /**
      * Crear nuevo evento
      */
     public function create($data)
@@ -24,28 +49,56 @@ class EventosManager
         // Generar codigo unico para el evento
         $codigoEvento = $this->generateEventCode();
 
+        // Generar color aleatorio
+        $color = $this->generateRandomColor();
+
         $stmt = $this->db->prepare("
             INSERT INTO eventos (
-                titulo, descripcion, fecha_inicio, fecha_fin,
+                titulo, descripcion, fecha_inicio, fecha_evento, hora_evento, fecha_fin,
                 fecha_inicio_inscripcion, fecha_fin_inscripcion,
-                lugar, imagen_portada, estado, creado_por,
-                costo_inscripcion, costo_alojamiento
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                lugar, imagen_portada, estado, color, creado_por,
+                costo_inscripcion, costo_alojamiento,
+                alojamiento_opcion1_desc, alojamiento_opcion1_costo,
+                alojamiento_opcion2_desc, alojamiento_opcion2_costo,
+                alojamiento_opcion3_desc, alojamiento_opcion3_costo,
+                edad_rango1_min, edad_rango1_max, costo_rango1,
+                edad_rango2_min, edad_rango2_max, costo_rango2,
+                imagen, destacado
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ");
+
+        $creatorId = $_SESSION['admin_id'] ?? $_SESSION['user_id'] ?? null;
 
         $result = $stmt->execute([
             $data['titulo'],
             $data['descripcion'] ?? '',
             $data['fecha_inicio'],
+            $data['fecha_inicio'], // fecha_evento
+            null, // hora_evento
             $data['fecha_fin'],
             $data['fecha_inicio_inscripcion'],
             $data['fecha_fin_inscripcion'],
             $data['lugar'] ?? '',
             $data['imagen_portada'] ?? null,
             $data['estado'] ?? 'activo',
-            $_SESSION['admin_id'] ?? $_SESSION['user_id'] ?? null,
+            $color,
+            $creatorId,
             $data['costo_inscripcion'] ?? 0,
-            $data['costo_alojamiento'] ?? 0
+            $data['costo_alojamiento'] ?? 0,
+            $data['alojamiento_opcion1_desc'] ?? null,
+            $data['alojamiento_opcion1_costo'] ?? 0,
+            $data['alojamiento_opcion2_desc'] ?? null,
+            $data['alojamiento_opcion2_costo'] ?? 0,
+            $data['alojamiento_opcion3_desc'] ?? null,
+            $data['alojamiento_opcion3_costo'] ?? 0,
+            $data['edad_rango1_min'] ?? null,
+            $data['edad_rango1_max'] ?? null,
+            $data['costo_rango1'] ?? 0,
+            $data['edad_rango2_min'] ?? null,
+            $data['edad_rango2_max'] ?? null,
+            $data['costo_rango2'] ?? 0,
+            $data['imagen'] ?? null,
+            $data['destacado'] ?? 'no'
         ]);
 
         if ($result) {
@@ -55,17 +108,57 @@ class EventosManager
             $this->createDefaultConfig($eventoId);
 
             // Asignar creador como administrador del evento
-            $this->assignAdmin($eventoId, $_SESSION['admin_id'] ?? $_SESSION['user_id'], $_SESSION['admin_id'] ?? $_SESSION['user_id']);
+            $this->assignAdmin($eventoId, $creatorId, $creatorId);
 
             // Log de actividad
             if ($auth) {
-                $auth->logActivity($_SESSION['admin_id'] ?? $_SESSION['user_id'], $eventoId, 'evento_creado', 'Evento creado: ' . $data['titulo']);
+                $auth->logActivity($creatorId, $eventoId, 'evento_creado', 'Evento creado: ' . $data['titulo']);
             }
 
             return ['success' => true, 'evento_id' => $eventoId];
         }
 
         return ['success' => false, 'message' => 'Error al crear el evento'];
+    }
+
+    /**
+     * Desactivar evento
+     */
+    public function deactivate($eventoId)
+    {
+        global $auth;
+
+        if (!$auth || !$auth->canAccessEvent($eventoId)) {
+            return ['success' => false, 'message' => 'No tiene permisos para desactivar este evento'];
+        }
+
+        $stmt = $this->db->prepare("UPDATE eventos SET estado = 'inactivo' WHERE id = ?");
+        $result = $stmt->execute([$eventoId]);
+
+        if ($result) {
+            // Log de actividad
+            $userId = $_SESSION['admin_id'] ?? $_SESSION['user_id'] ?? null;
+            $auth->logActivity($userId, $eventoId, 'evento_desactivado', 'Evento desactivado manualmente');
+            return ['success' => true, 'message' => 'Evento desactivado exitosamente'];
+        }
+
+        return ['success' => false, 'message' => 'Error al desactivar el evento'];
+    }
+
+    /**
+     * Auto-desactivar eventos expirados (más de 10 días después de la fecha de fin)
+     */
+    private function autoDeactivateExpiredEvents()
+    {
+        $tenDaysAgo = date('Y-m-d', strtotime('-10 days'));
+
+        $stmt = $this->db->prepare("
+            UPDATE eventos
+            SET estado = 'inactivo'
+            WHERE estado = 'activo'
+            AND fecha_fin < ?
+        ");
+        $stmt->execute([$tenDaysAgo]);
     }
 
     /**
@@ -85,13 +178,29 @@ class EventosManager
                 titulo = ?,
                 descripcion = ?,
                 fecha_inicio = ?,
+                fecha_evento = ?,
+                hora_evento = ?,
                 fecha_fin = ?,
                 fecha_inicio_inscripcion = ?,
                 fecha_fin_inscripcion = ?,
                 lugar = ?,
                 estado = ?,
                 costo_inscripcion = ?,
-                costo_alojamiento = ?
+                costo_alojamiento = ?,
+                alojamiento_opcion1_desc = ?,
+                alojamiento_opcion1_costo = ?,
+                alojamiento_opcion2_desc = ?,
+                alojamiento_opcion2_costo = ?,
+                alojamiento_opcion3_desc = ?,
+                alojamiento_opcion3_costo = ?,
+                edad_rango1_min = ?,
+                edad_rango1_max = ?,
+                costo_rango1 = ?,
+                edad_rango2_min = ?,
+                edad_rango2_max = ?,
+                costo_rango2 = ?,
+                imagen = ?,
+                destacado = ?
             WHERE id = ?
         ");
 
@@ -99,6 +208,8 @@ class EventosManager
             $data['titulo'],
             $data['descripcion'] ?? '',
             $data['fecha_inicio'],
+            $data['fecha_inicio'], // fecha_evento
+            null, // hora_evento
             $data['fecha_fin'],
             $data['fecha_inicio_inscripcion'],
             $data['fecha_fin_inscripcion'],
@@ -106,12 +217,27 @@ class EventosManager
             $data['estado'] ?? 'activo',
             $data['costo_inscripcion'] ?? 0,
             $data['costo_alojamiento'] ?? 0,
+            $data['alojamiento_opcion1_desc'] ?? null,
+            $data['alojamiento_opcion1_costo'] ?? 0,
+            $data['alojamiento_opcion2_desc'] ?? null,
+            $data['alojamiento_opcion2_costo'] ?? 0,
+            $data['alojamiento_opcion3_desc'] ?? null,
+            $data['alojamiento_opcion3_costo'] ?? 0,
+            $data['edad_rango1_min'] ?? null,
+            $data['edad_rango1_max'] ?? null,
+            $data['costo_rango1'] ?? 0,
+            $data['edad_rango2_min'] ?? null,
+            $data['edad_rango2_max'] ?? null,
+            $data['costo_rango2'] ?? 0,
+            $data['imagen'] ?? null,
+            $data['destacado'] ?? 'no',
             $eventoId
         ]);
 
         if ($result) {
             if ($auth) {
-                $auth->logActivity($_SESSION['admin_id'] ?? $_SESSION['user_id'], $eventoId, 'evento_actualizado', 'Evento actualizado: ' . $data['titulo']);
+                $userId = $_SESSION['admin_id'] ?? $_SESSION['user_id'] ?? null;
+                $auth->logActivity($userId, $eventoId, 'evento_actualizado', 'Evento actualizado: ' . $data['titulo']);
             }
             return ['success' => true];
         }
@@ -140,7 +266,8 @@ class EventosManager
         }
 
         // Log before delete to avoid foreign key issues
-        $auth->logActivity($_SESSION['admin_id'] ?? $_SESSION['user_id'], $eventoId, 'evento_eliminado', 'Evento eliminado ID: ' . $eventoId);
+        $userId = $_SESSION['admin_id'] ?? $_SESSION['user_id'] ?? null;
+        $auth->logActivity($userId, $eventoId, 'evento_eliminado', 'Evento eliminado ID: ' . $eventoId);
 
         $stmt = $this->db->prepare("DELETE FROM eventos WHERE id = ?");
         $result = $stmt->execute([$eventoId]);
@@ -170,7 +297,7 @@ class EventosManager
                    (SELECT COUNT(*) FROM inscripciones_eventos ie WHERE ie.evento_id = e.id AND ie.sexo = 'Femenino') as total_mujeres,
                    (SELECT COUNT(*) FROM inscripciones_eventos ie WHERE ie.evento_id = e.id AND ie.estado_pago = 'completo') as pagos_completos,
                    (SELECT COUNT(*) FROM inscripciones_eventos ie WHERE ie.evento_id = e.id AND ie.tipo_inscripcion = 'Beca') as total_becados,
-                   (SELECT COUNT(*) FROM inscripciones_eventos ie WHERE ie.evento_id = e.id AND ie.alojamiento = 'Si') as con_alojamiento,
+                   (SELECT COUNT(*) FROM inscripciones_eventos ie WHERE ie.evento_id = e.id AND ie.alojamiento != 'No') as con_alojamiento,
                    (SELECT SUM(ie.monto_pagado) FROM inscripciones_eventos ie WHERE ie.evento_id = e.id) as total_recaudado
             FROM eventos e
             LEFT JOIN usuarios u ON e.creado_por = u.id
@@ -182,7 +309,7 @@ class EventosManager
     }
 
     /**
-     * Obtener todos los eventos accesibles
+     * Obtener todos los eventos accesibles (solo activos)
      */
     public function getAll()
     {
@@ -194,13 +321,78 @@ class EventosManager
 
         $events = $auth->getAccessibleEvents();
 
-        // Agregar estadisticas adicionales
+        // Filtrar solo eventos activos
+        $events = array_filter($events, function ($event) {
+            return $event['estado'] === 'activo';
+        });
+
+        // Agregar estadisticas adicionales y administradores
         foreach ($events as &$event) {
             $stats = $this->getEventStats($event['id']);
             $event = array_merge($event, $stats);
+
+            // Obtener administradores asignados
+            $admins = $this->getAdmins($event['id']);
+            $adminNames = array_column($admins, 'nombre_completo');
+            $event['admin_nombres'] = implode(', ', $adminNames) ?: 'No asignado';
         }
 
         return $events;
+    }
+
+    /**
+     * Obtener eventos desactivados (solo para super admin)
+     */
+    public function getDeactivatedEvents()
+    {
+        global $auth;
+
+        if (!$auth || !$auth->hasRole('super_admin')) {
+            return [];
+        }
+
+        $events = $auth->getAccessibleEvents();
+
+        // Filtrar solo eventos inactivos
+        $events = array_filter($events, function ($event) {
+            return $event['estado'] === 'inactivo';
+        });
+
+        // Agregar estadisticas adicionales y administradores
+        foreach ($events as &$event) {
+            $stats = $this->getEventStats($event['id']);
+            $event = array_merge($event, $stats);
+
+            // Obtener administradores asignados
+            $admins = $this->getAdmins($event['id']);
+            $adminNames = array_column($admins, 'nombre_completo');
+            $event['admin_nombres'] = implode(', ', $adminNames) ?: 'No asignado';
+        }
+
+        return $events;
+    }
+
+    /**
+     * Reactivar evento
+     */
+    public function reactivate($eventoId)
+    {
+        global $auth;
+
+        if (!$auth || !$auth->hasRole('super_admin')) {
+            return ['success' => false, 'message' => 'No tiene permisos para reactivar este evento'];
+        }
+
+        $stmt = $this->db->prepare("UPDATE eventos SET estado = 'activo' WHERE id = ?");
+        $result = $stmt->execute([$eventoId]);
+
+        if ($result) {
+            // Log de actividad
+            $auth->logActivity($_SESSION['admin_id'] ?? $_SESSION['user_id'], $eventoId, 'evento_reactivado', 'Evento reactivado manualmente');
+            return ['success' => true, 'message' => 'Evento reactivado exitosamente'];
+        }
+
+        return ['success' => false, 'message' => 'Error al reactivar el evento'];
     }
 
     /**
@@ -222,7 +414,7 @@ class EventosManager
                 SUM(CASE WHEN estado_pago = 'completo' THEN 1 ELSE 0 END) as pagos_completos,
                 SUM(CASE WHEN estado_pago IN ('pendiente', 'parcial') THEN 1 ELSE 0 END) as deudores,
                 SUM(CASE WHEN tipo_inscripcion = 'Beca' THEN 1 ELSE 0 END) as becados,
-                SUM(CASE WHEN alojamiento = 'Si' THEN 1 ELSE 0 END) as con_alojamiento,
+                SUM(CASE WHEN alojamiento != 'No' THEN 1 ELSE 0 END) as con_alojamiento,
                 SUM(monto_pagado) as total_recaudado,
                 COUNT(DISTINCT grupo) as grupos_formados
             FROM inscripciones_eventos
@@ -246,8 +438,10 @@ class EventosManager
         $stmt = $this->db->prepare("
             INSERT INTO configuracion_eventos (
                 evento_id, precio_base, precio_alojamiento, max_participantes,
-                requiere_aprobacion, instrucciones_pago, campos_extra
-            ) VALUES (?, ?, ?, ?, ?, ?, ?)
+                requiere_aprobacion, instrucciones_pago, campos_extra,
+                descuento_fecha1, descuento_costo1, descuento_fecha2, descuento_costo2,
+                descuento_fecha3, descuento_costo3
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ON DUPLICATE KEY UPDATE
                 precio_base = VALUES(precio_base),
                 precio_alojamiento = VALUES(precio_alojamiento),
@@ -255,6 +449,12 @@ class EventosManager
                 requiere_aprobacion = VALUES(requiere_aprobacion),
                 instrucciones_pago = VALUES(instrucciones_pago),
                 campos_extra = VALUES(campos_extra),
+                descuento_fecha1 = VALUES(descuento_fecha1),
+                descuento_costo1 = VALUES(descuento_costo1),
+                descuento_fecha2 = VALUES(descuento_fecha2),
+                descuento_costo2 = VALUES(descuento_costo2),
+                descuento_fecha3 = VALUES(descuento_fecha3),
+                descuento_costo3 = VALUES(descuento_costo3),
                 fecha_actualizacion = NOW()
         ");
 
@@ -265,7 +465,13 @@ class EventosManager
             $config['max_participantes'] ?? 200,
             $config['requiere_aprobacion'] ?? false,
             $config['instrucciones_pago'] ?? '',
-            isset($config['campos_extra']) ? json_encode($config['campos_extra']) : null
+            isset($config['campos_extra']) ? json_encode($config['campos_extra']) : null,
+            $config['descuento_fecha1'] ?? null,
+            $config['descuento_costo1'] ?? 0,
+            $config['descuento_fecha2'] ?? null,
+            $config['descuento_costo2'] ?? 0,
+            $config['descuento_fecha3'] ?? null,
+            $config['descuento_costo3'] ?? 0
         ]);
 
         if ($result) {
@@ -489,10 +695,54 @@ class InscripcionesEvento
 
         // Calcular montos
         $eventoManager = new EventosManager($this->db);
+        $evento = $eventoManager->getById($this->eventoId);
         $config = $eventoManager->getConfig($this->eventoId);
 
-        $montoBase = $config['precio_base'];
-        $montoAlojamiento = ($data['alojamiento'] === 'Si') ? $config['precio_alojamiento'] : 0;
+        // Calcular edad del participante
+        $fechaNacimiento = new DateTime($data['fecha_nacimiento']);
+        $hoy = new DateTime();
+        $edad = $hoy->diff($fechaNacimiento)->y;
+
+        // Determinar costo base según rangos de edad
+        $montoBase = $evento['costo_inscripcion']; // Costo por defecto
+
+        // Verificar rangos de edad configurados
+        if (
+            !empty($evento['edad_rango1_min']) && !empty($evento['edad_rango1_max']) &&
+            $edad >= $evento['edad_rango1_min'] && $edad <= $evento['edad_rango1_max']
+        ) {
+            $montoBase = $evento['costo_rango1'];
+        } elseif (
+            !empty($evento['edad_rango2_min']) && !empty($evento['edad_rango2_max']) &&
+            $edad >= $evento['edad_rango2_min'] && $edad <= $evento['edad_rango2_max']
+        ) {
+            $montoBase = $evento['costo_rango2'];
+        }
+
+        // Aplicar descuento por fecha si corresponde (sobre el costo base ya determinado)
+        $today = date('Y-m-d');
+
+        if (!empty($config['descuento_fecha3']) && $today <= $config['descuento_fecha3']) {
+            $montoBase = $config['descuento_costo3'];
+        } elseif (!empty($config['descuento_fecha2']) && $today <= $config['descuento_fecha2']) {
+            $montoBase = $config['descuento_costo2'];
+        } elseif (!empty($config['descuento_fecha1']) && $today <= $config['descuento_fecha1']) {
+            $montoBase = $config['descuento_costo1'];
+        }
+
+        $montoAlojamiento = 0;
+
+        // Determinar costo de alojamiento basado en la opción seleccionada
+        if ($data['alojamiento'] !== 'No') {
+            if ($data['alojamiento'] === $evento['alojamiento_opcion1_desc']) {
+                $montoAlojamiento = $evento['alojamiento_opcion1_costo'] ?? 0;
+            } elseif ($data['alojamiento'] === $evento['alojamiento_opcion2_desc']) {
+                $montoAlojamiento = $evento['alojamiento_opcion2_costo'] ?? 0;
+            } elseif ($data['alojamiento'] === $evento['alojamiento_opcion3_desc']) {
+                $montoAlojamiento = $evento['alojamiento_opcion3_costo'] ?? 0;
+            }
+        }
+
         $montoTotal = $montoBase + $montoAlojamiento;
 
         // Determinar estado de pago

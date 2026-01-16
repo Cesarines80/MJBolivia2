@@ -26,17 +26,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     switch ($action) {
         case 'crear':
+            // Validar campos requeridos
+            if (empty($_POST['titulo'])) {
+                $_SESSION['error'] = 'El título del evento es obligatorio';
+                header('Location: eventos.php');
+                exit;
+            }
+            if (empty($_POST['costo_inscripcion'])) {
+                $_SESSION['error'] = 'El costo de inscripción es obligatorio';
+                header('Location: eventos.php');
+                exit;
+            }
+            if (empty($_POST['costo_alojamiento'])) {
+                $_SESSION['error'] = 'El costo de alojamiento es obligatorio';
+                header('Location: eventos.php');
+                exit;
+            }
+
             $data = [
                 'titulo' => cleanInput($_POST['titulo']),
                 'descripcion' => cleanInput($_POST['descripcion']),
-                'fecha_inicio' => $_POST['fecha_inicio'],
-                'fecha_fin' => $_POST['fecha_fin'],
-                'fecha_inicio_inscripcion' => $_POST['fecha_inicio_inscripcion'],
-                'fecha_fin_inscripcion' => $_POST['fecha_fin_inscripcion'],
+                'fecha_inicio' => !empty($_POST['fecha_inicio']) ? $_POST['fecha_inicio'] : null,
+                'fecha_fin' => !empty($_POST['fecha_fin']) ? $_POST['fecha_fin'] : null,
+                'fecha_inicio_inscripcion' => !empty($_POST['fecha_inicio_inscripcion']) ? $_POST['fecha_inicio_inscripcion'] : null,
+                'fecha_fin_inscripcion' => !empty($_POST['fecha_fin_inscripcion']) ? $_POST['fecha_fin_inscripcion'] : null,
                 'lugar' => cleanInput($_POST['lugar']),
                 'costo_inscripcion' => floatval($_POST['costo_inscripcion']),
                 'costo_alojamiento' => floatval($_POST['costo_alojamiento']),
+                'alojamiento_opcion1_desc' => cleanInput($_POST['alojamiento_opcion1_desc'] ?? ''),
+                'alojamiento_opcion1_costo' => floatval($_POST['alojamiento_opcion1_costo'] ?? 0),
+                'alojamiento_opcion2_desc' => cleanInput($_POST['alojamiento_opcion2_desc'] ?? ''),
+                'alojamiento_opcion2_costo' => floatval($_POST['alojamiento_opcion2_costo'] ?? 0),
+                'alojamiento_opcion3_desc' => cleanInput($_POST['alojamiento_opcion3_desc'] ?? ''),
+                'alojamiento_opcion3_costo' => floatval($_POST['alojamiento_opcion3_costo'] ?? 0),
+                'edad_rango1_min' => !empty($_POST['edad_rango1_min']) ? intval($_POST['edad_rango1_min']) : null,
+                'edad_rango1_max' => !empty($_POST['edad_rango1_max']) ? intval($_POST['edad_rango1_max']) : null,
+                'costo_rango1' => floatval($_POST['costo_rango1'] ?? 0),
+                'edad_rango2_min' => !empty($_POST['edad_rango2_min']) ? intval($_POST['edad_rango2_min']) : null,
+                'edad_rango2_max' => !empty($_POST['edad_rango2_max']) ? intval($_POST['edad_rango2_max']) : null,
+                'costo_rango2' => floatval($_POST['costo_rango2'] ?? 0),
                 'estado' => 'activo'
+            ];
+
+            // Configuración de descuentos
+            $configDescuentos = [
+                'descuento_fecha1' => !empty($_POST['descuento_fecha1']) ? $_POST['descuento_fecha1'] : null,
+                'descuento_costo1' => floatval($_POST['descuento_costo1'] ?? 0),
+                'descuento_fecha2' => !empty($_POST['descuento_fecha2']) ? $_POST['descuento_fecha2'] : null,
+                'descuento_costo2' => floatval($_POST['descuento_costo2'] ?? 0),
+                'descuento_fecha3' => !empty($_POST['descuento_fecha3']) ? $_POST['descuento_fecha3'] : null,
+                'descuento_costo3' => floatval($_POST['descuento_costo3'] ?? 0)
             ];
 
             // Subir imagen de portada si se proporcionó
@@ -54,6 +93,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $result = $eventosManager->create($data);
             if ($result['success']) {
                 $eventoId = $result['id'];
+
+                // Configurar descuentos si se proporcionaron
+                if (!empty($configDescuentos['descuento_fecha1']) || !empty($configDescuentos['descuento_fecha2']) || !empty($configDescuentos['descuento_fecha3'])) {
+                    $eventosManager->configure($eventoId, $configDescuentos);
+                }
 
                 // Procesar imágenes de la galería
                 if (isset($_FILES['imagenes_galeria']) && !empty($_FILES['imagenes_galeria']['name'][0])) {
@@ -96,18 +140,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = [
                 'titulo' => cleanInput($_POST['titulo']),
                 'descripcion' => cleanInput($_POST['descripcion']),
-                'fecha_inicio' => $_POST['fecha_inicio'],
-                'fecha_fin' => $_POST['fecha_fin'],
-                'fecha_inicio_inscripcion' => $_POST['fecha_inicio_inscripcion'],
-                'fecha_fin_inscripcion' => $_POST['fecha_fin_inscripcion'],
+                'fecha_inicio' => !empty($_POST['fecha_inicio']) ? $_POST['fecha_inicio'] : null,
+                'fecha_fin' => !empty($_POST['fecha_fin']) ? $_POST['fecha_fin'] : null,
+                'fecha_inicio_inscripcion' => !empty($_POST['fecha_inicio_inscripcion']) ? $_POST['fecha_inicio_inscripcion'] : null,
+                'fecha_fin_inscripcion' => !empty($_POST['fecha_fin_inscripcion']) ? $_POST['fecha_fin_inscripcion'] : null,
                 'lugar' => cleanInput($_POST['lugar']),
                 'costo_inscripcion' => floatval($_POST['costo_inscripcion']),
                 'costo_alojamiento' => floatval($_POST['costo_alojamiento']),
+                'alojamiento_opcion1_desc' => cleanInput($_POST['alojamiento_opcion1_desc'] ?? ''),
+                'alojamiento_opcion1_costo' => floatval($_POST['alojamiento_opcion1_costo'] ?? 0),
+                'alojamiento_opcion2_desc' => cleanInput($_POST['alojamiento_opcion2_desc'] ?? ''),
+                'alojamiento_opcion2_costo' => floatval($_POST['alojamiento_opcion2_costo'] ?? 0),
+                'alojamiento_opcion3_desc' => cleanInput($_POST['alojamiento_opcion3_desc'] ?? ''),
+                'alojamiento_opcion3_costo' => floatval($_POST['alojamiento_opcion3_costo'] ?? 0),
+                'edad_rango1_min' => !empty($_POST['edad_rango1_min']) ? intval($_POST['edad_rango1_min']) : null,
+                'edad_rango1_max' => !empty($_POST['edad_rango1_max']) ? intval($_POST['edad_rango1_max']) : null,
+                'costo_rango1' => floatval($_POST['costo_rango1'] ?? 0),
+                'edad_rango2_min' => !empty($_POST['edad_rango2_min']) ? intval($_POST['edad_rango2_min']) : null,
+                'edad_rango2_max' => !empty($_POST['edad_rango2_max']) ? intval($_POST['edad_rango2_max']) : null,
+                'costo_rango2' => floatval($_POST['costo_rango2'] ?? 0),
                 'estado' => $_POST['estado']
             ];
 
             $result = $eventosManager->update($eventoId, $data);
             if ($result['success']) {
+                // Actualizar configuración de descuentos
+                $configDescuentos = [
+                    'descuento_fecha1' => !empty($_POST['descuento_fecha1']) ? $_POST['descuento_fecha1'] : null,
+                    'descuento_costo1' => floatval($_POST['descuento_costo1'] ?? 0),
+                    'descuento_fecha2' => !empty($_POST['descuento_fecha2']) ? $_POST['descuento_fecha2'] : null,
+                    'descuento_costo2' => floatval($_POST['descuento_costo2'] ?? 0),
+                    'descuento_fecha3' => !empty($_POST['descuento_fecha3']) ? $_POST['descuento_fecha3'] : null,
+                    'descuento_costo3' => floatval($_POST['descuento_costo3'] ?? 0)
+                ];
+                $eventosManager->configure($eventoId, $configDescuentos);
+
                 $_SESSION['success'] = 'Evento actualizado exitosamente';
             } else {
                 $_SESSION['error'] = $result['message'] ?? 'Error al actualizar el evento';
@@ -131,7 +198,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'precio_alojamiento' => floatval($_POST['precio_alojamiento']),
                 'max_participantes' => intval($_POST['max_participantes']),
                 'requiere_aprovacion' => isset($_POST['requiere_aprovacion']),
-                'instrucciones_pago' => cleanInput($_POST['instrucciones_pago'])
+                'instrucciones_pago' => cleanInput($_POST['instrucciones_pago']),
+                'descuento_fecha1' => !empty($_POST['descuento_fecha1']) ? $_POST['descuento_fecha1'] : null,
+                'descuento_costo1' => floatval($_POST['descuento_costo1'] ?? 0),
+                'descuento_fecha2' => !empty($_POST['descuento_fecha2']) ? $_POST['descuento_fecha2'] : null,
+                'descuento_costo2' => floatval($_POST['descuento_costo2'] ?? 0),
+                'descuento_fecha3' => !empty($_POST['descuento_fecha3']) ? $_POST['descuento_fecha3'] : null,
+                'descuento_costo3' => floatval($_POST['descuento_costo3'] ?? 0)
             ];
 
             $result = $eventosManager->configure($eventoId, $config);
@@ -152,6 +225,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['error'] = 'Error al asignar el administrador';
             }
             break;
+
+        case 'desactivar':
+            $eventoId = intval($_POST['evento_id']);
+            $result = $eventosManager->deactivate($eventoId);
+            if ($result['success']) {
+                $_SESSION['success'] = 'Evento desactivado exitosamente';
+            } else {
+                $_SESSION['error'] = $result['message'] ?? 'Error al desactivar el evento';
+            }
+            break;
     }
 
     header('Location: eventos.php');
@@ -167,6 +250,19 @@ $error = $_SESSION['error'] ?? '';
 unset($_SESSION['success'], $_SESSION['error']);
 
 $csrf_token = generateCSRFToken();
+
+function getContrastColor($hexColor)
+{
+    // Remove # if present
+    $hexColor = ltrim($hexColor, '#');
+    // Convert to RGB
+    $r = hexdec(substr($hexColor, 0, 2));
+    $g = hexdec(substr($hexColor, 2, 2));
+    $b = hexdec(substr($hexColor, 4, 2));
+    // Calculate luminance
+    $luminance = (0.299 * $r + 0.587 * $g + 0.114 * $b) / 255;
+    return $luminance > 0.5 ? '#000000' : '#FFFFFF';
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -237,6 +333,27 @@ $csrf_token = generateCSRFToken();
         .evento-finalizado {
             border-left: 4px solid #6c757d;
         }
+
+        .evento-thumbnail {
+            float: right;
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-left: 10px;
+            border: 2px solid #e9ecef;
+        }
+
+        .evento-color-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
     </style>
 </head>
 
@@ -297,6 +414,12 @@ $csrf_token = generateCSRFToken();
                                 <a href="eventos.php" class="nav-link active">
                                     <i class="nav-icon fas fa-calendar-alt"></i>
                                     <p>Gestion de Eventos</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="eventos-desactivados.php" class="nav-link">
+                                    <i class="nav-icon fas fa-calendar-times"></i>
+                                    <p>Eventos Desactivados</p>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -380,7 +503,8 @@ $csrf_token = generateCSRFToken();
                         <?php foreach ($eventos as $evento): ?>
                             <div class="col-md-6 col-lg-4 mb-4">
                                 <div class="card evento-card evento-<?php echo $evento['estado']; ?>">
-                                    <div class="card-header">
+                                    <div class="card-header"
+                                        style="background-color: <?php echo $evento['color'] ?? '#B8B3D8'; ?>; color: <?php echo getContrastColor($evento['color'] ?? '#B8B3D8'); ?>;">
                                         <h3 class="card-title"><?php echo htmlspecialchars($evento['titulo']); ?></h3>
                                         <div class="card-tools">
                                             <span
@@ -402,6 +526,15 @@ $csrf_token = generateCSRFToken();
                                         <p class="mb-3">
                                             <?php echo limitText($evento['descripcion'], 100); ?>
                                         </p>
+                                        <p class="text-muted mb-2">
+                                            <i class="fas fa-user-shield"></i>
+                                            Administradores: <?php echo htmlspecialchars($evento['admin_nombres']); ?>
+                                        </p>
+
+                                        <?php if ($evento['imagen_portada']): ?>
+                                            <img src="<?php echo UPLOADS_URL . $evento['imagen_portada']; ?>" alt="Portada"
+                                                class="evento-thumbnail">
+                                        <?php endif; ?>
 
                                         <!-- Estadisticas -->
                                         <div class="row text-center mb-3">
@@ -434,6 +567,12 @@ $csrf_token = generateCSRFToken();
                                                 onclick="configurarEvento(<?php echo $evento['id']; ?>)">
                                                 <i class="fas fa-cog"></i> Configurar
                                             </button>
+                                            <?php if ($evento['estado'] === 'activo'): ?>
+                                                <button type="button" class="btn btn-sm btn-warning"
+                                                    onclick="desactivarEvento(<?php echo $evento['id']; ?>)">
+                                                    <i class="fas fa-ban"></i> Desactivar
+                                                </button>
+                                            <?php endif; ?>
                                             <button type="button" class="btn btn-sm btn-danger"
                                                 onclick="eliminarEvento(<?php echo $evento['id']; ?>)">
                                                 <i class="fas fa-trash"></i> Eliminar
@@ -555,6 +694,201 @@ $csrf_token = generateCSRFToken();
                                 </div>
                             </div>
                         </div>
+
+                        <div class="mb-3">
+                            <button class="btn btn-outline-secondary btn-sm" type="button" data-toggle="collapse"
+                                data-target="#collapseAlojamientoCrear" aria-expanded="false"
+                                aria-controls="collapseAlojamientoCrear">
+                                <i class="fas fa-chevron-down"></i> Opciones de Alojamiento (Opcional)
+                            </button>
+                        </div>
+                        <div class="collapse" id="collapseAlojamientoCrear">
+                            <div class="card card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Opción 1 - Descripción</label>
+                                            <input type="text" class="form-control" name="alojamiento_opcion1_desc"
+                                                placeholder="Ej: Habitación Individual">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Opción 1 - Costo (Bs.)</label>
+                                            <input type="number" step="0.01" class="form-control"
+                                                name="alojamiento_opcion1_costo" value="0.00">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Opción 2 - Descripción</label>
+                                            <input type="text" class="form-control" name="alojamiento_opcion2_desc"
+                                                placeholder="Ej: Habitación Doble">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Opción 2 - Costo (Bs.)</label>
+                                            <input type="number" step="0.01" class="form-control"
+                                                name="alojamiento_opcion2_costo" value="0.00">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Opción 3 - Descripción</label>
+                                            <input type="text" class="form-control" name="alojamiento_opcion3_desc"
+                                                placeholder="Ej: Habitación Compartida">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Opción 3 - Costo (Bs.)</label>
+                                            <input type="number" step="0.01" class="form-control"
+                                                name="alojamiento_opcion3_costo" value="0.00">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <button class="btn btn-outline-secondary btn-sm" type="button" data-toggle="collapse"
+                                data-target="#collapseEdadCrear" aria-expanded="false"
+                                aria-controls="collapseEdadCrear">
+                                <i class="fas fa-chevron-down"></i> Criterios de Costos por Edad (Opcional)
+                            </button>
+                        </div>
+                        <div class="collapse" id="collapseEdadCrear">
+                            <div class="card card-body">
+                                <p class="text-muted">Configure costos diferenciados según rangos de edad. Deje los
+                                    campos
+                                    vacíos si no aplica.</p>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Edad Mínima Rango 1</label>
+                                            <input type="number" class="form-control" name="edad_rango1_min" min="0"
+                                                placeholder="Ej: 18">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Edad Máxima Rango 1</label>
+                                            <input type="number" class="form-control" name="edad_rango1_max" min="0"
+                                                placeholder="Ej: 25">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Costo Rango 1 (Bs.)</label>
+                                            <input type="number" step="0.01" class="form-control" name="costo_rango1"
+                                                value="0.00">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Edad Mínima Rango 2</label>
+                                            <input type="number" class="form-control" name="edad_rango2_min" min="0"
+                                                placeholder="Ej: 26">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Edad Máxima Rango 2</label>
+                                            <input type="number" class="form-control" name="edad_rango2_max" min="0"
+                                                placeholder="Ej: 35">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Costo Rango 2 (Bs.)</label>
+                                            <input type="number" step="0.01" class="form-control" name="costo_rango2"
+                                                value="0.00">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <button class="btn btn-outline-secondary btn-sm" type="button" data-toggle="collapse"
+                                data-target="#collapseDescuentosCrear" aria-expanded="false"
+                                aria-controls="collapseDescuentosCrear">
+                                <i class="fas fa-chevron-down"></i> Criterios de Descuentos por Fechas (Opcional)
+                            </button>
+                        </div>
+                        <div class="collapse" id="collapseDescuentosCrear">
+                            <div class="card card-body">
+                                <p class="text-muted">Configure descuentos aplicables según la fecha de inscripción. Los
+                                    costos
+                                    se aplican desde la fecha de inicio de inscripciones hasta la fecha especificada.
+                                </p>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Fecha Límite Descuento 1</label>
+                                            <input type="date" class="form-control" name="descuento_fecha1">
+                                            <small class="form-text text-muted">Hasta esta fecha aplica el costo
+                                                1</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Costo Inscripción 1 (Bs.)</label>
+                                            <input type="number" step="0.01" class="form-control"
+                                                name="descuento_costo1" value="0.00">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Fecha Límite Descuento 2</label>
+                                            <input type="date" class="form-control" name="descuento_fecha2">
+                                            <small class="form-text text-muted">Desde fecha 1 hasta esta fecha aplica el
+                                                costo
+                                                2</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Costo Inscripción 2 (Bs.)</label>
+                                            <input type="number" step="0.01" class="form-control"
+                                                name="descuento_costo2" value="0.00">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Fecha Límite Descuento 3</label>
+                                            <input type="date" class="form-control" name="descuento_fecha3">
+                                            <small class="form-text text-muted">Desde fecha 2 hasta esta fecha aplica el
+                                                costo
+                                                3</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Costo Inscripción 3 (Bs.)</label>
+                                            <input type="number" step="0.01" class="form-control"
+                                                name="descuento_costo3" value="0.00">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -643,6 +977,70 @@ $csrf_token = generateCSRFToken();
                                 </div>
                             </div>
                         </div>
+
+                        <div class="mb-3">
+                            <button class="btn btn-outline-secondary btn-sm" type="button" data-toggle="collapse"
+                                data-target="#collapseAlojamientoEditar" aria-expanded="false"
+                                aria-controls="collapseAlojamientoEditar">
+                                <i class="fas fa-chevron-down"></i> Opciones de Alojamiento (Opcional)
+                            </button>
+                        </div>
+                        <div class="collapse" id="collapseAlojamientoEditar">
+                            <div class="card card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Opción 1 - Descripción</label>
+                                            <input type="text" class="form-control" name="alojamiento_opcion1_desc"
+                                                id="editAlojamientoOpcion1Desc" placeholder="Ej: Habitación Individual">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Opción 1 - Costo (Bs.)</label>
+                                            <input type="number" step="0.01" class="form-control"
+                                                name="alojamiento_opcion1_costo" id="editAlojamientoOpcion1Costo"
+                                                value="0.00">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Opción 2 - Descripción</label>
+                                            <input type="text" class="form-control" name="alojamiento_opcion2_desc"
+                                                id="editAlojamientoOpcion2Desc" placeholder="Ej: Habitación Doble">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Opción 2 - Costo (Bs.)</label>
+                                            <input type="number" step="0.01" class="form-control"
+                                                name="alojamiento_opcion2_costo" id="editAlojamientoOpcion2Costo"
+                                                value="0.00">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Opción 3 - Descripción</label>
+                                            <input type="text" class="form-control" name="alojamiento_opcion3_desc"
+                                                id="editAlojamientoOpcion3Desc" placeholder="Ej: Habitación Compartida">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Opción 3 - Costo (Bs.)</label>
+                                            <input type="number" step="0.01" class="form-control"
+                                                name="alojamiento_opcion3_costo" id="editAlojamientoOpcion3Costo"
+                                                value="0.00">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label>Estado</label>
                             <select class="form-control" name="estado" id="editEstado">
@@ -650,6 +1048,141 @@ $csrf_token = generateCSRFToken();
                                 <option value="inactivo">Inactivo</option>
                                 <option value="finalizado">Finalizado</option>
                             </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <button class="btn btn-outline-secondary btn-sm" type="button" data-toggle="collapse"
+                                data-target="#collapseEdadEditar" aria-expanded="false"
+                                aria-controls="collapseEdadEditar">
+                                <i class="fas fa-chevron-down"></i> Criterios de Costos por Edad (Opcional)
+                            </button>
+                        </div>
+                        <div class="collapse" id="collapseEdadEditar">
+                            <div class="card card-body">
+                                <p class="text-muted">Configure costos diferenciados según rangos de edad. Deje los
+                                    campos
+                                    vacíos si no aplica.</p>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Edad Mínima Rango 1</label>
+                                            <input type="number" class="form-control" name="edad_rango1_min"
+                                                id="editEdadRango1Min" min="0" placeholder="Ej: 18">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Edad Máxima Rango 1</label>
+                                            <input type="number" class="form-control" name="edad_rango1_max"
+                                                id="editEdadRango1Max" min="0" placeholder="Ej: 25">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Costo Rango 1 (Bs.)</label>
+                                            <input type="number" step="0.01" class="form-control" name="costo_rango1"
+                                                id="editCostoRango1" value="0.00">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Edad Mínima Rango 2</label>
+                                            <input type="number" class="form-control" name="edad_rango2_min"
+                                                id="editEdadRango2Min" min="0" placeholder="Ej: 26">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Edad Máxima Rango 2</label>
+                                            <input type="number" class="form-control" name="edad_rango2_max"
+                                                id="editEdadRango2Max" min="0" placeholder="Ej: 35">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Costo Rango 2 (Bs.)</label>
+                                            <input type="number" step="0.01" class="form-control" name="costo_rango2"
+                                                id="editCostoRango2" value="0.00">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <button class="btn btn-outline-secondary btn-sm" type="button" data-toggle="collapse"
+                                data-target="#collapseDescuentosEditar" aria-expanded="false"
+                                aria-controls="collapseDescuentosEditar">
+                                <i class="fas fa-chevron-down"></i> Criterios de Descuentos por Fechas (Opcional)
+                            </button>
+                        </div>
+                        <div class="collapse" id="collapseDescuentosEditar">
+                            <div class="card card-body">
+                                <p class="text-muted">Configure descuentos aplicables según la fecha de inscripción.</p>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Fecha Límite Descuento 1</label>
+                                            <input type="date" class="form-control" name="descuento_fecha1"
+                                                id="editDescuentoFecha1">
+                                            <small class="form-text text-muted">Hasta esta fecha aplica el costo
+                                                1</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Costo Inscripción 1 (Bs.)</label>
+                                            <input type="number" step="0.01" class="form-control"
+                                                name="descuento_costo1" id="editDescuentoCosto1" value="0.00">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Fecha Límite Descuento 2</label>
+                                            <input type="date" class="form-control" name="descuento_fecha2"
+                                                id="editDescuentoFecha2">
+                                            <small class="form-text text-muted">Desde fecha 1 hasta esta fecha aplica el
+                                                costo
+                                                2</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Costo Inscripción 2 (Bs.)</label>
+                                            <input type="number" step="0.01" class="form-control"
+                                                name="descuento_costo2" id="editDescuentoCosto2" value="0.00">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Fecha Límite Descuento 3</label>
+                                            <input type="date" class="form-control" name="descuento_fecha3"
+                                                id="editDescuentoFecha3">
+                                            <small class="form-text text-muted">Desde fecha 2 hasta esta fecha aplica el
+                                                costo
+                                                3</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Costo Inscripción 3 (Bs.)</label>
+                                            <input type="number" step="0.01" class="form-control"
+                                                name="descuento_costo3" id="editDescuentoCosto3" value="0.00">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -713,6 +1246,81 @@ $csrf_token = generateCSRFToken();
                             <textarea class="form-control" name="instrucciones_pago" id="configInstrucciones"
                                 rows="4"></textarea>
                         </div>
+
+                        <div class="mb-3">
+                            <button class="btn btn-outline-secondary btn-sm" type="button" data-toggle="collapse"
+                                data-target="#collapseDescuentosConfig" aria-expanded="false"
+                                aria-controls="collapseDescuentosConfig">
+                                <i class="fas fa-chevron-down"></i> Criterios de Descuentos por Fechas (Opcional)
+                            </button>
+                        </div>
+                        <div class="collapse" id="collapseDescuentosConfig">
+                            <div class="card card-body">
+                                <p class="text-muted">Configure descuentos aplicables según la fecha de inscripción. Los
+                                    costos
+                                    se aplican desde la fecha de inicio de inscripciones hasta la fecha especificada.
+                                </p>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Fecha Límite Descuento 1</label>
+                                            <input type="date" class="form-control" name="descuento_fecha1"
+                                                id="configDescuentoFecha1">
+                                            <small class="form-text text-muted">Hasta esta fecha aplica el costo
+                                                1</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Costo Inscripción 1 (Bs.)</label>
+                                            <input type="number" step="0.01" class="form-control"
+                                                name="descuento_costo1" id="configDescuentoCosto1" value="0.00">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Fecha Límite Descuento 2</label>
+                                            <input type="date" class="form-control" name="descuento_fecha2"
+                                                id="configDescuentoFecha2">
+                                            <small class="form-text text-muted">Desde fecha 1 hasta esta fecha aplica el
+                                                costo
+                                                2</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Costo Inscripción 2 (Bs.)</label>
+                                            <input type="number" step="0.01" class="form-control"
+                                                name="descuento_costo2" id="configDescuentoCosto2" value="0.00">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Fecha Límite Descuento 3</label>
+                                            <input type="date" class="form-control" name="descuento_fecha3"
+                                                id="configDescuentoFecha3">
+                                            <small class="form-text text-muted">Desde fecha 2 hasta esta fecha aplica el
+                                                costo
+                                                3</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Costo Inscripción 3 (Bs.)</label>
+                                            <input type="number" step="0.01" class="form-control"
+                                                name="descuento_costo3" id="configDescuentoCosto3" value="0.00">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -768,14 +1376,53 @@ $csrf_token = generateCSRFToken();
             $('#editFechaFinIns').val(evento.fecha_fin_inscripcion);
             $('#editCostoInscripcion').val(evento.costo_inscripcion || 0);
             $('#editCostoAlojamiento').val(evento.costo_alojamiento || 0);
+            $('#editAlojamientoOpcion1Desc').val(evento.alojamiento_opcion1_desc || '');
+            $('#editAlojamientoOpcion1Costo').val(evento.alojamiento_opcion1_costo || 0);
+            $('#editAlojamientoOpcion2Desc').val(evento.alojamiento_opcion2_desc || '');
+            $('#editAlojamientoOpcion2Costo').val(evento.alojamiento_opcion2_costo || 0);
+            $('#editAlojamientoOpcion3Desc').val(evento.alojamiento_opcion3_desc || '');
+            $('#editAlojamientoOpcion3Costo').val(evento.alojamiento_opcion3_costo || 0);
+            $('#editEdadRango1Min').val(evento.edad_rango1_min || '');
+            $('#editEdadRango1Max').val(evento.edad_rango1_max || '');
+            $('#editCostoRango1').val(evento.costo_rango1 || 0);
+            $('#editEdadRango2Min').val(evento.edad_rango2_min || '');
+            $('#editEdadRango2Max').val(evento.edad_rango2_max || '');
+            $('#editCostoRango2').val(evento.costo_rango2 || 0);
             $('#editEstado').val(evento.estado);
+
+            // Cargar configuración de descuentos
+            $.ajax({
+                url: 'ajax.php?action=get_config',
+                type: 'GET',
+                data: {
+                    evento_id: evento.id
+                },
+                success: function(config) {
+                    $('#editDescuentoFecha1').val(config.descuento_fecha1 || '');
+                    $('#editDescuentoCosto1').val(config.descuento_costo1 || 0);
+                    $('#editDescuentoFecha2').val(config.descuento_fecha2 || '');
+                    $('#editDescuentoCosto2').val(config.descuento_costo2 || 0);
+                    $('#editDescuentoFecha3').val(config.descuento_fecha3 || '');
+                    $('#editDescuentoCosto3').val(config.descuento_costo3 || 0);
+                },
+                error: function() {
+                    // Si no hay configuración, dejar campos vacíos
+                    $('#editDescuentoFecha1').val('');
+                    $('#editDescuentoCosto1').val(0);
+                    $('#editDescuentoFecha2').val('');
+                    $('#editDescuentoCosto2').val(0);
+                    $('#editDescuentoFecha3').val('');
+                    $('#editDescuentoCosto3').val(0);
+                }
+            });
+
             $('#modalEditarEvento').modal('show');
         }
 
         function configurarEvento(eventoId) {
             // Cargar configuracion actual via AJAX
             $.ajax({
-                url: 'ajax/get-config.php',
+                url: 'ajax.php?action=get_config',
                 type: 'GET',
                 data: {
                     evento_id: eventoId
@@ -787,6 +1434,12 @@ $csrf_token = generateCSRFToken();
                     $('#configMaxParticipantes').val(config.max_participantes || 200);
                     $('#configRequiereAprobacion').prop('checked', config.requiere_aprovacion);
                     $('#configInstrucciones').val(config.instrucciones_pago || '');
+                    $('#configDescuentoFecha1').val(config.descuento_fecha1 || '');
+                    $('#configDescuentoCosto1').val(config.descuento_costo1 || 0);
+                    $('#configDescuentoFecha2').val(config.descuento_fecha2 || '');
+                    $('#configDescuentoCosto2').val(config.descuento_costo2 || 0);
+                    $('#configDescuentoFecha3').val(config.descuento_fecha3 || '');
+                    $('#configDescuentoCosto3').val(config.descuento_costo3 || 0);
                     $('#modalConfigurarEvento').modal('show');
                 },
                 error: function() {
@@ -798,6 +1451,18 @@ $csrf_token = generateCSRFToken();
         function eliminarEvento(eventoId) {
             $('#deleteEventoId').val(eventoId);
             $('#modalEliminarEvento').modal('show');
+        }
+
+        function desactivarEvento(eventoId) {
+            if (confirm('¿Está seguro de que desea desactivar este evento?')) {
+                // Crear formulario y enviar
+                var form = $('<form method="POST">');
+                form.append('<input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">');
+                form.append('<input type="hidden" name="action" value="desactivar">');
+                form.append('<input type="hidden" name="evento_id" value="' + eventoId + '">');
+                $('body').append(form);
+                form.submit();
+            }
         }
 
         // Validar fechas en formulario de creacion

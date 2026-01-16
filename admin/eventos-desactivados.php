@@ -4,17 +4,53 @@ require_once __DIR__ . '/../config/config.php';
 // Verificar autenticación
 Auth::requireLogin();
 
-// Verificar que tenga rol de admin o super_admin
-if (!Auth::checkRole(['superadmin', 'admin', 'super_admin', 'usuario'])) {
+// Verificar que tenga rol de super_admin
+if (!Auth::checkRole(['superadmin', 'super_admin'])) {
     header('HTTP/1.0 403 Forbidden');
-    die('Acceso denegado. No tienes permisos para acceder a esta página.');
+    die('Acceso denegado. Solo super administradores pueden acceder a esta página.');
 }
 
 $db = getDB();
 $eventosManager = new EventosManager($db);
 
-// Obtener eventos accesibles para el usuario actual
-$eventos = $eventosManager->getAll();
+// Procesar acciones
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!isset($_POST['csrf_token']) || !validateCSRFToken($_POST['csrf_token'])) {
+        $_SESSION['error'] = 'Token CSRF invalido';
+        header('Location: eventos-desactivados.php');
+        exit;
+    }
+
+    $action = $_POST['action'] ?? '';
+
+    switch ($action) {
+        case 'reactivar':
+            $eventoId = intval($_POST['evento_id']);
+            $result = $eventosManager->reactivate($eventoId);
+            if ($result['success']) {
+                $_SESSION['success'] = 'Evento reactivado exitosamente';
+            } else {
+                $_SESSION['error'] = $result['message'] ?? 'Error al reactivar el evento';
+            }
+            break;
+
+        case 'eliminar':
+            $eventoId = intval($_POST['evento_id']);
+            $result = $eventosManager->delete($eventoId);
+            if ($result['success']) {
+                $_SESSION['success'] = 'Evento eliminado exitosamente';
+            } else {
+                $_SESSION['error'] = $result['message'] ?? 'Error al eliminar el evento';
+            }
+            break;
+    }
+
+    header('Location: eventos-desactivados.php');
+    exit;
+}
+
+// Obtener eventos desactivados
+$eventos = $eventosManager->getDeactivatedEvents();
 
 // Obtener mensajes de sesion
 $success = $_SESSION['success'] ?? '';
@@ -22,6 +58,19 @@ $error = $_SESSION['error'] ?? '';
 unset($_SESSION['success'], $_SESSION['error']);
 
 $csrf_token = generateCSRFToken();
+
+function getContrastColor($hexColor)
+{
+    // Remove # if present
+    $hexColor = ltrim($hexColor, '#');
+    // Convert to RGB
+    $r = hexdec(substr($hexColor, 0, 2));
+    $g = hexdec(substr($hexColor, 2, 2));
+    $b = hexdec(substr($hexColor, 4, 2));
+    // Calculate luminance
+    $luminance = (0.299 * $r + 0.587 * $g + 0.114 * $b) / 255;
+    return $luminance > 0.5 ? '#000000' : '#FFFFFF';
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -29,7 +78,7 @@ $csrf_token = generateCSRFToken();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Mis Eventos | <?php echo SITE_NAME; ?></title>
+    <title>Eventos Desactivados | <?php echo SITE_NAME; ?></title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -38,6 +87,8 @@ $csrf_token = generateCSRFToken();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css">
 
     <style>
         :root {
@@ -66,6 +117,11 @@ $csrf_token = generateCSRFToken();
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
+        .modal-header {
+            background-color: var(--color-primario);
+            color: white;
+        }
+
         .evento-card {
             transition: transform 0.3s ease;
         }
@@ -74,31 +130,8 @@ $csrf_token = generateCSRFToken();
             transform: translateY(-5px);
         }
 
-        .evento-activo {
-            border-left: 4px solid #28a745;
-        }
-
-        .evento-activo .card-header {
-            background: linear-gradient(135deg, #28a745, #20c997);
-            color: white;
-        }
-
-        .inscripcion-abierta {
-            border-left: 4px solid #17a2b8;
-        }
-
-        .inscripcion-abierta .card-header {
-            background: linear-gradient(135deg, #17a2b8, #6f42c1);
-            color: white;
-        }
-
-        .inscripcion-cerrada {
+        .evento-inactivo {
             border-left: 4px solid #dc3545;
-        }
-
-        .inscripcion-cerrada .card-header {
-            background: linear-gradient(135deg, #dc3545, #fd7e14);
-            color: white;
         }
 
         .evento-thumbnail {
@@ -109,6 +142,17 @@ $csrf_token = generateCSRFToken();
             border-radius: 8px;
             margin-left: 10px;
             border: 2px solid #e9ecef;
+        }
+
+        .evento-color-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
@@ -125,7 +169,7 @@ $csrf_token = generateCSRFToken();
                     <a href="index.php" class="nav-link">Inicio</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="mis-eventos.php" class="nav-link">Mis Eventos</a>
+                    <a href="eventos.php" class="nav-link">Eventos</a>
                 </li>
             </ul>
 
@@ -149,8 +193,7 @@ $csrf_token = generateCSRFToken();
                     <div class="info">
                         <?php $currentUser = Auth::getUser(); ?>
                         <a href="#" class="d-block">
-                            <i
-                                class="fas fa-user-<?php echo Auth::checkRole(['super_admin', 'superadmin']) ? 'shield text-success' : 'cog text-warning'; ?>"></i>
+                            <i class="fas fa-user-shield text-success"></i>
                             <?php echo htmlspecialchars($currentUser['nombre'] ?? 'Usuario'); ?>
                         </a>
                         <small class="text-muted"><?php echo ucfirst($currentUser['rol'] ?? 'Usuario'); ?></small>
@@ -174,7 +217,7 @@ $csrf_token = generateCSRFToken();
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="eventos-desactivados.php" class="nav-link">
+                                <a href="eventos-desactivados.php" class="nav-link active">
                                     <i class="nav-icon fas fa-calendar-times"></i>
                                     <p>Eventos Desactivados</p>
                                 </a>
@@ -187,14 +230,21 @@ $csrf_token = generateCSRFToken();
                             </li>
                         <?php endif; ?>
 
-                        <?php if (Auth::checkRole(['super_admin', 'superadmin', 'admin'])): ?>
+                        <?php if (Auth::checkRole(['super_admin', 'superadmin', 'admin', 'usuario'])): ?>
                             <li class="nav-item">
-                                <a href="mis-eventos.php" class="nav-link active">
+                                <a href="mis-eventos.php" class="nav-link">
                                     <i class="nav-icon fas fa-calendar-check"></i>
                                     <p>Mis Eventos</p>
                                 </a>
                             </li>
                         <?php endif; ?>
+
+                        <li class="nav-item">
+                            <a href="configuracion.php" class="nav-link">
+                                <i class="nav-icon fas fa-cogs"></i>
+                                <p>Configuracion</p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -206,13 +256,13 @@ $csrf_token = generateCSRFToken();
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Mis Eventos</h1>
-                            <p class="text-muted">Administra las inscripciones de tus eventos asignados</p>
+                            <h1 class="m-0">Eventos Desactivados</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="index.php">Inicio</a></li>
-                                <li class="breadcrumb-item active">Mis Eventos</li>
+                                <li class="breadcrumb-item"><a href="eventos.php">Eventos</a></li>
+                                <li class="breadcrumb-item active">Desactivados</li>
                             </ol>
                         </div>
                     </div>
@@ -236,54 +286,32 @@ $csrf_token = generateCSRFToken();
                         </div>
                     <?php endif; ?>
 
-                    <!-- Lista de Eventos -->
+                    <!-- Lista de Eventos Desactivados -->
                     <div class="row">
                         <?php foreach ($eventos as $evento): ?>
-                            <?php
-                            // Determinar el estado de inscripcion
-                            $hoy = date('Y-m-d');
-                            $estadoInscripcion = '';
-                            $badgeClass = '';
-
-                            if ($hoy < $evento['fecha_inicio_inscripcion']) {
-                                $estadoInscripcion = 'Próximamente';
-                                $badgeClass = 'badge-secondary';
-                            } elseif ($hoy > $evento['fecha_fin_inscripcion']) {
-                                $estadoInscripcion = 'Inscripciones Cerradas';
-                                $badgeClass = 'badge-danger';
-                            } else {
-                                $estadoInscripcion = 'Inscripciones Abiertas';
-                                $badgeClass = 'badge-success';
-                            }
-
-                            $inscripcionAbierta = ($hoy >= $evento['fecha_inicio_inscripcion'] && $hoy <= $evento['fecha_fin_inscripcion']);
-                            $puedeInscribir = $inscripcionAbierta || Auth::checkRole(['usuario']);
-                            ?>
                             <div class="col-md-6 col-lg-4 mb-4">
-                                <div
-                                    class="card evento-card evento-<?php echo $evento['estado']; ?> <?php echo $inscripcionAbierta ? 'inscripcion-abierta' : 'inscripcion-cerrada'; ?>">
-                                    <div class="card-header">
+                                <div class="card evento-card evento-inactivo">
+                                    <div class="card-header"
+                                        style="background-color: <?php echo $evento['color'] ?? '#B8B3D8'; ?>; color: <?php echo getContrastColor($evento['color'] ?? '#B8B3D8'); ?>;">
                                         <h3 class="card-title"><?php echo htmlspecialchars($evento['titulo']); ?></h3>
                                         <div class="card-tools">
-                                            <span class="badge <?php echo $badgeClass; ?>">
-                                                <?php echo $estadoInscripcion; ?>
+                                            <span class="badge badge-danger">
+                                                Inactivo
                                             </span>
                                         </div>
                                     </div>
                                     <div class="card-body">
                                         <p class="text-muted mb-2">
                                             <i class="fas fa-calendar"></i>
-                                            Evento: <?php echo formatDate($evento['fecha_inicio']); ?> -
-                                            <?php echo formatDate($evento['fecha_fin']); ?>
-                                        </p>
-                                        <p class="text-muted mb-2">
-                                            <i class="fas fa-user-clock"></i>
-                                            Inscripciones: <?php echo formatDate($evento['fecha_inicio_inscripcion']); ?> -
+                                            <?php echo formatDate($evento['fecha_inicio_inscripcion']); ?> -
                                             <?php echo formatDate($evento['fecha_fin_inscripcion']); ?>
                                         </p>
                                         <p class="text-muted mb-2">
                                             <i class="fas fa-map-marker-alt"></i>
                                             <?php echo htmlspecialchars($evento['lugar'] ?? 'No especificado'); ?>
+                                        </p>
+                                        <p class="mb-3">
+                                            <?php echo limitText($evento['descripcion'], 100); ?>
                                         </p>
                                         <p class="text-muted mb-2">
                                             <i class="fas fa-user-shield"></i>
@@ -297,41 +325,31 @@ $csrf_token = generateCSRFToken();
 
                                         <!-- Estadisticas -->
                                         <div class="row text-center mb-3">
-                                            <div class="col-3">
+                                            <div class="col-4">
                                                 <strong><?php echo $evento['total_inscritos'] ?? 0; ?></strong><br>
                                                 <small class="text-muted">Inscritos</small>
                                             </div>
-                                            <div class="col-3">
+                                            <div class="col-4">
                                                 <strong>Bs.
                                                     <?php echo number_format($evento['total_recaudado'] ?? 0, 2); ?></strong><br>
                                                 <small class="text-muted">Recaudado</small>
                                             </div>
-                                            <div class="col-3">
+                                            <div class="col-4">
                                                 <strong><?php echo $evento['grupos_formados'] ?? 0; ?></strong><br>
                                                 <small class="text-muted">Grupos</small>
-                                            </div>
-                                            <div class="col-3">
-                                                <strong><?php echo $evento['total_becados'] ?? 0; ?></strong><br>
-                                                <small class="text-muted">Becados</small>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="card-footer">
                                         <div class="btn-group" role="group">
-                                            <a href="inscripciones-evento.php?evento=<?php echo $evento['id']; ?>"
-                                                class="btn btn-sm btn-primary">
-                                                <i class="fas fa-users"></i> Inscripciones
-                                            </a>
-                                            <a href="reportes-evento.php?evento=<?php echo $evento['id']; ?>"
-                                                target="_blank" class="btn btn-sm btn-info">
-                                                <i class="fas fa-file-alt"></i> Reportes
-                                            </a>
-                                            <?php if ($puedeInscribir): ?>
-                                                <a href="<?php echo EVENTOS_URL; ?>inscribir.php?evento=<?php echo $evento['id']; ?>"
-                                                    target="_blank" class="btn btn-sm btn-success">
-                                                    <i class="fas fa-user-plus"></i> Inscribir
-                                                </a>
-                                            <?php endif; ?>
+                                            <button type="button" class="btn btn-sm btn-success"
+                                                onclick="reactivarEvento(<?php echo $evento['id']; ?>)">
+                                                <i class="fas fa-play"></i> Reactivar
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-danger"
+                                                onclick="eliminarEvento(<?php echo $evento['id']; ?>)">
+                                                <i class="fas fa-trash"></i> Eliminar
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -341,9 +359,9 @@ $csrf_token = generateCSRFToken();
 
                     <?php if (empty($eventos)): ?>
                         <div class="text-center py-5">
-                            <i class="fas fa-calendar-times fa-5x text-muted mb-3"></i>
-                            <h3 class="text-muted">No tienes eventos asignados</h3>
-                            <p class="text-muted">Contacta al Super Administrador para que te asigne eventos</p>
+                            <i class="fas fa-calendar-check fa-5x text-success mb-3"></i>
+                            <h3 class="text-muted">No hay eventos desactivados</h3>
+                            <p class="text-muted">Todos los eventos están activos</p>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -359,6 +377,32 @@ $csrf_token = generateCSRFToken();
         </footer>
     </div>
 
+    <!-- Modal Eliminar Evento -->
+    <div class="modal fade" id="modalEliminarEvento" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmar Eliminacion</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form method="POST">
+                    <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
+                    <input type="hidden" name="action" value="eliminar">
+                    <input type="hidden" name="evento_id" id="deleteEventoId">
+                    <div class="modal-body">
+                        <p>¿Esta seguro de que desea eliminar este evento?</p>
+                        <p class="text-danger"><strong>Advertencia:</strong> Esta accion no se puede deshacer.</p>
+                        <p class="text-muted">Si el evento tiene inscripciones, no podra ser eliminado.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Bootstrap 4 -->
@@ -367,12 +411,22 @@ $csrf_token = generateCSRFToken();
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
 
     <script>
-        $(document).ready(function() {
-            // Actualizar contadores en tiempo real (opcional)
-            setInterval(function() {
-                // Podriamos hacer AJAX para actualizar estadisticas
-            }, 30000); // Cada 30 segundos
-        });
+        function eliminarEvento(eventoId) {
+            $('#deleteEventoId').val(eventoId);
+            $('#modalEliminarEvento').modal('show');
+        }
+
+        function reactivarEvento(eventoId) {
+            if (confirm('¿Está seguro de que desea reactivar este evento?')) {
+                // Crear formulario y enviar
+                var form = $('<form method="POST">');
+                form.append('<input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">');
+                form.append('<input type="hidden" name="action" value="reactivar">');
+                form.append('<input type="hidden" name="evento_id" value="' + eventoId + '">');
+                $('body').append(form);
+                form.submit();
+            }
+        }
     </script>
 </body>
 
