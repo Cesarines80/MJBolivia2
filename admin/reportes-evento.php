@@ -211,6 +211,10 @@ $tipoReporte = $_GET['tipo'] ?? 'todos';
                         <a class="nav-link <?php echo $tipoReporte == 'grupos' ? 'active' : ''; ?>"
                             href="?evento=<?php echo $eventoId; ?>&tipo=grupos">Grupos</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo $tipoReporte == 'egresos' ? 'active' : ''; ?>"
+                            href="?evento=<?php echo $eventoId; ?>&tipo=egresos">Egresos</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -667,6 +671,62 @@ $tipoReporte = $_GET['tipo'] ?? 'todos';
                 </div>
             <?php endif; ?>
         <?php endif; ?>
+
+        <?php if ($tipoReporte == 'egresos'): ?>
+            <!-- Reporte: Egresos -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title mb-0">Control de Egresos</h3>
+                </div>
+                <div class="card-body">
+                    <!-- Formulario para agregar egreso -->
+                    <form id="form-egreso" class="mb-4">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="cantidad" class="form-label">Cantidad</label>
+                                <input type="number" class="form-control" id="cantidad" min="1" required>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="descripcion" class="form-label">Descripción</label>
+                                <input type="text" class="form-control" id="descripcion" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="monto" class="form-label">Monto (Bs.)</label>
+                                <input type="number" class="form-control" id="monto" step="0.01" min="0" required>
+                            </div>
+                            <div class="col-md-1 d-flex align-items-end">
+                                <button type="submit" class="btn btn-primary">Agregar</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Lista de egresos -->
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="tabla-egresos">
+                            <thead>
+                                <tr>
+                                    <th>Cantidad</th>
+                                    <th>Descripción</th>
+                                    <th>Monto Unitario</th>
+                                    <th>Subtotal</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="lista-egresos">
+                                <!-- Aquí se agregarán los egresos dinámicamente -->
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th colspan="3" class="text-end">Total:</th>
+                                    <th id="total-egresos">Bs. 0.00</th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -748,7 +808,8 @@ $tipoReporte = $_GET['tipo'] ?? 'todos';
                     let texto = col.innerText.trim();
                     texto = texto.replace(/\s+/g, ' ');
                     texto = texto.replace(/"/g, '""');
-                    if (texto.includes(',') || texto.includes('\n') || texto.includes('"') || texto.includes(';')) {
+                    if (texto.includes(',') || texto.includes('\n') || texto.includes('"') || texto
+                        .includes(';')) {
                         csvRow.push('"' + texto + '"');
                     } else {
                         csvRow.push(texto);
@@ -786,7 +847,8 @@ $tipoReporte = $_GET['tipo'] ?? 'todos';
                     let texto = col.innerText.trim();
                     texto = texto.replace(/\s+/g, ' ');
                     texto = texto.replace(/"/g, '""');
-                    if (texto.includes(',') || texto.includes('\n') || texto.includes('"') || texto.includes(';')) {
+                    if (texto.includes(',') || texto.includes('\n') || texto.includes('"') || texto
+                        .includes(';')) {
                         csvRow.push('"' + texto + '"');
                     } else {
                         csvRow.push(texto);
@@ -824,7 +886,8 @@ $tipoReporte = $_GET['tipo'] ?? 'todos';
                     let texto = col.innerText.trim();
                     texto = texto.replace(/\s+/g, ' ');
                     texto = texto.replace(/"/g, '""');
-                    if (texto.includes(',') || texto.includes('\n') || texto.includes('"') || texto.includes(';')) {
+                    if (texto.includes(',') || texto.includes('\n') || texto.includes('"') || texto
+                        .includes(';')) {
                         csvRow.push('"' + texto + '"');
                     } else {
                         csvRow.push(texto);
@@ -885,6 +948,52 @@ $tipoReporte = $_GET['tipo'] ?? 'todos';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+        }
+
+        // Control de egresos
+        let egresos = [];
+
+        document.getElementById('form-egreso')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const cantidad = parseInt(document.getElementById('cantidad').value);
+            const descripcion = document.getElementById('descripcion').value.trim();
+            const monto = parseFloat(document.getElementById('monto').value);
+            if (cantidad > 0 && descripcion && monto >= 0) {
+                const subtotal = cantidad * monto;
+                egresos.push({
+                    cantidad,
+                    descripcion,
+                    monto,
+                    subtotal
+                });
+                actualizarTablaEgresos();
+                this.reset();
+            }
+        });
+
+        function actualizarTablaEgresos() {
+            const tbody = document.getElementById('lista-egresos');
+            tbody.innerHTML = '';
+            let total = 0;
+            egresos.forEach((egreso, index) => {
+                total += egreso.subtotal;
+                const row = `
+                    <tr>
+                        <td>${egreso.cantidad}</td>
+                        <td>${egreso.descripcion}</td>
+                        <td>Bs. ${egreso.monto.toFixed(2)}</td>
+                        <td>Bs. ${egreso.subtotal.toFixed(2)}</td>
+                        <td><button class="btn btn-sm btn-danger" onclick="eliminarEgreso(${index})">Eliminar</button></td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+            document.getElementById('total-egresos').textContent = `Bs. ${total.toFixed(2)}`;
+        }
+
+        function eliminarEgreso(index) {
+            egresos.splice(index, 1);
+            actualizarTablaEgresos();
         }
     </script>
 </body>

@@ -30,7 +30,7 @@ $inscripcionesEvento = new InscripcionesEvento($db, $eventoId);
 $evento = $eventosManager->getById($eventoId);
 $config = $eventosManager->getConfig($eventoId);
 
-// Aplicar descuento por fecha o edad si corresponde, priorizando sobre costo_inscripcion
+// Aplicar descuento por fecha si corresponde
 $original_costo = $evento['costo_inscripcion'];
 $today = date('Y-m-d');
 if (!empty($config['descuento_fecha3']) && $today <= $config['descuento_fecha3']) {
@@ -39,10 +39,6 @@ if (!empty($config['descuento_fecha3']) && $today <= $config['descuento_fecha3']
     $evento['costo_inscripcion'] = $config['descuento_costo2'];
 } elseif (!empty($config['descuento_fecha1']) && $today <= $config['descuento_fecha1']) {
     $evento['costo_inscripcion'] = $config['descuento_costo1'];
-} elseif (!empty($evento['costo_rango1'])) {
-    $evento['costo_inscripcion'] = $evento['costo_rango1'];
-} elseif (!empty($evento['costo_rango2'])) {
-    $evento['costo_inscripcion'] = $evento['costo_rango2'];
 } else {
     $evento['costo_inscripcion'] = $original_costo ?? 0;
 }
@@ -545,7 +541,8 @@ $csrf_token = generateCSRFToken();
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Fecha de Nacimiento *</label>
-                                    <input type="date" class="form-control" name="fecha_nacimiento" required>
+                                    <input type="date" class="form-control" id="fecha_nacimiento_modal"
+                                        name="fecha_nacimiento" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -858,6 +855,8 @@ $csrf_token = generateCSRFToken();
             // Calcular monto al abrir el modal
             $('#modalCrearInscripcion').on('shown.bs.modal', function() {
                 calcularMontoModal();
+                document.getElementById('fecha_nacimiento_modal').addEventListener('change',
+                    calcularMontoModal);
             });
         });
 
@@ -889,6 +888,14 @@ $csrf_token = generateCSRFToken();
             var costoInscripcion = <?php echo $evento['costo_inscripcion'] ?? 0; ?>;
             var costoAlojamiento = 0;
 
+            // Datos de rangos de edad
+            var edadRango1Min = <?php echo $evento['edad_rango1_min'] ?? 'null'; ?>;
+            var edadRango1Max = <?php echo $evento['edad_rango1_max'] ?? 'null'; ?>;
+            var costoRango1 = <?php echo $evento['costo_rango1'] ?? 0; ?>;
+            var edadRango2Min = <?php echo $evento['edad_rango2_min'] ?? 'null'; ?>;
+            var edadRango2Max = <?php echo $evento['edad_rango2_max'] ?? 'null'; ?>;
+            var costoRango2 = <?php echo $evento['costo_rango2'] ?? 0; ?>;
+
             // Determinar costo de alojamiento basado en la opción seleccionada
             if (alojamientoSeleccionado === '<?php echo addslashes($evento['alojamiento_opcion1_desc'] ?? ''); ?>') {
                 costoAlojamiento = <?php echo $evento['alojamiento_opcion1_costo'] ?? 0; ?>;
@@ -900,8 +907,27 @@ $csrf_token = generateCSRFToken();
                 costoAlojamiento = <?php echo $evento['costo_alojamiento'] ?? 0; ?>;
             }
 
-            var total = costoInscripcion;
-            var costoInscripcionActual = costoInscripcion;
+            // Calcular edad del participante
+            var fechaNacimiento = new Date(document.getElementById('fecha_nacimiento_modal').value);
+            var hoy = new Date();
+            var edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+            var mes = hoy.getMonth() - fechaNacimiento.getMonth();
+            if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+                edad--;
+            }
+
+            // Determinar costo base según rangos de edad
+            var costoInscripcionActual = costoInscripcion; // Costo por defecto
+
+            if (edadRango1Min !== null && edadRango1Max !== null &&
+                edad >= edadRango1Min && edad <= edadRango1Max) {
+                costoInscripcionActual = costoRango1;
+            } else if (edadRango2Min !== null && edadRango2Max !== null &&
+                edad >= edadRango2Min && edad <= edadRango2Max) {
+                costoInscripcionActual = costoRango2;
+            }
+
+            var total = costoInscripcionActual;
 
             // Mostrar/ocultar campo de código según tipo de pago
             if (tipoInscripcion === 'QR') {

@@ -34,7 +34,7 @@ $permitirInscripcion = $inscripcionAbierta || $esAdminEvento;
 // Obtener configuracion
 $config = $eventosManager->getConfig($eventoId);
 
-// Aplicar descuento por fecha o edad si corresponde, priorizando sobre costo_inscripcion
+// Aplicar descuento por fecha si corresponde
 $original_costo = $evento['costo_inscripcion'];
 $today = date('Y-m-d');
 if (!empty($config['descuento_fecha3']) && $today <= $config['descuento_fecha3']) {
@@ -43,10 +43,6 @@ if (!empty($config['descuento_fecha3']) && $today <= $config['descuento_fecha3']
     $evento['costo_inscripcion'] = $config['descuento_costo2'];
 } elseif (!empty($config['descuento_fecha1']) && $today <= $config['descuento_fecha1']) {
     $evento['costo_inscripcion'] = $config['descuento_costo1'];
-} elseif (!empty($evento['costo_rango1'])) {
-    $evento['costo_inscripcion'] = $evento['costo_rango1'];
-} elseif (!empty($evento['costo_rango2'])) {
-    $evento['costo_inscripcion'] = $evento['costo_rango2'];
 } else {
     $evento['costo_inscripcion'] = $original_costo ?? 0;
 }
