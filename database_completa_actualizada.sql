@@ -1,5 +1,5 @@
 -- Base de datos completa actualizada
--- Exportado el 2026-01-16 07:55:48
+-- Exportado el 2026-01-17 15:17:19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET FOREIGN_KEY_CHECKS = 0;
@@ -95,7 +95,7 @@ CREATE TABLE `configuracion_eventos` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_evento` (`evento_id`),
   CONSTRAINT `configuracion_eventos_ibfk_1` FOREIGN KEY (`evento_id`) REFERENCES `eventos` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcado de datos para la tabla `configuracion_eventos`
 INSERT INTO `configuracion_eventos` (`id`, `evento_id`, `precio_base`, `precio_alojamiento`, `max_participantes`, `requiere_aprobacion`, `instrucciones_pago`, `campos_extra`, `fecha_actualizacion`, `descuento_fecha1`, `descuento_costo1`, `descuento_fecha2`, `descuento_costo2`, `descuento_fecha3`, `descuento_costo3`) VALUES ('1', '2', '100.00', '50.00', '200', '0', 'Realizar el pago en la cuenta bancaria proporcionada y enviar el comprobante.', NULL, '2026-01-10 20:14:25', NULL, '0.00', NULL, '0.00', NULL, '0.00');
@@ -103,6 +103,9 @@ INSERT INTO `configuracion_eventos` (`id`, `evento_id`, `precio_base`, `precio_a
 INSERT INTO `configuracion_eventos` (`id`, `evento_id`, `precio_base`, `precio_alojamiento`, `max_participantes`, `requiere_aprobacion`, `instrucciones_pago`, `campos_extra`, `fecha_actualizacion`, `descuento_fecha1`, `descuento_costo1`, `descuento_fecha2`, `descuento_costo2`, `descuento_fecha3`, `descuento_costo3`) VALUES ('11', '12', '100.00', '50.00', '200', '0', 'Realizar el pago en la cuenta bancaria proporcionada y enviar el comprobante.', NULL, '2026-01-15 21:56:34', NULL, '0.00', NULL, '0.00', NULL, '0.00');
 INSERT INTO `configuracion_eventos` (`id`, `evento_id`, `precio_base`, `precio_alojamiento`, `max_participantes`, `requiere_aprobacion`, `instrucciones_pago`, `campos_extra`, `fecha_actualizacion`, `descuento_fecha1`, `descuento_costo1`, `descuento_fecha2`, `descuento_costo2`, `descuento_fecha3`, `descuento_costo3`) VALUES ('12', '13', '100.00', '50.00', '200', '0', 'Realizar el pago en la cuenta bancaria proporcionada y enviar el comprobante.', NULL, '2026-01-15 22:04:47', NULL, '0.00', NULL, '0.00', NULL, '0.00');
 INSERT INTO `configuracion_eventos` (`id`, `evento_id`, `precio_base`, `precio_alojamiento`, `max_participantes`, `requiere_aprobacion`, `instrucciones_pago`, `campos_extra`, `fecha_actualizacion`, `descuento_fecha1`, `descuento_costo1`, `descuento_fecha2`, `descuento_costo2`, `descuento_fecha3`, `descuento_costo3`) VALUES ('13', '14', '100.00', '50.00', '200', '0', 'Realizar el pago en la cuenta bancaria proporcionada y enviar el comprobante.', NULL, '2026-01-16 07:12:02', NULL, '0.00', NULL, '0.00', NULL, '0.00');
+INSERT INTO `configuracion_eventos` (`id`, `evento_id`, `precio_base`, `precio_alojamiento`, `max_participantes`, `requiere_aprobacion`, `instrucciones_pago`, `campos_extra`, `fecha_actualizacion`, `descuento_fecha1`, `descuento_costo1`, `descuento_fecha2`, `descuento_costo2`, `descuento_fecha3`, `descuento_costo3`) VALUES ('14', '15', '100.00', '50.00', '200', '0', 'Realizar el pago en la cuenta bancaria proporcionada y enviar el comprobante.', NULL, '2026-01-16 23:34:34', NULL, '0.00', NULL, '0.00', NULL, '0.00');
+INSERT INTO `configuracion_eventos` (`id`, `evento_id`, `precio_base`, `precio_alojamiento`, `max_participantes`, `requiere_aprobacion`, `instrucciones_pago`, `campos_extra`, `fecha_actualizacion`, `descuento_fecha1`, `descuento_costo1`, `descuento_fecha2`, `descuento_costo2`, `descuento_fecha3`, `descuento_costo3`) VALUES ('16', '17', '0.00', '0.00', '200', '0', '', NULL, '2026-01-17 00:30:14', '2026-01-26', '200.00', NULL, '0.00', NULL, '0.00');
+INSERT INTO `configuracion_eventos` (`id`, `evento_id`, `precio_base`, `precio_alojamiento`, `max_participantes`, `requiere_aprobacion`, `instrucciones_pago`, `campos_extra`, `fecha_actualizacion`, `descuento_fecha1`, `descuento_costo1`, `descuento_fecha2`, `descuento_costo2`, `descuento_fecha3`, `descuento_costo3`) VALUES ('18', '18', '100.00', '50.00', '200', '0', 'Realizar el pago en la cuenta bancaria proporcionada y enviar el comprobante.', NULL, '2026-01-17 13:12:00', NULL, '0.00', NULL, '0.00', NULL, '0.00');
 
 -- Estructura de la tabla `configuracion_global`
 DROP TABLE IF EXISTS `configuracion_global`;
@@ -199,7 +202,7 @@ CREATE TABLE `eventos` (
   KEY `idx_estado` (`estado`),
   KEY `idx_creado_por` (`creado_por`),
   CONSTRAINT `eventos_ibfk_1` FOREIGN KEY (`creado_por`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcado de datos para la tabla `eventos`
 INSERT INTO `eventos` (`id`, `titulo`, `descripcion`, `fecha_inicio`, `fecha_evento`, `hora_evento`, `fecha_fin`, `fecha_inicio_inscripcion`, `fecha_fin_inscripcion`, `lugar`, `imagen_portada`, `costo_inscripcion`, `costo_alojamiento`, `alojamiento_opcion1_desc`, `alojamiento_opcion1_costo`, `alojamiento_opcion2_desc`, `alojamiento_opcion2_costo`, `alojamiento_opcion3_desc`, `alojamiento_opcion3_costo`, `edad_rango1_min`, `edad_rango1_max`, `costo_rango1`, `edad_rango2_min`, `edad_rango2_max`, `costo_rango2`, `imagen`, `estado`, `color`, `destacado`, `creado_por`, `fecha_creacion`) VALUES ('2', 'Campamento', 'Tiquipaya', NULL, '2026-01-19', NULL, '2026-01-25', '2026-01-10', '2026-01-19', 'cbba', NULL, '100.00', '30.00', NULL, '0.00', NULL, '0.00', NULL, '0.00', NULL, NULL, '0.00', NULL, NULL, '0.00', NULL, 'inactivo', NULL, 'no', '1', '2026-01-10 20:14:25');
@@ -207,6 +210,9 @@ INSERT INTO `eventos` (`id`, `titulo`, `descripcion`, `fecha_inicio`, `fecha_eve
 INSERT INTO `eventos` (`id`, `titulo`, `descripcion`, `fecha_inicio`, `fecha_evento`, `hora_evento`, `fecha_fin`, `fecha_inicio_inscripcion`, `fecha_fin_inscripcion`, `lugar`, `imagen_portada`, `costo_inscripcion`, `costo_alojamiento`, `alojamiento_opcion1_desc`, `alojamiento_opcion1_costo`, `alojamiento_opcion2_desc`, `alojamiento_opcion2_costo`, `alojamiento_opcion3_desc`, `alojamiento_opcion3_costo`, `edad_rango1_min`, `edad_rango1_max`, `costo_rango1`, `edad_rango2_min`, `edad_rango2_max`, `costo_rango2`, `imagen`, `estado`, `color`, `destacado`, `creado_por`, `fecha_creacion`) VALUES ('12', 'isaacar', 'añañañao', '2026-02-02', '2026-02-10', NULL, '2026-02-08', '2026-01-15', '2026-02-02', 'Santa Cruz', '69699ad2386d4_1768528594.jpeg', '200.00', '10.00', NULL, '0.00', NULL, '0.00', NULL, '0.00', NULL, NULL, '0.00', NULL, NULL, '0.00', NULL, 'activo', '#45B7D1', 'no', '5', '2026-01-15 21:56:34');
 INSERT INTO `eventos` (`id`, `titulo`, `descripcion`, `fecha_inicio`, `fecha_evento`, `hora_evento`, `fecha_fin`, `fecha_inicio_inscripcion`, `fecha_fin_inscripcion`, `lugar`, `imagen_portada`, `costo_inscripcion`, `costo_alojamiento`, `alojamiento_opcion1_desc`, `alojamiento_opcion1_costo`, `alojamiento_opcion2_desc`, `alojamiento_opcion2_costo`, `alojamiento_opcion3_desc`, `alojamiento_opcion3_costo`, `edad_rango1_min`, `edad_rango1_max`, `costo_rango1`, `edad_rango2_min`, `edad_rango2_max`, `costo_rango2`, `imagen`, `estado`, `color`, `destacado`, `creado_por`, `fecha_creacion`) VALUES ('13', 'Nuestra Mision', 'ghfgh hfgh hfgh hfgh', '2026-02-02', '2026-02-15', NULL, '2026-02-08', '2026-01-15', '2026-02-02', 'Santa Cruz', '69699cbf74135_1768529087.jpg', '200.00', '30.00', NULL, '0.00', NULL, '0.00', NULL, '0.00', NULL, NULL, '0.00', NULL, NULL, '0.00', NULL, 'activo', '#BB8FCE', 'no', '5', '2026-01-15 22:04:47');
 INSERT INTO `eventos` (`id`, `titulo`, `descripcion`, `fecha_inicio`, `fecha_evento`, `hora_evento`, `fecha_fin`, `fecha_inicio_inscripcion`, `fecha_fin_inscripcion`, `lugar`, `imagen_portada`, `costo_inscripcion`, `costo_alojamiento`, `alojamiento_opcion1_desc`, `alojamiento_opcion1_costo`, `alojamiento_opcion2_desc`, `alojamiento_opcion2_costo`, `alojamiento_opcion3_desc`, `alojamiento_opcion3_costo`, `edad_rango1_min`, `edad_rango1_max`, `costo_rango1`, `edad_rango2_min`, `edad_rango2_max`, `costo_rango2`, `imagen`, `estado`, `color`, `destacado`, `creado_por`, `fecha_creacion`) VALUES ('14', 'isaacar', 'hfghf hfgh hfg', '2026-02-02', '2026-02-02', NULL, '2026-02-08', '2026-01-16', '2026-02-02', 'cbba', '696a1d0211a73_1768561922.jpeg', '100.00', '30.00', 'Habitacion con Ducha', '40.00', 'Habitacion con Ducha y Wifi', '60.00', 'algo', '10.00', NULL, NULL, '0.00', NULL, NULL, '0.00', NULL, 'activo', '#D7BDE2', 'no', '5', '2026-01-16 07:12:02');
+INSERT INTO `eventos` (`id`, `titulo`, `descripcion`, `fecha_inicio`, `fecha_evento`, `hora_evento`, `fecha_fin`, `fecha_inicio_inscripcion`, `fecha_fin_inscripcion`, `lugar`, `imagen_portada`, `costo_inscripcion`, `costo_alojamiento`, `alojamiento_opcion1_desc`, `alojamiento_opcion1_costo`, `alojamiento_opcion2_desc`, `alojamiento_opcion2_costo`, `alojamiento_opcion3_desc`, `alojamiento_opcion3_costo`, `edad_rango1_min`, `edad_rango1_max`, `costo_rango1`, `edad_rango2_min`, `edad_rango2_max`, `costo_rango2`, `imagen`, `estado`, `color`, `destacado`, `creado_por`, `fecha_creacion`) VALUES ('15', 'Campamento oruro', 'Lugar del Evento Colcapirua', '2026-02-02', '2026-02-02', NULL, '2026-02-08', '2026-01-16', '2026-02-02', 'Cochabamba', '696b034ad97b7_1768620874.webp', '210.00', '0.00', 'Habitacion + Alimentacion+Polera', '40.00', '', '0.00', '', '0.00', NULL, NULL, '0.00', NULL, NULL, '0.00', NULL, 'activo', '#FF6B6B', 'no', '5', '2026-01-16 23:34:34');
+INSERT INTO `eventos` (`id`, `titulo`, `descripcion`, `fecha_inicio`, `fecha_evento`, `hora_evento`, `fecha_fin`, `fecha_inicio_inscripcion`, `fecha_fin_inscripcion`, `lugar`, `imagen_portada`, `costo_inscripcion`, `costo_alojamiento`, `alojamiento_opcion1_desc`, `alojamiento_opcion1_costo`, `alojamiento_opcion2_desc`, `alojamiento_opcion2_costo`, `alojamiento_opcion3_desc`, `alojamiento_opcion3_costo`, `edad_rango1_min`, `edad_rango1_max`, `costo_rango1`, `edad_rango2_min`, `edad_rango2_max`, `costo_rango2`, `imagen`, `estado`, `color`, `destacado`, `creado_por`, `fecha_creacion`) VALUES ('17', 'Desenderate', 'Hogar Militar de Colcaphirua', '2026-02-02', '2026-02-02', NULL, '2026-02-08', '2026-01-17', '2026-02-02', 'Cochabamba', '696b1056046c8_1768624214.jpg', '210.00', '0.00', 'Habitacion + Alimentacion+Polera', '40.00', '', '0.00', '', '0.00', NULL, NULL, '0.00', NULL, NULL, '0.00', NULL, 'activo', '#85C1E9', 'no', '5', '2026-01-17 00:30:14');
+INSERT INTO `eventos` (`id`, `titulo`, `descripcion`, `fecha_inicio`, `fecha_evento`, `hora_evento`, `fecha_fin`, `fecha_inicio_inscripcion`, `fecha_fin_inscripcion`, `lugar`, `imagen_portada`, `costo_inscripcion`, `costo_alojamiento`, `alojamiento_opcion1_desc`, `alojamiento_opcion1_costo`, `alojamiento_opcion2_desc`, `alojamiento_opcion2_costo`, `alojamiento_opcion3_desc`, `alojamiento_opcion3_costo`, `edad_rango1_min`, `edad_rango1_max`, `costo_rango1`, `edad_rango2_min`, `edad_rango2_max`, `costo_rango2`, `imagen`, `estado`, `color`, `destacado`, `creado_por`, `fecha_creacion`) VALUES ('18', 'Desenderate  2.0', 'complejo militar', '2026-02-02', '2026-02-02', NULL, '2026-02-08', '2026-01-17', '2026-02-02', 'Cochabamba', '696bc2e094b84_1768669920.jpg', '210.00', '0.00', 'Habitacion + Alimentacion+Polera', '40.00', '', '0.00', '', '0.00', '5', '12', '100.00', NULL, NULL, '0.00', NULL, 'activo', '#85C1E9', 'no', '5', '2026-01-17 13:12:00');
 
 -- Estructura de la tabla `eventos_administradores`
 DROP TABLE IF EXISTS `eventos_administradores`;
@@ -222,7 +228,7 @@ CREATE TABLE `eventos_administradores` (
   KEY `asignado_por` (`asignado_por`),
   KEY `idx_usuario_evento` (`usuario_id`,`evento_id`),
   CONSTRAINT `eventos_administradores_ibfk_3` FOREIGN KEY (`asignado_por`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcado de datos para la tabla `eventos_administradores`
 INSERT INTO `eventos_administradores` (`id`, `evento_id`, `usuario_id`, `asignado_por`, `fecha_asignacion`, `activo`) VALUES ('1', '2', '1', '1', '2026-01-10 20:14:25', '1');
@@ -234,6 +240,13 @@ INSERT INTO `eventos_administradores` (`id`, `evento_id`, `usuario_id`, `asignad
 INSERT INTO `eventos_administradores` (`id`, `evento_id`, `usuario_id`, `asignado_por`, `fecha_asignacion`, `activo`) VALUES ('19', '12', '5', '5', '2026-01-15 21:56:34', '1');
 INSERT INTO `eventos_administradores` (`id`, `evento_id`, `usuario_id`, `asignado_por`, `fecha_asignacion`, `activo`) VALUES ('20', '13', '5', '5', '2026-01-15 22:04:47', '1');
 INSERT INTO `eventos_administradores` (`id`, `evento_id`, `usuario_id`, `asignado_por`, `fecha_asignacion`, `activo`) VALUES ('21', '14', '5', '5', '2026-01-16 07:12:02', '1');
+INSERT INTO `eventos_administradores` (`id`, `evento_id`, `usuario_id`, `asignado_por`, `fecha_asignacion`, `activo`) VALUES ('22', '14', '9', '5', '2026-01-16 23:19:03', '0');
+INSERT INTO `eventos_administradores` (`id`, `evento_id`, `usuario_id`, `asignado_por`, `fecha_asignacion`, `activo`) VALUES ('23', '15', '5', '5', '2026-01-16 23:34:34', '1');
+INSERT INTO `eventos_administradores` (`id`, `evento_id`, `usuario_id`, `asignado_por`, `fecha_asignacion`, `activo`) VALUES ('24', '15', '9', '5', '2026-01-16 23:35:29', '0');
+INSERT INTO `eventos_administradores` (`id`, `evento_id`, `usuario_id`, `asignado_por`, `fecha_asignacion`, `activo`) VALUES ('25', '16', '5', '5', '2026-01-17 00:23:27', '1');
+INSERT INTO `eventos_administradores` (`id`, `evento_id`, `usuario_id`, `asignado_por`, `fecha_asignacion`, `activo`) VALUES ('26', '17', '5', '5', '2026-01-17 00:30:14', '1');
+INSERT INTO `eventos_administradores` (`id`, `evento_id`, `usuario_id`, `asignado_por`, `fecha_asignacion`, `activo`) VALUES ('27', '17', '9', '5', '2026-01-17 00:53:36', '1');
+INSERT INTO `eventos_administradores` (`id`, `evento_id`, `usuario_id`, `asignado_por`, `fecha_asignacion`, `activo`) VALUES ('28', '18', '5', '5', '2026-01-17 13:12:00', '1');
 
 -- Estructura de la tabla `eventos_galeria`
 DROP TABLE IF EXISTS `eventos_galeria`;
@@ -248,7 +261,15 @@ CREATE TABLE `eventos_galeria` (
   PRIMARY KEY (`id`),
   KEY `evento_id` (`evento_id`),
   CONSTRAINT `eventos_galeria_ibfk_1` FOREIGN KEY (`evento_id`) REFERENCES `eventos` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Volcado de datos para la tabla `eventos_galeria`
+INSERT INTO `eventos_galeria` (`id`, `evento_id`, `titulo`, `descripcion`, `imagen`, `orden`, `fecha_creacion`) VALUES ('1', '17', '', '', '696b105607b3e_1768624214.jpg', '0', '2026-01-17 00:30:14');
+INSERT INTO `eventos_galeria` (`id`, `evento_id`, `titulo`, `descripcion`, `imagen`, `orden`, `fecha_creacion`) VALUES ('2', '17', '', '', '696b1056087bb_1768624214.jpg', '2', '2026-01-17 00:30:14');
+INSERT INTO `eventos_galeria` (`id`, `evento_id`, `titulo`, `descripcion`, `imagen`, `orden`, `fecha_creacion`) VALUES ('3', '17', '', '', '696b10560905d_1768624214.jpg', '3', '2026-01-17 00:30:14');
+INSERT INTO `eventos_galeria` (`id`, `evento_id`, `titulo`, `descripcion`, `imagen`, `orden`, `fecha_creacion`) VALUES ('4', '18', '', '', '696bc2e099ffa_1768669920.jpg', '0', '2026-01-17 13:12:00');
+INSERT INTO `eventos_galeria` (`id`, `evento_id`, `titulo`, `descripcion`, `imagen`, `orden`, `fecha_creacion`) VALUES ('5', '18', '', '', '696bc2e09a82f_1768669920.jpg', '2', '2026-01-17 13:12:00');
+INSERT INTO `eventos_galeria` (`id`, `evento_id`, `titulo`, `descripcion`, `imagen`, `orden`, `fecha_creacion`) VALUES ('6', '18', '', '', '696bc2e09b224_1768669920.jpg', '3', '2026-01-17 13:12:00');
 
 -- Estructura de la tabla `galeria`
 DROP TABLE IF EXISTS `galeria`;
@@ -373,7 +394,7 @@ CREATE TABLE `inscripciones_eventos` (
   KEY `idx_estado_pago` (`estado_pago`),
   KEY `idx_codigo` (`codigo_inscripcion`),
   CONSTRAINT `inscripciones_eventos_ibfk_1` FOREIGN KEY (`evento_id`) REFERENCES `eventos` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcado de datos para la tabla `inscripciones_eventos`
 INSERT INTO `inscripciones_eventos` (`id`, `evento_id`, `codigo_inscripcion`, `nombres`, `apellidos`, `email`, `telefono`, `fecha_nacimiento`, `iglesia`, `departamento`, `sexo`, `tipo_inscripcion`, `monto_pagado`, `codigo_pago`, `monto_total`, `alojamiento`, `grupo`, `estado_pago`, `aprobado`, `fecha_inscripcion`, `fecha_actualizacion`) VALUES ('1', '2', 'INS20266473B8', 'Amaia Alexia', 'Quispe Quispe', 'amaia@amaia.com', '73847578', '2009-07-25', 'Oruro Norte', 'ORURO', 'Femenino', 'Efectivo', '150.00', NULL, '100.00', 'No', '2', 'completo', '1', '2026-01-10 23:50:30', '2026-01-10 23:59:33');
@@ -381,6 +402,9 @@ INSERT INTO `inscripciones_eventos` (`id`, `evento_id`, `codigo_inscripcion`, `n
 INSERT INTO `inscripciones_eventos` (`id`, `evento_id`, `codigo_inscripcion`, `nombres`, `apellidos`, `email`, `telefono`, `fecha_nacimiento`, `iglesia`, `departamento`, `sexo`, `tipo_inscripcion`, `monto_pagado`, `codigo_pago`, `monto_total`, `alojamiento`, `grupo`, `estado_pago`, `aprobado`, `fecha_inscripcion`, `fecha_actualizacion`) VALUES ('3', '5', 'INS202648ADD1', 'cesar', 'quispe', 'admin@institucion.com', '73847578', '1998-02-11', 'Oruro Norte', 'ORURO', 'Masculino', 'Beca', '0.00', '', '150.00', 'Si', NULL, 'beca', '1', '2026-01-11 01:02:28', '2026-01-11 01:02:28');
 INSERT INTO `inscripciones_eventos` (`id`, `evento_id`, `codigo_inscripcion`, `nombres`, `apellidos`, `email`, `telefono`, `fecha_nacimiento`, `iglesia`, `departamento`, `sexo`, `tipo_inscripcion`, `monto_pagado`, `codigo_pago`, `monto_total`, `alojamiento`, `grupo`, `estado_pago`, `aprobado`, `fecha_inscripcion`, `fecha_actualizacion`) VALUES ('4', '2', 'INS20264E7AF1', 'weimar', 'Quispe mamani', 'admin@institucion.com', '+590 73847578', '2011-02-12', 'Oruro Norte', 'ORURO', 'Femenino', 'Beca', '0.00', '', '150.00', 'Si', NULL, 'beca', '1', '2026-01-12 23:21:40', '2026-01-12 23:21:40');
 INSERT INTO `inscripciones_eventos` (`id`, `evento_id`, `codigo_inscripcion`, `nombres`, `apellidos`, `email`, `telefono`, `fecha_nacimiento`, `iglesia`, `departamento`, `sexo`, `tipo_inscripcion`, `monto_pagado`, `codigo_pago`, `monto_total`, `alojamiento`, `grupo`, `estado_pago`, `aprobado`, `fecha_inscripcion`, `fecha_actualizacion`) VALUES ('5', '14', 'INS202676BB2F', 'weimar', 'Quispe mamani', 'admin@institucion.com', '+590 73847578', '1980-02-12', 'Amachuma Catuyo', 'ORURO', 'Masculino', 'Efectivo', '140.00', '', '140.00', '', NULL, 'completo', '1', '2026-01-16 07:29:43', '2026-01-16 07:29:43');
+INSERT INTO `inscripciones_eventos` (`id`, `evento_id`, `codigo_inscripcion`, `nombres`, `apellidos`, `email`, `telefono`, `fecha_nacimiento`, `iglesia`, `departamento`, `sexo`, `tipo_inscripcion`, `monto_pagado`, `codigo_pago`, `monto_total`, `alojamiento`, `grupo`, `estado_pago`, `aprobado`, `fecha_inscripcion`, `fecha_actualizacion`) VALUES ('6', '14', 'INS20260AA3DD', 'carlos', 'mamani', '', '', '1980-09-12', 'oruro', 'oruro', 'Masculino', 'Efectivo', '160.00', '', '160.00', '', NULL, 'completo', '1', '2026-01-16 23:28:00', '2026-01-16 23:28:00');
+INSERT INTO `inscripciones_eventos` (`id`, `evento_id`, `codigo_inscripcion`, `nombres`, `apellidos`, `email`, `telefono`, `fecha_nacimiento`, `iglesia`, `departamento`, `sexo`, `tipo_inscripcion`, `monto_pagado`, `codigo_pago`, `monto_total`, `alojamiento`, `grupo`, `estado_pago`, `aprobado`, `fecha_inscripcion`, `fecha_actualizacion`) VALUES ('7', '15', 'INS20265C8036', 'Andres', 'mamani', '', '', '1988-12-12', 'oruro', 'Oruro', 'Masculino', 'Efectivo', '250.00', '', '250.00', '', NULL, 'completo', '1', '2026-01-16 23:37:41', '2026-01-16 23:37:41');
+INSERT INTO `inscripciones_eventos` (`id`, `evento_id`, `codigo_inscripcion`, `nombres`, `apellidos`, `email`, `telefono`, `fecha_nacimiento`, `iglesia`, `departamento`, `sexo`, `tipo_inscripcion`, `monto_pagado`, `codigo_pago`, `monto_total`, `alojamiento`, `grupo`, `estado_pago`, `aprobado`, `fecha_inscripcion`, `fecha_actualizacion`) VALUES ('8', '18', 'INS2026C5DEDB', 'Shirley Angelica', 'Quispe mamani', 'admin@institucion.com', '+590 73847578', '2020-02-06', 'Amachuma Catuyo', 'ORURO', 'Masculino', 'Efectivo', '140.00', '', '140.00', '', NULL, 'completo', '1', '2026-01-17 14:25:16', '2026-01-17 14:25:16');
 
 -- Estructura de la tabla `intentos_login`
 DROP TABLE IF EXISTS `intentos_login`;
@@ -394,7 +418,7 @@ CREATE TABLE `intentos_login` (
   PRIMARY KEY (`id`),
   KEY `email` (`email`),
   KEY `ip_address` (`ip_address`)
-) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Estructura de la tabla `log_actividades`
 DROP TABLE IF EXISTS `log_actividades`;
@@ -410,7 +434,7 @@ CREATE TABLE `log_actividades` (
   KEY `idx_usuario` (`usuario_id`),
   KEY `idx_evento_log` (`evento_id`),
   KEY `idx_fecha` (`fecha_hora`)
-) ENGINE=InnoDB AUTO_INCREMENT=186 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=209 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcado de datos para la tabla `log_actividades`
 INSERT INTO `log_actividades` (`id`, `usuario_id`, `evento_id`, `accion`, `descripcion`, `ip_address`, `fecha_hora`) VALUES ('1', '1', NULL, 'UPDATE_CONFIG', 'Configuración general actualizada', '::1', '2026-01-10 19:47:53');
@@ -595,6 +619,29 @@ INSERT INTO `log_actividades` (`id`, `usuario_id`, `evento_id`, `accion`, `descr
 INSERT INTO `log_actividades` (`id`, `usuario_id`, `evento_id`, `accion`, `descripcion`, `ip_address`, `fecha_hora`) VALUES ('183', '5', '10', 'evento_eliminado', 'Evento eliminado ID: 10', '::1', '2026-01-16 06:48:14');
 INSERT INTO `log_actividades` (`id`, `usuario_id`, `evento_id`, `accion`, `descripcion`, `ip_address`, `fecha_hora`) VALUES ('184', '5', '14', 'evento_creado', 'Evento creado: isaacar', '::1', '2026-01-16 07:12:02');
 INSERT INTO `log_actividades` (`id`, `usuario_id`, `evento_id`, `accion`, `descripcion`, `ip_address`, `fecha_hora`) VALUES ('185', '5', '14', 'inscripcion_creada', 'Inscripcion creada: INS202676BB2F', '::1', '2026-01-16 07:29:43');
+INSERT INTO `log_actividades` (`id`, `usuario_id`, `evento_id`, `accion`, `descripcion`, `ip_address`, `fecha_hora`) VALUES ('186', '5', NULL, 'login', 'Inicio de sesion exitoso', '::1', '2026-01-16 23:18:42');
+INSERT INTO `log_actividades` (`id`, `usuario_id`, `evento_id`, `accion`, `descripcion`, `ip_address`, `fecha_hora`) VALUES ('187', '5', NULL, 'logout', 'Cierre de sesion', '::1', '2026-01-16 23:19:21');
+INSERT INTO `log_actividades` (`id`, `usuario_id`, `evento_id`, `accion`, `descripcion`, `ip_address`, `fecha_hora`) VALUES ('188', '9', NULL, 'login', 'Inicio de sesion exitoso', '::1', '2026-01-16 23:19:35');
+INSERT INTO `log_actividades` (`id`, `usuario_id`, `evento_id`, `accion`, `descripcion`, `ip_address`, `fecha_hora`) VALUES ('189', '9', '14', 'inscripcion_creada', 'Inscripcion creada: INS20260AA3DD', '::1', '2026-01-16 23:28:00');
+INSERT INTO `log_actividades` (`id`, `usuario_id`, `evento_id`, `accion`, `descripcion`, `ip_address`, `fecha_hora`) VALUES ('190', '9', NULL, 'logout', 'Cierre de sesion', '::1', '2026-01-16 23:28:42');
+INSERT INTO `log_actividades` (`id`, `usuario_id`, `evento_id`, `accion`, `descripcion`, `ip_address`, `fecha_hora`) VALUES ('191', '5', NULL, 'login', 'Inicio de sesion exitoso', '::1', '2026-01-16 23:28:45');
+INSERT INTO `log_actividades` (`id`, `usuario_id`, `evento_id`, `accion`, `descripcion`, `ip_address`, `fecha_hora`) VALUES ('192', '5', '15', 'evento_creado', 'Evento creado: Campamento oruro', '::1', '2026-01-16 23:34:34');
+INSERT INTO `log_actividades` (`id`, `usuario_id`, `evento_id`, `accion`, `descripcion`, `ip_address`, `fecha_hora`) VALUES ('193', '5', NULL, 'logout', 'Cierre de sesion', '::1', '2026-01-16 23:35:38');
+INSERT INTO `log_actividades` (`id`, `usuario_id`, `evento_id`, `accion`, `descripcion`, `ip_address`, `fecha_hora`) VALUES ('194', '9', NULL, 'login', 'Inicio de sesion exitoso', '::1', '2026-01-16 23:35:45');
+INSERT INTO `log_actividades` (`id`, `usuario_id`, `evento_id`, `accion`, `descripcion`, `ip_address`, `fecha_hora`) VALUES ('195', '9', '15', 'inscripcion_creada', 'Inscripcion creada: INS20265C8036', '::1', '2026-01-16 23:37:41');
+INSERT INTO `log_actividades` (`id`, `usuario_id`, `evento_id`, `accion`, `descripcion`, `ip_address`, `fecha_hora`) VALUES ('196', '9', NULL, 'logout', 'Cierre de sesion', '::1', '2026-01-17 00:10:43');
+INSERT INTO `log_actividades` (`id`, `usuario_id`, `evento_id`, `accion`, `descripcion`, `ip_address`, `fecha_hora`) VALUES ('197', '5', NULL, 'login', 'Inicio de sesion exitoso', '::1', '2026-01-17 00:10:46');
+INSERT INTO `log_actividades` (`id`, `usuario_id`, `evento_id`, `accion`, `descripcion`, `ip_address`, `fecha_hora`) VALUES ('198', '5', '16', 'evento_creado', 'Evento creado: Desenderate', '::1', '2026-01-17 00:23:27');
+INSERT INTO `log_actividades` (`id`, `usuario_id`, `evento_id`, `accion`, `descripcion`, `ip_address`, `fecha_hora`) VALUES ('199', '5', '16', 'evento_eliminado', 'Evento eliminado ID: 16', '::1', '2026-01-17 00:29:01');
+INSERT INTO `log_actividades` (`id`, `usuario_id`, `evento_id`, `accion`, `descripcion`, `ip_address`, `fecha_hora`) VALUES ('200', '5', '17', 'evento_creado', 'Evento creado: Desenderate', '::1', '2026-01-17 00:30:14');
+INSERT INTO `log_actividades` (`id`, `usuario_id`, `evento_id`, `accion`, `descripcion`, `ip_address`, `fecha_hora`) VALUES ('201', '5', '17', 'evento_configurado', 'Evento configurado', '::1', '2026-01-17 00:30:14');
+INSERT INTO `log_actividades` (`id`, `usuario_id`, `evento_id`, `accion`, `descripcion`, `ip_address`, `fecha_hora`) VALUES ('202', '5', NULL, 'logout', 'Cierre de sesion', '::1', '2026-01-17 00:53:48');
+INSERT INTO `log_actividades` (`id`, `usuario_id`, `evento_id`, `accion`, `descripcion`, `ip_address`, `fecha_hora`) VALUES ('203', '9', NULL, 'login', 'Inicio de sesion exitoso', '::1', '2026-01-17 00:53:58');
+INSERT INTO `log_actividades` (`id`, `usuario_id`, `evento_id`, `accion`, `descripcion`, `ip_address`, `fecha_hora`) VALUES ('204', '9', NULL, 'logout', 'Cierre de sesion', '::1', '2026-01-17 13:08:49');
+INSERT INTO `log_actividades` (`id`, `usuario_id`, `evento_id`, `accion`, `descripcion`, `ip_address`, `fecha_hora`) VALUES ('205', '5', NULL, 'login', 'Inicio de sesion exitoso', '::1', '2026-01-17 13:08:51');
+INSERT INTO `log_actividades` (`id`, `usuario_id`, `evento_id`, `accion`, `descripcion`, `ip_address`, `fecha_hora`) VALUES ('206', '5', '18', 'evento_creado', 'Evento creado: Desenderate  2.0', '::1', '2026-01-17 13:12:00');
+INSERT INTO `log_actividades` (`id`, `usuario_id`, `evento_id`, `accion`, `descripcion`, `ip_address`, `fecha_hora`) VALUES ('207', '5', NULL, 'login', 'Inicio de sesion exitoso', '::1', '2026-01-17 14:17:51');
+INSERT INTO `log_actividades` (`id`, `usuario_id`, `evento_id`, `accion`, `descripcion`, `ip_address`, `fecha_hora`) VALUES ('208', '5', '18', 'inscripcion_creada', 'Inscripcion creada: INS2026C5DEDB', '::1', '2026-01-17 14:25:16');
 
 -- Estructura de la tabla `mision_vision`
 DROP TABLE IF EXISTS `mision_vision`;
@@ -703,7 +750,15 @@ INSERT INTO `sesiones` (`id`, `usuario_id`, `ip_address`, `user_agent`, `datos`,
 INSERT INTO `sesiones` (`id`, `usuario_id`, `ip_address`, `user_agent`, `datos`, `ultima_actividad`) VALUES ('7mc44famq8mskom2kclugpir2v', '9', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '{\"login_time\":1768325731,\"role\":\"usuario\"}', '2026-01-13 13:35:31');
 INSERT INTO `sesiones` (`id`, `usuario_id`, `ip_address`, `user_agent`, `datos`, `ultima_actividad`) VALUES ('7tom1den74glps741mspv9j3bt', '5', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '{\"login_time\":1768325590,\"role\":\"super_admin\"}', '2026-01-13 13:33:10');
 INSERT INTO `sesiones` (`id`, `usuario_id`, `ip_address`, `user_agent`, `datos`, `ultima_actividad`) VALUES ('a6p5qphp2hka8dpalfnklljosd', '5', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '{\"login_time\":1768361252,\"role\":\"super_admin\"}', '2026-01-13 23:27:32');
+INSERT INTO `sesiones` (`id`, `usuario_id`, `ip_address`, `user_agent`, `datos`, `ultima_actividad`) VALUES ('hctka6q5gbp3f8m808niv1f5ng', '9', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 OPR/125.0.0.0', '{\"login_time\":1768619975,\"role\":\"usuario\"}', '2026-01-16 23:19:35');
+INSERT INTO `sesiones` (`id`, `usuario_id`, `ip_address`, `user_agent`, `datos`, `ultima_actividad`) VALUES ('hlsbov8vs5hjtdqqg6k5nieue5', '5', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 OPR/125.0.0.0', '{\"login_time\":1768623046,\"role\":\"super_admin\"}', '2026-01-17 00:10:46');
+INSERT INTO `sesiones` (`id`, `usuario_id`, `ip_address`, `user_agent`, `datos`, `ultima_actividad`) VALUES ('k8l7rnap8097bormhpdm3osruo', '5', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 OPR/125.0.0.0', '{\"login_time\":1768619922,\"role\":\"super_admin\"}', '2026-01-16 23:18:42');
+INSERT INTO `sesiones` (`id`, `usuario_id`, `ip_address`, `user_agent`, `datos`, `ultima_actividad`) VALUES ('m3mlp5a1juuq5nlbjr4acc7hrh', '9', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 OPR/125.0.0.0', '{\"login_time\":1768625638,\"role\":\"usuario\"}', '2026-01-17 00:53:58');
+INSERT INTO `sesiones` (`id`, `usuario_id`, `ip_address`, `user_agent`, `datos`, `ultima_actividad`) VALUES ('mbe6ctd6qt2v56cbfbamsqtf33', '5', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', '{\"login_time\":1768673871,\"role\":\"super_admin\"}', '2026-01-17 14:17:51');
+INSERT INTO `sesiones` (`id`, `usuario_id`, `ip_address`, `user_agent`, `datos`, `ultima_actividad`) VALUES ('mbgok9hcbd4bbj3lgkue765pfe', '5', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 OPR/125.0.0.0', '{\"login_time\":1768669731,\"role\":\"super_admin\"}', '2026-01-17 13:08:51');
 INSERT INTO `sesiones` (`id`, `usuario_id`, `ip_address`, `user_agent`, `datos`, `ultima_actividad`) VALUES ('n2hppcpb0839rj7l5bq1mdij7q', '5', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '{\"login_time\":1768495356,\"role\":\"super_admin\"}', '2026-01-15 12:42:36');
+INSERT INTO `sesiones` (`id`, `usuario_id`, `ip_address`, `user_agent`, `datos`, `ultima_actividad`) VALUES ('q11mf9b80cq4m49fo2ifpmu0cc', '5', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 OPR/125.0.0.0', '{\"login_time\":1768620525,\"role\":\"super_admin\"}', '2026-01-16 23:28:45');
+INSERT INTO `sesiones` (`id`, `usuario_id`, `ip_address`, `user_agent`, `datos`, `ultima_actividad`) VALUES ('rvp05gi6np8sboudt11pn88mp3', '9', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 OPR/125.0.0.0', '{\"login_time\":1768620945,\"role\":\"usuario\"}', '2026-01-16 23:35:45');
 
 -- Estructura de la tabla `sesiones_admin`
 DROP TABLE IF EXISTS `sesiones_admin`;
@@ -747,11 +802,11 @@ INSERT INTO `usuarios` (`id`, `username`, `password`, `email`, `nombre_completo`
 INSERT INTO `usuarios` (`id`, `username`, `password`, `email`, `nombre_completo`, `rol`, `activo`, `fecha_creacion`, `ultimo_acceso`, `intentos_fallidos`, `bloqueado_hasta`) VALUES ('2', 'andres', '$2y$10$/VVLr/sTGaZt.jyCkYZkRu5lwqq8TMhWlTpuLVLofApZ/Sz1OO7KW', 'andres@andres.com', 'Andres marca', 'admin', '1', '2026-01-10 21:12:47', '2026-01-13 13:29:33', '0', NULL);
 INSERT INTO `usuarios` (`id`, `username`, `password`, `email`, `nombre_completo`, `rol`, `activo`, `fecha_creacion`, `ultimo_acceso`, `intentos_fallidos`, `bloqueado_hasta`) VALUES ('3', 'jaasiel', '$2y$10$Vb4cdu/.lBouu5LQGhz35.iIdZIuWC/PNujTH/JQsnFGXFiGgShyC', 'jaasiel@jaasiel.com', 'Jaasiel Raquel', 'admin', '1', '2026-01-11 00:23:51', '2026-01-12 18:21:34', '0', NULL);
 INSERT INTO `usuarios` (`id`, `username`, `password`, `email`, `nombre_completo`, `rol`, `activo`, `fecha_creacion`, `ultimo_acceso`, `intentos_fallidos`, `bloqueado_hasta`) VALUES ('4', 'mamani', '$2y$10$qKAJrff/vz0pPTaVkU5BnOAIquEVe7JSd9gv1ODFdQ8JuF5DMGOmO', 'mamani@mamani.com', 'Mamani Quispe', 'admin', '1', '2026-01-11 01:18:50', '2026-01-11 01:19:22', '0', NULL);
-INSERT INTO `usuarios` (`id`, `username`, `password`, `email`, `nombre_completo`, `rol`, `activo`, `fecha_creacion`, `ultimo_acceso`, `intentos_fallidos`, `bloqueado_hasta`) VALUES ('5', 'superadmin', '$2y$10$t.WZhijNEfbB0jhFvUDG9eQY.eqJy.N9ttGbOgiAFZYgeFp1vPUXa', 'superadmin@sistema.com', 'Super Administrador', 'super_admin', '1', '2026-01-11 01:31:03', '2026-01-15 12:42:36', '0', NULL);
+INSERT INTO `usuarios` (`id`, `username`, `password`, `email`, `nombre_completo`, `rol`, `activo`, `fecha_creacion`, `ultimo_acceso`, `intentos_fallidos`, `bloqueado_hasta`) VALUES ('5', 'superadmin', '$2y$10$t.WZhijNEfbB0jhFvUDG9eQY.eqJy.N9ttGbOgiAFZYgeFp1vPUXa', 'superadmin@sistema.com', 'Super Administrador', 'super_admin', '1', '2026-01-11 01:31:03', '2026-01-17 14:17:51', '0', NULL);
 INSERT INTO `usuarios` (`id`, `username`, `password`, `email`, `nombre_completo`, `rol`, `activo`, `fecha_creacion`, `ultimo_acceso`, `intentos_fallidos`, `bloqueado_hasta`) VALUES ('6', 'amor', '$2y$10$hm9T4hzob3/LGLty/8uR.uttiZ3O.uV0i2Zfj5baH49NLrKXKCnU2', 'amor@amor.com', 'amores', 'admin', '1', '2026-01-12 21:56:12', '2026-01-12 22:59:00', '0', NULL);
 INSERT INTO `usuarios` (`id`, `username`, `password`, `email`, `nombre_completo`, `rol`, `activo`, `fecha_creacion`, `ultimo_acceso`, `intentos_fallidos`, `bloqueado_hasta`) VALUES ('7', 'rox', '$2y$10$fSjAY/fGYCdY13vpM1VHQObOrHlPHBgCxhe2mt3uGDSfMie3YO4Mu', 'rox@rox.com', 'roxana', 'usuario', '1', '2026-01-12 23:16:29', '2026-01-13 13:32:54', '0', NULL);
 INSERT INTO `usuarios` (`id`, `username`, `password`, `email`, `nombre_completo`, `rol`, `activo`, `fecha_creacion`, `ultimo_acceso`, `intentos_fallidos`, `bloqueado_hasta`) VALUES ('8', 'ces', '$2y$10$LWgY6RI..meFx7LIPhYzjOh0lXP5Ul59xGBeZYYSH4JOVlJY3556K', 'ces@ces.com', 'cesar', 'usuario', '1', '2026-01-12 23:36:57', '2026-01-13 13:24:54', '0', NULL);
-INSERT INTO `usuarios` (`id`, `username`, `password`, `email`, `nombre_completo`, `rol`, `activo`, `fecha_creacion`, `ultimo_acceso`, `intentos_fallidos`, `bloqueado_hasta`) VALUES ('9', 'ami', '$2y$10$O7RSvgZQH0ld9WymFA/jAuU2Gkql6.55KhvRf7ZCvHYiSBPS4U8Bm', 'ami@ami', 'ami', 'usuario', '1', '2026-01-13 13:34:41', '2026-01-13 13:35:31', '0', NULL);
+INSERT INTO `usuarios` (`id`, `username`, `password`, `email`, `nombre_completo`, `rol`, `activo`, `fecha_creacion`, `ultimo_acceso`, `intentos_fallidos`, `bloqueado_hasta`) VALUES ('9', 'ami', '$2y$10$O7RSvgZQH0ld9WymFA/jAuU2Gkql6.55KhvRf7ZCvHYiSBPS4U8Bm', 'ami@ami', 'ami', 'usuario', '1', '2026-01-13 13:34:41', '2026-01-17 00:53:58', '0', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
 
