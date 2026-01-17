@@ -114,6 +114,8 @@ $tipoReporte = $_GET['tipo'] ?? 'todos';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- html2pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
         :root {
@@ -214,6 +216,10 @@ $tipoReporte = $_GET['tipo'] ?? 'todos';
                     <li class="nav-item">
                         <a class="nav-link <?php echo $tipoReporte == 'egresos' ? 'active' : ''; ?>"
                             href="?evento=<?php echo $eventoId; ?>&tipo=egresos">Egresos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo $tipoReporte == 'financiero' ? 'active' : ''; ?>"
+                            href="?evento=<?php echo $eventoId; ?>&tipo=financiero">Informe Financiero</a>
                     </li>
                 </ul>
             </div>
@@ -727,6 +733,160 @@ $tipoReporte = $_GET['tipo'] ?? 'todos';
                 </div>
             </div>
         <?php endif; ?>
+
+        <?php if ($tipoReporte == 'financiero'): ?>
+            <!-- Reporte Financiero -->
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3 class="card-title mb-0">Informe Financiero</h3>
+                    <button class="btn btn-success" onclick="exportarFinancieroPDF()">
+                        <i class="fas fa-file-pdf"></i> Exportar PDF
+                    </button>
+                </div>
+                <div class="card-body" id="financiero-content">
+                    <!-- Encabezado del Reporte -->
+                    <div class="text-center mb-4">
+                        <h2><?php echo SITE_NAME; ?></h2>
+                        <h3>Informe Financiero</h3>
+                        <h4><?php echo htmlspecialchars($evento['nombre']); ?></h4>
+                        <p>Generado el <?php echo formatDate(date('Y-m-d'), 'd/m/Y'); ?> a las <?php echo date('H:i'); ?>
+                        </p>
+                    </div>
+                    <!-- Ingresos -->
+                    <h4>Ingresos</h4>
+                    <h5>Inscripciones</h5>
+                    <p>Total recaudado por inscripciones: Bs.
+                        <?php echo number_format($stats['total_recaudado'] ?? 0, 2); ?></p>
+
+                    <!-- Otros Ingresos -->
+                    <h5>Otros Ingresos</h5>
+                    <form id="form-ingreso" class="mb-4">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="descripcion-ingreso" class="form-label">Descripción</label>
+                                <input type="text" class="form-control" id="descripcion-ingreso" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="monto-ingreso" class="form-label">Monto (Bs.)</label>
+                                <input type="number" class="form-control" id="monto-ingreso" step="0.01" min="0" required>
+                            </div>
+                            <div class="col-md-2 d-flex align-items-end">
+                                <button type="submit" class="btn btn-primary">Agregar</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="tabla-ingresos">
+                            <thead>
+                                <tr>
+                                    <th>Descripción</th>
+                                    <th>Monto</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="lista-ingresos">
+                                <!-- Aquí se agregarán los ingresos dinámicamente -->
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th class="text-end">Total Otros Ingresos:</th>
+                                    <th id="total-otros-ingresos">Bs. 0.00</th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                    <p><strong>Total Ingresos: Bs. <span id="total-ingresos">0.00</span></strong></p>
+
+                    <!-- Egresos -->
+                    <h4>Egresos</h4>
+                    <form id="form-egreso-fin" class="mb-4">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="cantidad-eg" class="form-label">Cantidad</label>
+                                <input type="number" class="form-control" id="cantidad-eg" min="1" required>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="descripcion-eg" class="form-label">Descripción</label>
+                                <input type="text" class="form-control" id="descripcion-eg" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="monto-eg" class="form-label">Monto (Bs.)</label>
+                                <input type="number" class="form-control" id="monto-eg" step="0.01" min="0" required>
+                            </div>
+                            <div class="col-md-1 d-flex align-items-end">
+                                <button type="submit" class="btn btn-primary">Agregar</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="tabla-egresos-fin">
+                            <thead>
+                                <tr>
+                                    <th>Cantidad</th>
+                                    <th>Descripción</th>
+                                    <th>Monto Unitario</th>
+                                    <th>Subtotal</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="lista-egresos-fin">
+                                <!-- Aquí se agregarán los egresos dinámicamente -->
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th colspan="3" class="text-end">Total Egresos:</th>
+                                    <th id="total-egresos-fin">Bs. 0.00</th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                    <p><strong>Total Egresos: Bs. <span id="total-egresos-display">0.00</span></strong></p>
+
+                    <!-- Total -->
+                    <h4>Total de la Actividad</h4>
+                    <p><strong>Ingresos Totales: Bs. <span id="total-final-ingresos">0.00</span></strong></p>
+                    <p><strong>Egresos Totales: Bs. <span id="total-final-egresos">0.00</span></strong></p>
+                    <p><strong>Balance: Bs. <span id="balance">0.00</span></strong></p>
+                </div>
+            </div>
+
+            <!-- Contenido oculto para PDF -->
+            <div id="pdf-content" style="display: none;">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <h2><?php echo SITE_NAME; ?></h2>
+                    <h3>Informe Financiero</h3>
+                    <h4><?php echo htmlspecialchars($evento['nombre']); ?></h4>
+                    <p>Generado el <?php echo formatDate(date('Y-m-d'), 'd/m/Y'); ?> a las <?php echo date('H:i'); ?></p>
+                </div>
+
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                    <thead>
+                        <tr style="background-color: #f8f9fa;">
+                            <th style="border: 1px solid #dee2e6; padding: 8px; text-align: left;">Descripción</th>
+                            <th style="border: 1px solid #dee2e6; padding: 8px; text-align: right;">Monto (Bs.)</th>
+                            <th style="border: 1px solid #dee2e6; padding: 8px; text-align: center;">Tipo</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pdf-table-body">
+                        <!-- Se llenará dinámicamente -->
+                    </tbody>
+                    <tfoot>
+                        <tr style="font-weight: bold;">
+                            <td style="border: 1px solid #dee2e6; padding: 8px;">Balance</td>
+                            <td style="border: 1px solid #dee2e6; padding: 8px; text-align: right;" id="pdf-balance">0.00
+                            </td>
+                            <td style="border: 1px solid #dee2e6; padding: 8px; text-align: center;"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        <?php endif; ?>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -951,7 +1111,11 @@ $tipoReporte = $_GET['tipo'] ?? 'todos';
         }
 
         // Control de egresos
-        let egresos = [];
+        let egresos = JSON.parse(localStorage.getItem('egresos_evento_<?php echo $eventoId; ?>')) || [];
+
+        function saveEgresos() {
+            localStorage.setItem('egresos_evento_<?php echo $eventoId; ?>', JSON.stringify(egresos));
+        }
 
         document.getElementById('form-egreso')?.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -966,6 +1130,7 @@ $tipoReporte = $_GET['tipo'] ?? 'todos';
                     monto,
                     subtotal
                 });
+                saveEgresos();
                 actualizarTablaEgresos();
                 this.reset();
             }
@@ -973,6 +1138,7 @@ $tipoReporte = $_GET['tipo'] ?? 'todos';
 
         function actualizarTablaEgresos() {
             const tbody = document.getElementById('lista-egresos');
+            if (!tbody) return;
             tbody.innerHTML = '';
             let total = 0;
             egresos.forEach((egreso, index) => {
@@ -988,12 +1154,224 @@ $tipoReporte = $_GET['tipo'] ?? 'todos';
                 `;
                 tbody.innerHTML += row;
             });
-            document.getElementById('total-egresos').textContent = `Bs. ${total.toFixed(2)}`;
+            const totalEl = document.getElementById('total-egresos');
+            if (totalEl) totalEl.textContent = `Bs. ${total.toFixed(2)}`;
         }
 
         function eliminarEgreso(index) {
             egresos.splice(index, 1);
+            saveEgresos();
             actualizarTablaEgresos();
+        }
+
+        // Inicializar tabla de egresos si existe
+        actualizarTablaEgresos();
+
+        // Control de ingresos adicionales
+        let ingresos = JSON.parse(localStorage.getItem('ingresos_evento_<?php echo $eventoId; ?>')) || [];
+
+        function saveIngresos() {
+            localStorage.setItem('ingresos_evento_<?php echo $eventoId; ?>', JSON.stringify(ingresos));
+        }
+
+        document.getElementById('form-ingreso')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const descripcion = document.getElementById('descripcion-ingreso').value.trim();
+            const monto = parseFloat(document.getElementById('monto-ingreso').value);
+            if (descripcion && monto >= 0) {
+                ingresos.push({
+                    descripcion,
+                    monto
+                });
+                saveIngresos();
+                actualizarTablaIngresos();
+                actualizarTotalesFinanciero();
+                this.reset();
+            }
+        });
+
+        function actualizarTablaIngresos() {
+            const tbody = document.getElementById('lista-ingresos');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            let total = 0;
+            ingresos.forEach((ingreso, index) => {
+                total += ingreso.monto;
+                const row = `
+                    <tr>
+                        <td>${ingreso.descripcion}</td>
+                        <td>Bs. ${ingreso.monto.toFixed(2)}</td>
+                        <td><button class="btn btn-sm btn-danger" onclick="eliminarIngreso(${index})">Eliminar</button></td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+            const totalEl = document.getElementById('total-otros-ingresos');
+            if (totalEl) totalEl.textContent = `Bs. ${total.toFixed(2)}`;
+        }
+
+        function eliminarIngreso(index) {
+            ingresos.splice(index, 1);
+            saveIngresos();
+            actualizarTablaIngresos();
+            actualizarTotalesFinanciero();
+        }
+
+        // Control de egresos en financiero
+        document.getElementById('form-egreso-fin')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const cantidad = parseInt(document.getElementById('cantidad-eg').value);
+            const descripcion = document.getElementById('descripcion-eg').value.trim();
+            const monto = parseFloat(document.getElementById('monto-eg').value);
+            if (cantidad > 0 && descripcion && monto >= 0) {
+                const subtotal = cantidad * monto;
+                egresos.push({
+                    cantidad,
+                    descripcion,
+                    monto,
+                    subtotal
+                });
+                saveEgresos();
+                actualizarTablaEgresosFin();
+                actualizarTotalesFinanciero();
+                this.reset();
+            }
+        });
+
+        function actualizarTablaEgresosFin() {
+            const tbody = document.getElementById('lista-egresos-fin');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            let total = 0;
+            egresos.forEach((egreso, index) => {
+                total += egreso.subtotal;
+                const row = `
+                    <tr>
+                        <td>${egreso.cantidad}</td>
+                        <td>${egreso.descripcion}</td>
+                        <td>Bs. ${egreso.monto.toFixed(2)}</td>
+                        <td>Bs. ${egreso.subtotal.toFixed(2)}</td>
+                        <td><button class="btn btn-sm btn-danger" onclick="eliminarEgresoFin(${index})">Eliminar</button></td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+            const totalEl = document.getElementById('total-egresos-fin');
+            if (totalEl) totalEl.textContent = `Bs. ${total.toFixed(2)}`;
+        }
+
+        function eliminarEgresoFin(index) {
+            egresos.splice(index, 1);
+            saveEgresos();
+            actualizarTablaEgresosFin();
+            actualizarTotalesFinanciero();
+        }
+
+        function actualizarTotalesFinanciero() {
+            const totalInscripciones = <?php echo $stats['total_recaudado'] ?? 0; ?>;
+            const totalOtrosIngresos = ingresos.reduce((sum, i) => sum + i.monto, 0);
+            const totalIngresos = totalInscripciones + totalOtrosIngresos;
+            const totalEgresos = egresos.reduce((sum, e) => sum + e.subtotal, 0);
+            const balance = totalIngresos - totalEgresos;
+
+            document.getElementById('total-ingresos').textContent = totalIngresos.toFixed(2);
+            document.getElementById('total-egresos-display').textContent = totalEgresos.toFixed(2);
+            document.getElementById('total-final-ingresos').textContent = totalIngresos.toFixed(2);
+            document.getElementById('total-final-egresos').textContent = totalEgresos.toFixed(2);
+            document.getElementById('balance').textContent = balance.toFixed(2);
+
+            // Actualizar tabla PDF
+            actualizarTablaPDF(totalInscripciones, ingresos, egresos, balance);
+        }
+
+        function actualizarTablaPDF(totalInscripciones, ingresos, egresos, balance) {
+            const tbody = document.getElementById('pdf-table-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            // Título de Ingresos
+            const ingresosTitleRow = `
+                <tr>
+                    <td colspan="3" style="border: 1px solid #dee2e6; padding: 8px; text-align: center; font-weight: bold; background-color: #f8f9fa;">INGRESOS</td>
+                </tr>
+            `;
+            tbody.innerHTML += ingresosTitleRow;
+
+            // Ingreso de inscripciones
+            if (totalInscripciones > 0) {
+                const row = `
+                    <tr>
+                        <td style="border: 1px solid #dee2e6; padding: 8px;">Inscripciones</td>
+                        <td style="border: 1px solid #dee2e6; padding: 8px; text-align: right;">${totalInscripciones.toFixed(2)}</td>
+                        <td style="border: 1px solid #dee2e6; padding: 8px; text-align: center;">Ingreso</td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            }
+
+            // Otros ingresos
+            ingresos.forEach(ingreso => {
+                const row = `
+                    <tr>
+                        <td style="border: 1px solid #dee2e6; padding: 8px;">${ingreso.descripcion}</td>
+                        <td style="border: 1px solid #dee2e6; padding: 8px; text-align: right;">${ingreso.monto.toFixed(2)}</td>
+                        <td style="border: 1px solid #dee2e6; padding: 8px; text-align: center;">Ingreso</td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+
+            // Título de Egresos
+            const egresosTitleRow = `
+                <tr>
+                    <td colspan="3" style="border: 1px solid #dee2e6; padding: 8px; text-align: center; font-weight: bold; background-color: #f8f9fa;">EGRESOS</td>
+                </tr>
+            `;
+            tbody.innerHTML += egresosTitleRow;
+
+            // Egresos
+            egresos.forEach(egreso => {
+                const row = `
+                    <tr>
+                        <td style="border: 1px solid #dee2e6; padding: 8px;">${egreso.descripcion} (Cant: ${egreso.cantidad})</td>
+                        <td style="border: 1px solid #dee2e6; padding: 8px; text-align: right;">${egreso.subtotal.toFixed(2)}</td>
+                        <td style="border: 1px solid #dee2e6; padding: 8px; text-align: center;">Egreso</td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+
+            // Balance
+            document.getElementById('pdf-balance').textContent = balance.toFixed(2);
+        }
+
+        // Inicializar tablas y totales en financiero
+        actualizarTablaIngresos();
+        actualizarTablaEgresosFin();
+        actualizarTotalesFinanciero();
+
+        function exportarFinancieroPDF() {
+            const element = document.getElementById('pdf-content');
+            element.style.display = 'block'; // Temporarily show the element
+            const opt = {
+                margin: 1,
+                filename: `informe_financiero_<?php echo $eventoId; ?>.pdf`,
+                image: {
+                    type: 'jpeg',
+                    quality: 0.98
+                },
+                html2canvas: {
+                    scale: 2
+                },
+                jsPDF: {
+                    unit: 'in',
+                    format: 'letter',
+                    orientation: 'portrait'
+                }
+            };
+            html2pdf().set(opt).from(element).save().then(() => {
+                element.style.display = 'none'; // Hide it back after PDF generation
+            });
         }
     </script>
 </body>
