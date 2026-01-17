@@ -30,22 +30,21 @@ $inscripcionesEvento = new InscripcionesEvento($db, $eventoId);
 $evento = $eventosManager->getById($eventoId);
 $config = $eventosManager->getConfig($eventoId);
 
-// Si costo_inscripcion es null o 0, aplicar descuento por fecha o edad si corresponde
+// Aplicar descuento por fecha o edad si corresponde, priorizando sobre costo_inscripcion
+$original_costo = $evento['costo_inscripcion'];
 $today = date('Y-m-d');
-if (is_null($evento['costo_inscripcion']) || $evento['costo_inscripcion'] == 0) {
-    if (!empty($config['descuento_fecha3']) && $today <= $config['descuento_fecha3']) {
-        $evento['costo_inscripcion'] = $config['descuento_costo3'];
-    } elseif (!empty($config['descuento_fecha2']) && $today <= $config['descuento_fecha2']) {
-        $evento['costo_inscripcion'] = $config['descuento_costo2'];
-    } elseif (!empty($config['descuento_fecha1']) && $today <= $config['descuento_fecha1']) {
-        $evento['costo_inscripcion'] = $config['descuento_costo1'];
-    } elseif (!empty($evento['costo_rango1'])) {
-        $evento['costo_inscripcion'] = $evento['costo_rango1'];
-    } elseif (!empty($evento['costo_rango2'])) {
-        $evento['costo_inscripcion'] = $evento['costo_rango2'];
-    } else {
-        $evento['costo_inscripcion'] = 0;
-    }
+if (!empty($config['descuento_fecha3']) && $today <= $config['descuento_fecha3']) {
+    $evento['costo_inscripcion'] = $config['descuento_costo3'];
+} elseif (!empty($config['descuento_fecha2']) && $today <= $config['descuento_fecha2']) {
+    $evento['costo_inscripcion'] = $config['descuento_costo2'];
+} elseif (!empty($config['descuento_fecha1']) && $today <= $config['descuento_fecha1']) {
+    $evento['costo_inscripcion'] = $config['descuento_costo1'];
+} elseif (!empty($evento['costo_rango1'])) {
+    $evento['costo_inscripcion'] = $evento['costo_rango1'];
+} elseif (!empty($evento['costo_rango2'])) {
+    $evento['costo_inscripcion'] = $evento['costo_rango2'];
+} else {
+    $evento['costo_inscripcion'] = $original_costo ?? 0;
 }
 $stats = $inscripcionesEvento->getStats();
 
@@ -353,6 +352,16 @@ $csrf_token = generateCSRFToken();
                                 <div class="info-box-content">
                                     <span class="info-box-text">Deudores</span>
                                     <span class="info-box-number"><?php echo $stats['deudores'] ?? 0; ?></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-6">
+                            <div class="info-box bg-gradient-secondary">
+                                <span class="info-box-icon"><i class="fas fa-globe"></i></span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Inscripciones Online</span>
+                                    <span
+                                        class="info-box-number"><?php echo $stats['inscripciones_online'] ?? 0; ?></span>
                                 </div>
                             </div>
                         </div>

@@ -407,7 +407,7 @@ class EventosManager
         }
 
         $stmt = $this->db->prepare("
-            SELECT 
+            SELECT
                 COUNT(*) as total_inscritos,
                 SUM(CASE WHEN sexo = 'Masculino' THEN 1 ELSE 0 END) as hombres,
                 SUM(CASE WHEN sexo = 'Femenino' THEN 1 ELSE 0 END) as mujeres,
@@ -416,7 +416,8 @@ class EventosManager
                 SUM(CASE WHEN tipo_inscripcion = 'Beca' THEN 1 ELSE 0 END) as becados,
                 SUM(CASE WHEN alojamiento != 'No' THEN 1 ELSE 0 END) as con_alojamiento,
                 SUM(monto_pagado) as total_recaudado,
-                COUNT(DISTINCT grupo) as grupos_formados
+                COUNT(DISTINCT grupo) as grupos_formados,
+                SUM(CASE WHEN codigo_pago IS NOT NULL THEN 1 ELSE 0 END) as inscripciones_online
             FROM inscripciones_eventos
             WHERE evento_id = ?
         ");

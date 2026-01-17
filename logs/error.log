@@ -1919,3 +1919,191 @@ Stack trace:
 [17-Jan-2026 01:37:06 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\eventos\inscribir.php on line 98
 [17-Jan-2026 01:37:06 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\eventos\inscribir.php on line 189
 [17-Jan-2026 01:37:06 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\eventos\inscribir.php on line 189
+[17-Jan-2026 01:38:21 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\eventos\inscribir.php on line 98
+[17-Jan-2026 01:38:21 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\eventos\inscribir.php on line 98
+[17-Jan-2026 01:38:21 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\eventos\inscribir.php on line 189
+[17-Jan-2026 01:38:21 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\eventos\inscribir.php on line 189
+[17-Jan-2026 06:36:53 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 122
+[17-Jan-2026 06:36:53 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 122
+[17-Jan-2026 06:36:53 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 189
+[17-Jan-2026 06:36:53 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 189
+[17-Jan-2026 06:36:53 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 276
+[17-Jan-2026 06:36:53 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 276
+[17-Jan-2026 06:36:53 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 287
+[17-Jan-2026 06:36:53 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 287
+[17-Jan-2026 06:36:53 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 494
+[17-Jan-2026 06:36:53 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 494
+[17-Jan-2026 06:36:53 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\eventos\inscribir.php on line 98
+[17-Jan-2026 06:36:53 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\eventos\inscribir.php on line 98
+[17-Jan-2026 06:36:53 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\eventos\inscribir.php on line 189
+[17-Jan-2026 06:36:53 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\eventos\inscribir.php on line 189
+[17-Jan-2026 06:36:53 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\eventos\inscribir.php on line 98
+[17-Jan-2026 06:36:53 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\eventos\inscribir.php on line 98
+[17-Jan-2026 06:36:53 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\eventos\inscribir.php on line 189
+[17-Jan-2026 06:36:53 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\eventos\inscribir.php on line 189
+[17-Jan-2026 06:37:02 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 122
+[17-Jan-2026 06:37:02 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 122
+[17-Jan-2026 06:37:02 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 189
+[17-Jan-2026 06:37:02 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 189
+[17-Jan-2026 06:37:02 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 276
+[17-Jan-2026 06:37:02 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 276
+[17-Jan-2026 06:37:02 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 287
+[17-Jan-2026 06:37:02 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 287
+[17-Jan-2026 06:37:02 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 494
+[17-Jan-2026 06:37:02 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 494
+[17-Jan-2026 07:13:40 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 122
+[17-Jan-2026 07:13:40 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 122
+[17-Jan-2026 07:13:40 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 189
+[17-Jan-2026 07:13:40 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 189
+[17-Jan-2026 07:13:40 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 276
+[17-Jan-2026 07:13:40 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 276
+[17-Jan-2026 07:13:40 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 287
+[17-Jan-2026 07:13:40 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 287
+[17-Jan-2026 07:13:40 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 494
+[17-Jan-2026 07:13:40 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 494
+[17-Jan-2026 07:14:33 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 122
+[17-Jan-2026 07:14:33 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 122
+[17-Jan-2026 07:14:33 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 189
+[17-Jan-2026 07:14:33 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 189
+[17-Jan-2026 07:14:33 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 276
+[17-Jan-2026 07:14:33 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 276
+[17-Jan-2026 07:14:33 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 287
+[17-Jan-2026 07:14:33 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 287
+[17-Jan-2026 07:14:33 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 494
+[17-Jan-2026 07:14:33 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 494
+[17-Jan-2026 07:14:33 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 122
+[17-Jan-2026 07:14:33 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 122
+[17-Jan-2026 07:14:33 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 189
+[17-Jan-2026 07:14:33 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 189
+[17-Jan-2026 07:14:33 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 276
+[17-Jan-2026 07:14:33 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 276
+[17-Jan-2026 07:14:33 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 287
+[17-Jan-2026 07:14:33 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 287
+[17-Jan-2026 07:14:33 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 494
+[17-Jan-2026 07:14:33 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 494
+[17-Jan-2026 07:14:34 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 122
+[17-Jan-2026 07:14:34 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 122
+[17-Jan-2026 07:14:34 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 189
+[17-Jan-2026 07:14:34 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 189
+[17-Jan-2026 07:14:34 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 276
+[17-Jan-2026 07:14:34 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 276
+[17-Jan-2026 07:14:34 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 287
+[17-Jan-2026 07:14:34 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 287
+[17-Jan-2026 07:14:34 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 494
+[17-Jan-2026 07:14:34 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 494
+[17-Jan-2026 07:15:22 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\eventos\inscribir.php on line 97
+[17-Jan-2026 07:15:22 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\eventos\inscribir.php on line 97
+[17-Jan-2026 07:15:22 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\eventos\inscribir.php on line 188
+[17-Jan-2026 07:15:22 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\eventos\inscribir.php on line 188
+[17-Jan-2026 07:15:41 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\eventos\inscribir.php on line 97
+[17-Jan-2026 07:15:41 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\eventos\inscribir.php on line 97
+[17-Jan-2026 07:15:41 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\eventos\inscribir.php on line 188
+[17-Jan-2026 07:15:41 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\eventos\inscribir.php on line 188
+[17-Jan-2026 07:20:04 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 121
+[17-Jan-2026 07:20:04 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 121
+[17-Jan-2026 07:20:04 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 188
+[17-Jan-2026 07:20:04 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 188
+[17-Jan-2026 07:20:04 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 275
+[17-Jan-2026 07:20:04 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 275
+[17-Jan-2026 07:20:04 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 286
+[17-Jan-2026 07:20:04 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 286
+[17-Jan-2026 07:20:04 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 493
+[17-Jan-2026 07:20:04 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 493
+[17-Jan-2026 07:29:09 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 121
+[17-Jan-2026 07:29:09 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 121
+[17-Jan-2026 07:29:09 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 188
+[17-Jan-2026 07:29:09 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 188
+[17-Jan-2026 07:29:09 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 275
+[17-Jan-2026 07:29:09 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 275
+[17-Jan-2026 07:29:09 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 286
+[17-Jan-2026 07:29:09 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 286
+[17-Jan-2026 07:29:09 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 493
+[17-Jan-2026 07:29:09 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 493
+[17-Jan-2026 07:30:24 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 121
+[17-Jan-2026 07:30:24 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 121
+[17-Jan-2026 07:30:24 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 188
+[17-Jan-2026 07:30:24 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 188
+[17-Jan-2026 07:30:24 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 275
+[17-Jan-2026 07:30:24 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 275
+[17-Jan-2026 07:30:24 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 286
+[17-Jan-2026 07:30:24 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 286
+[17-Jan-2026 07:30:24 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 503
+[17-Jan-2026 07:30:24 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 503
+[17-Jan-2026 07:47:20 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 121
+[17-Jan-2026 07:47:20 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 121
+[17-Jan-2026 07:47:20 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 188
+[17-Jan-2026 07:47:20 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 188
+[17-Jan-2026 07:47:20 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 275
+[17-Jan-2026 07:47:20 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 275
+[17-Jan-2026 07:47:20 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 286
+[17-Jan-2026 07:47:20 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 286
+[17-Jan-2026 07:47:20 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 503
+[17-Jan-2026 07:47:20 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\inscripciones-evento.php on line 503
+[17-Jan-2026 07:48:01 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:48:01 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:48:01 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:48:01 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:48:04 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:48:04 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:48:04 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:48:04 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:48:17 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:48:17 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:48:17 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:48:17 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:48:19 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:48:19 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:48:19 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:48:19 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:48:21 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:48:21 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:48:21 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:48:21 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:48:22 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:48:22 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:48:22 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:48:22 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:48:23 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:48:23 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:48:23 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:48:23 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:48:24 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:48:24 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:48:24 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:48:24 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:52:06 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:52:06 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:52:06 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:52:06 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:52:08 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:52:08 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:52:08 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:52:08 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:52:10 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:52:10 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:52:10 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:52:10 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:52:12 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:52:12 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:52:12 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:52:12 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:52:13 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:52:13 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:52:13 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:52:13 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:52:19 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:52:19 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:52:19 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:52:19 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:52:21 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:52:21 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:52:21 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:52:21 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:52:22 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:52:22 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:52:22 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:52:22 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:52:24 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:52:24 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 108
+[17-Jan-2026 07:52:24 America/La_Paz] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169
+[17-Jan-2026 07:52:24 America/La_Paz] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\proyectos\MJBolivia2\admin\reportes-evento.php on line 169

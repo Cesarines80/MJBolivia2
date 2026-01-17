@@ -68,6 +68,13 @@ function getBecados($inscripciones)
     });
 }
 
+function getInscripcionesOnline($inscripciones)
+{
+    return array_filter($inscripciones, function ($i) {
+        return !empty($i['codigo_pago']);
+    });
+}
+
 function getPorGrupos($inscripciones)
 {
     $grupos = [];
@@ -86,6 +93,7 @@ $porSexo = getInscripcionesPorSexo($inscripciones);
 $porTipo = getInscripcionesPorTipo($inscripciones);
 $deudores = getDeudores($inscripciones);
 $becados = getBecados($inscripciones);
+$online = getInscripcionesOnline($inscripciones);
 $porGrupos = getPorGrupos($inscripciones);
 
 // Determinar tipo de reporte
@@ -196,6 +204,10 @@ $tipoReporte = $_GET['tipo'] ?? 'todos';
                             href="?evento=<?php echo $eventoId; ?>&tipo=becados">Becados</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link <?php echo $tipoReporte == 'online' ? 'active' : ''; ?>"
+                            href="?evento=<?php echo $eventoId; ?>&tipo=online">Inscripciones Online</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link <?php echo $tipoReporte == 'grupos' ? 'active' : ''; ?>"
                             href="?evento=<?php echo $eventoId; ?>&tipo=grupos">Grupos</a>
                     </li>
@@ -253,17 +265,30 @@ $tipoReporte = $_GET['tipo'] ?? 'todos';
                     </div>
                 </div>
             </div>
+            <div class="col-lg-2 col-6">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h3 class="text-secondary"><?php echo $stats['inscripciones_online'] ?? 0; ?></h3>
+                        <p class="mb-0">Online</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <?php if ($tipoReporte == 'todos'): ?>
             <!-- Reporte: Todos los Inscritos -->
             <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Lista Completa de Inscritos</h3>
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3 class="card-title mb-0">Lista Completa de Inscritos</h3>
+                    <div class="no-print">
+                        <button class="btn btn-sm btn-success" onclick="exportarTodosExcel(<?php echo $eventoId; ?>)">
+                            <i class="fas fa-file-excel"></i> Excel
+                        </button>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table table-striped" id="tabla-todos">
                             <thead>
                                 <tr>
                                     <th>Codigo</th>
@@ -431,12 +456,17 @@ $tipoReporte = $_GET['tipo'] ?? 'todos';
         <?php if ($tipoReporte == 'deudores'): ?>
             <!-- Reporte: Deudores -->
             <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Lista de Deudores (<?php echo count($deudores); ?>)</h3>
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3 class="card-title mb-0">Lista de Deudores (<?php echo count($deudores); ?>)</h3>
+                    <div class="no-print">
+                        <button class="btn btn-sm btn-success" onclick="exportarDeudoresExcel(<?php echo $eventoId; ?>)">
+                            <i class="fas fa-file-excel"></i> Excel
+                        </button>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table table-striped" id="tabla-deudores">
                             <thead>
                                 <tr>
                                     <th>Codigo</th>
@@ -473,12 +503,17 @@ $tipoReporte = $_GET['tipo'] ?? 'todos';
         <?php if ($tipoReporte == 'becados'): ?>
             <!-- Reporte: Becados -->
             <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Lista de Becados (<?php echo count($becados); ?>)</h3>
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3 class="card-title mb-0">Lista de Becados (<?php echo count($becados); ?>)</h3>
+                    <div class="no-print">
+                        <button class="btn btn-sm btn-success" onclick="exportarBecadosExcel(<?php echo $eventoId; ?>)">
+                            <i class="fas fa-file-excel"></i> Excel
+                        </button>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table table-striped" id="tabla-becados">
                             <thead>
                                 <tr>
                                     <th>Codigo</th>
@@ -498,6 +533,63 @@ $tipoReporte = $_GET['tipo'] ?? 'todos';
                                         <td><?php echo htmlspecialchars($inscrito['email']); ?></td>
                                         <td><?php echo htmlspecialchars($inscrito['telefono']); ?></td>
                                         <td><?php echo htmlspecialchars($inscrito['iglesia']); ?></td>
+                                        <td><?php echo formatDate($inscrito['fecha_inscripcion'], 'd/m/Y H:i'); ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+
+        <?php if ($tipoReporte == 'online'): ?>
+            <!-- Reporte: Inscripciones Online -->
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3 class="card-title mb-0">Inscripciones Online (<?php echo count($online); ?>)</h3>
+                    <div class="no-print">
+                        <button class="btn btn-sm btn-success" onclick="exportarOnlineExcel(<?php echo $eventoId; ?>)">
+                            <i class="fas fa-file-excel"></i> Excel
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="tabla-online">
+                            <thead>
+                                <tr>
+                                    <th>Codigo</th>
+                                    <th>Nombres</th>
+                                    <th>Apellidos</th>
+                                    <th>Email</th>
+                                    <th>Sexo</th>
+                                    <th>Tipo</th>
+                                    <th>Monto Pagado</th>
+                                    <th>Alojamiento</th>
+                                    <th>Estado</th>
+                                    <th>Codigo Pago</th>
+                                    <th>Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($online as $inscrito): ?>
+                                    <tr>
+                                        <td><code><?php echo $inscrito['codigo_inscripcion']; ?></code></td>
+                                        <td><?php echo htmlspecialchars($inscrito['nombres']); ?></td>
+                                        <td><?php echo htmlspecialchars($inscrito['apellidos']); ?></td>
+                                        <td><?php echo htmlspecialchars($inscrito['email']); ?></td>
+                                        <td><?php echo $inscrito['sexo']; ?></td>
+                                        <td><?php echo $inscrito['tipo_inscripcion']; ?></td>
+                                        <td>Bs. <?php echo number_format($inscrito['monto_pagado'], 2); ?></td>
+                                        <td><?php echo $inscrito['alojamiento']; ?></td>
+                                        <td>
+                                            <span
+                                                class="badge bg-<?php echo $inscrito['estado_pago'] == 'completo' ? 'success' : ($inscrito['estado_pago'] == 'beca' ? 'info' : ($inscrito['estado_pago'] == 'parcial' ? 'warning' : 'danger')); ?>">
+                                                <?php echo ucfirst($inscrito['estado_pago']); ?>
+                                            </span>
+                                        </td>
+                                        <td><?php echo htmlspecialchars($inscrito['codigo_pago']); ?></td>
                                         <td><?php echo formatDate($inscrito['fecha_inscripcion'], 'd/m/Y H:i'); ?></td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -636,6 +728,159 @@ $tipoReporte = $_GET['tipo'] ?? 'todos';
 
             link.setAttribute('href', url);
             link.setAttribute('download', `grupo_${numGrupo}_evento_${eventoId}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Función para exportar todos los inscritos a Excel (formato CSV)
+        function exportarTodosExcel(eventoId) {
+            const tabla = document.getElementById('tabla-todos');
+
+            let csv = [];
+            const filas = tabla.querySelectorAll('tr');
+
+            filas.forEach(fila => {
+                const cols = fila.querySelectorAll('td, th');
+                const csvRow = [];
+                cols.forEach(col => {
+                    let texto = col.innerText.trim();
+                    texto = texto.replace(/\s+/g, ' ');
+                    texto = texto.replace(/"/g, '""');
+                    if (texto.includes(',') || texto.includes('\n') || texto.includes('"') || texto.includes(';')) {
+                        csvRow.push('"' + texto + '"');
+                    } else {
+                        csvRow.push(texto);
+                    }
+                });
+                csv.push(csvRow.join(';'));
+            });
+
+            const csvString = csv.join('\r\n');
+            const blob = new Blob(['\ufeff' + csvString], {
+                type: 'text/csv;charset=utf-8;'
+            });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+
+            link.setAttribute('href', url);
+            link.setAttribute('download', `todos_inscritos_evento_${eventoId}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Función para exportar deudores a Excel (formato CSV)
+        function exportarDeudoresExcel(eventoId) {
+            const tabla = document.getElementById('tabla-deudores');
+
+            let csv = [];
+            const filas = tabla.querySelectorAll('tr');
+
+            filas.forEach(fila => {
+                const cols = fila.querySelectorAll('td, th');
+                const csvRow = [];
+                cols.forEach(col => {
+                    let texto = col.innerText.trim();
+                    texto = texto.replace(/\s+/g, ' ');
+                    texto = texto.replace(/"/g, '""');
+                    if (texto.includes(',') || texto.includes('\n') || texto.includes('"') || texto.includes(';')) {
+                        csvRow.push('"' + texto + '"');
+                    } else {
+                        csvRow.push(texto);
+                    }
+                });
+                csv.push(csvRow.join(';'));
+            });
+
+            const csvString = csv.join('\r\n');
+            const blob = new Blob(['\ufeff' + csvString], {
+                type: 'text/csv;charset=utf-8;'
+            });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+
+            link.setAttribute('href', url);
+            link.setAttribute('download', `deudores_evento_${eventoId}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Función para exportar becados a Excel (formato CSV)
+        function exportarBecadosExcel(eventoId) {
+            const tabla = document.getElementById('tabla-becados');
+
+            let csv = [];
+            const filas = tabla.querySelectorAll('tr');
+
+            filas.forEach(fila => {
+                const cols = fila.querySelectorAll('td, th');
+                const csvRow = [];
+                cols.forEach(col => {
+                    let texto = col.innerText.trim();
+                    texto = texto.replace(/\s+/g, ' ');
+                    texto = texto.replace(/"/g, '""');
+                    if (texto.includes(',') || texto.includes('\n') || texto.includes('"') || texto.includes(';')) {
+                        csvRow.push('"' + texto + '"');
+                    } else {
+                        csvRow.push(texto);
+                    }
+                });
+                csv.push(csvRow.join(';'));
+            });
+
+            const csvString = csv.join('\r\n');
+            const blob = new Blob(['\ufeff' + csvString], {
+                type: 'text/csv;charset=utf-8;'
+            });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+
+            link.setAttribute('href', url);
+            link.setAttribute('download', `becados_evento_${eventoId}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Función para exportar inscripciones online a Excel (formato CSV)
+        function exportarOnlineExcel(eventoId) {
+            const tabla = document.getElementById('tabla-online');
+
+            let csv = [];
+            const filas = tabla.querySelectorAll('tr');
+
+            filas.forEach(fila => {
+                const cols = fila.querySelectorAll('td, th');
+                const csvRow = [];
+                cols.forEach(col => {
+                    let texto = col.innerText.trim();
+                    texto = texto.replace(/\s+/g, ' ');
+                    texto = texto.replace(/"/g, '""');
+                    if (texto.includes(',') || texto.includes('\n') || texto.includes('"') || texto
+                        .includes(';')) {
+                        csvRow.push('"' + texto + '"');
+                    } else {
+                        csvRow.push(texto);
+                    }
+                });
+                csv.push(csvRow.join(';'));
+            });
+
+            const csvString = csv.join('\r\n');
+            const blob = new Blob(['\ufeff' + csvString], {
+                type: 'text/csv;charset=utf-8;'
+            });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+
+            link.setAttribute('href', url);
+            link.setAttribute('download', `inscripciones_online_evento_${eventoId}.csv`);
             link.style.visibility = 'hidden';
             document.body.appendChild(link);
             link.click();
