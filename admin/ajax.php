@@ -121,7 +121,7 @@ switch ($action) {
         $db = getDB();
         $stmt = $db->prepare("
             SELECT ea.evento_id, ea.usuario_id, ea.fecha_asignacion,
-                   e.nombre, e.estado,
+                   e.titulo, e.estado,
                    u.nombre_completo as asignado_por_nombre
             FROM eventos_administradores ea
             INNER JOIN eventos e ON ea.evento_id = e.id

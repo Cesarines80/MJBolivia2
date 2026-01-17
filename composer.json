@@ -1,0 +1,13 @@
+{
+    "name": "mjbbolivia/mjbbolivia",
+    "description": "Sistema de gestión de eventos MJB Bolivia",
+    "type": "project",
+    "require": {
+        "dompdf/dompdf": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "MJB\\": "src/"
+        }
+    }
+}

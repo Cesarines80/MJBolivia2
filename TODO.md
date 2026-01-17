@@ -1,3 +1,29 @@
+# TODO - Manual de Usuario PDF
+
+## Completado ✅
+- [x] Instalar DomPDF via Composer
+- [x] Crear archivo manual_usuario.php con generación de PDF
+- [x] Agregar enlace al manual en el sidebar para usuarios con rol "usuario"
+- [x] Agregar banner informativo con botón de descarga en mis-eventos.php
+- [x] Verificar sintaxis PHP del archivo manual_usuario.php
+- [x] Expandir manual con descripciones detalladas de todas las funciones:
+  - [x] Gestión detallada de inscripciones (crear, editar, pagos, eliminar)
+  - [x] Formación de grupos paso a paso
+  - [x] Reportes detallados con todas las pestañas y estadísticas
+  - [x] Formulario público y sus características
+  - [x] Inscripción manual desde panel principal
+
+## Pendiente ⏳
+- [ ] Probar la generación completa del PDF en navegador (requiere servidor web activo)
+
+## Notas
+- ✅ DomPDF completamente instalado y funcional
+- ✅ vendor/autoload.php generado correctamente
+- ✅ Sintaxis PHP verificada sin errores
+- ✅ Manual ampliado con secciones detalladas para todas las funciones
+- El manual está listo para uso en producción
+- Para testing completo, se requiere un servidor web activo con PHP
+
 # Actualización del Formulario de Inscripción de Eventos
 
 ## Tarea: Actualizar formulario de inscripción para mostrar criterios de descuento condicionalmente

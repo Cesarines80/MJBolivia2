@@ -561,7 +561,7 @@ $csrf_token = generateCSRFToken();
                                         <option value="">Seleccionar Evento...</option>
                                         <?php foreach ($eventos as $evento): ?>
                                             <option value="<?php echo $evento['id']; ?>">
-                                                <?php echo htmlspecialchars($evento['nombre']); ?>
+                                                <?php echo htmlspecialchars($evento['titulo']); ?>
                                             </option>
                                         <?php endforeach; ?>
                                     </select>
@@ -669,7 +669,7 @@ $csrf_token = generateCSRFToken();
 
             eventos.forEach(function(evento) {
                 html += '<tr>';
-                html += '<td>' + evento.nombre + '</td>';
+                html += '<td>' + evento.titulo + '</td>';
                 html += '<td>' + evento.fecha_asignacion + '</td>';
                 html += '<td>' + (evento.asignado_por_nombre || 'Sistema') + '</td>';
                 html += '<td>';

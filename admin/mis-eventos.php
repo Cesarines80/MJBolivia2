@@ -127,6 +127,14 @@ $csrf_token = generateCSRFToken();
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="mis-eventos.php" class="nav-link">Mis Eventos</a>
                 </li>
+                        <?php if (Auth::checkRole(['usuario' ])): ?>
+                            <li class="nav-item">
+                                <a href="manual_usuario.php" class="nav-link">
+                                    <i class="nav-icon fas fa-book"></i>
+                                    <p>Manual de Usuario</p>
+                                </a>
+                            </li>
+                        <?php endif; ?>
             </ul>
 
             <ul class="navbar-nav ml-auto">
@@ -135,6 +143,14 @@ $csrf_token = generateCSRFToken();
                         <i class="fas fa-sign-out-alt"></i> Cerrar Sesion
                     </a>
                 </li>
+                        <?php if (Auth::checkRole(['usuario' ])): ?>
+                            <li class="nav-item">
+                                <a href="manual_usuario.php" class="nav-link">
+                                    <i class="nav-icon fas fa-book"></i>
+                                    <p>Manual de Usuario</p>
+                                </a>
+                            </li>
+                        <?php endif; ?>
             </ul>
         </nav>
 
@@ -195,6 +211,14 @@ $csrf_token = generateCSRFToken();
                                 </a>
                             </li>
                         <?php endif; ?>
+                        <?php if (Auth::checkRole(['usuario' ])): ?>
+                            <li class="nav-item">
+                                <a href="manual_usuario.php" class="nav-link">
+                                    <i class="nav-icon fas fa-book"></i>
+                                    <p>Manual de Usuario</p>
+                                </a>
+                            </li>
+                        <?php endif; ?>
                     </ul>
                 </nav>
             </div>
@@ -236,6 +260,17 @@ $csrf_token = generateCSRFToken();
                         </div>
                     <?php endif; ?>
 
+                    <!-- Banner Manual de Usuario -->
+                    <?php if (Auth::checkRole(['usuario' ])): ?>
+                        <div class="alert alert-info alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <h5><i class="icon fas fa-info"></i> ¡Bienvenido al Sistema MJB Bolivia!</h5>
+                            <p>Para obtener ayuda detallada sobre cómo usar el sistema, descarga nuestro Manual de Usuario completo.</p>
+                            <a href="manual_usuario.php" class="btn btn-info btn-sm" target="_blank">
+                                <i class="fas fa-download"></i> Descargar Manual de Usuario (PDF)
+                            </a>
+                        </div>
+                    <?php endif; ?>
                     <!-- Lista de Eventos -->
                     <div class="row">
                         <?php foreach ($eventos as $evento): ?>

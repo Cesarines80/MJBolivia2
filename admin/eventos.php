@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $result = $eventosManager->create($data);
             if ($result['success']) {
-                $eventoId = $result['id'];
+                $eventoId = $result['evento_id'];
 
                 // Configurar descuentos si se proporcionaron
                 if (!empty($configDescuentos['descuento_fecha1']) || !empty($configDescuentos['descuento_fecha2']) || !empty($configDescuentos['descuento_fecha3'])) {

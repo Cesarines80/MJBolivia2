@@ -34,6 +34,24 @@ $permitirInscripcion = $inscripcionAbierta || $esAdminEvento;
 // Obtener configuracion
 $config = $eventosManager->getConfig($eventoId);
 
+// Si costo_inscripcion es null o 0, aplicar descuento por fecha o edad si corresponde
+$today = date('Y-m-d');
+if (is_null($evento['costo_inscripcion']) || $evento['costo_inscripcion'] == 0) {
+    if (!empty($config['descuento_fecha3']) && $today <= $config['descuento_fecha3']) {
+        $evento['costo_inscripcion'] = $config['descuento_costo3'];
+    } elseif (!empty($config['descuento_fecha2']) && $today <= $config['descuento_fecha2']) {
+        $evento['costo_inscripcion'] = $config['descuento_costo2'];
+    } elseif (!empty($config['descuento_fecha1']) && $today <= $config['descuento_fecha1']) {
+        $evento['costo_inscripcion'] = $config['descuento_costo1'];
+    } elseif (!empty($evento['costo_rango1'])) {
+        $evento['costo_inscripcion'] = $evento['costo_rango1'];
+    } elseif (!empty($evento['costo_rango2'])) {
+        $evento['costo_inscripcion'] = $evento['costo_rango2'];
+    } else {
+        $evento['costo_inscripcion'] = 0;
+    }
+}
+
 // Procesar formulario
 $success = '';
 $error = '';

@@ -56,6 +56,7 @@ $colorAcento = $config['color_acento'] ?? '#6B5B95';
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hotel+de+Paris&display=swap" rel="stylesheet">
 
     <!-- Custom CSS -->
     <style>
@@ -128,6 +129,7 @@ $colorAcento = $config['color_acento'] ?? '#6B5B95';
         .event-title h1 {
             font-size: 2.5rem;
             font-weight: 700;
+            font-family: 'Hotel de Paris', cursive;
             margin-bottom: 0.5rem;
         }
 
@@ -352,9 +354,11 @@ $colorAcento = $config['color_acento'] ?? '#6B5B95';
     <!-- Event Details -->
     <section class="container">
         <div class="event-details">
-            <?php if ($evento['imagen']): ?>
-                <img src="<?php echo UPLOADS_URL . $evento['imagen']; ?>"
-                    alt="<?php echo htmlspecialchars($evento['titulo']); ?>" class="event-image">
+            <?php if ($evento['imagen_portada']): ?>
+                <img src="<?php echo UPLOADS_URL . $evento['imagen_portada']; ?>"
+                    alt="<?php echo htmlspecialchars($evento['titulo']); ?>" class="event-image" data-bs-toggle="modal"
+                    data-bs-target="#imageModal"
+                    onclick="showImageModal('<?php echo UPLOADS_URL . $evento['imagen_portada']; ?>', '<?php echo htmlspecialchars($evento['titulo']); ?>')">
             <?php endif; ?>
 
             <div class="event-meta">
@@ -402,7 +406,9 @@ $colorAcento = $config['color_acento'] ?? '#6B5B95';
                     <?php foreach ($galeria as $item): ?>
                         <div class="gallery-item">
                             <img src="<?php echo UPLOADS_URL . $item['imagen']; ?>"
-                                alt="<?php echo htmlspecialchars($item['titulo'] ?? 'Imagen del evento'); ?>">
+                                alt="<?php echo htmlspecialchars($item['titulo'] ?? 'Imagen del evento'); ?>"
+                                data-bs-toggle="modal" data-bs-target="#imageModal"
+                                onclick="showImageModal('<?php echo UPLOADS_URL . $item['imagen']; ?>', '<?php echo htmlspecialchars($item['titulo'] ?? 'Imagen del evento'); ?>')">
                             <div class="gallery-overlay">
                                 <?php if ($item['titulo']): ?>
                                     <h5><?php echo htmlspecialchars($item['titulo']); ?></h5>
@@ -418,6 +424,21 @@ $colorAcento = $config['color_acento'] ?? '#6B5B95';
         <?php endif; ?>
     </section>
 
+    <!-- Image Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageModalLabel">Imagen del Evento</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="modalImage" src="" alt="" class="img-fluid" style="max-height: 70vh; width: auto;">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -430,6 +451,12 @@ $colorAcento = $config['color_acento'] ?? '#6B5B95';
                 item.style.animationDelay = `${index * 0.1}s`;
             });
         });
+
+        function showImageModal(imageSrc, title) {
+            document.getElementById('modalImage').src = imageSrc;
+            document.getElementById('modalImage').alt = title;
+            document.getElementById('imageModalLabel').textContent = title;
+        }
     </script>
 </body>
 
