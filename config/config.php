@@ -6,15 +6,15 @@
 
 // Configuracion de la base de datos
 define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'web_institucional');
+define('DB_USER', 'setbo933_mj');
+define('DB_PASS', 'mjbolivia123456');
+define('DB_NAME', 'setbo933_mj');
 
 // Configuracion del sistema
 define('SITE_NAME', 'Sistema de Gestion de Eventos');
 
 // URL base del sitio (ajustar según el entorno)
-define('SITE_URL', 'http://localhost/proyectos/MJBolivia2/');
+define('SITE_URL', 'https://mjbolivia.setbolivia.org/');
 
 define('ADMIN_URL', SITE_URL . 'admin/');
 define('INSCRIPCIONES_URL', SITE_URL . 'inscripciones/');
