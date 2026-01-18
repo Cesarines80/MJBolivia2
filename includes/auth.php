@@ -104,10 +104,7 @@ class Auth
         // Verificar si esta bloqueado DESPUÉS de validar la contraseña
         // Esto evita que usuarios con contraseña correcta sean bloqueados permanentemente
         if ($user['bloqueado_hasta'] && strtotime($user['bloqueado_hasta']) > time()) {
-            // Excepción para usuario 'andres', 'superadmin' y rol 'usuario' - nunca bloquear
-            if ($user['username'] !== 'andres' && $user['email'] !== 'andres@andres.com' && $user['username'] !== 'superadmin' && $user['email'] !== 'superadmin@sistema.com' && $user['rol'] !== 'usuario') {
-                return ['success' => false, 'message' => 'Usuario bloqueado temporalmente'];
-            }
+            return ['success' => false, 'message' => 'Usuario bloqueado temporalmente'];
         }
 
         // Actualizar ultimo acceso y limpiar bloqueos
@@ -552,10 +549,6 @@ class Auth
      */
     private function recordFailedLogin($ipAddress, $identifier)
     {
-        // NO bloquear al usuario 'andres' ni 'superadmin' ni a usuarios con email 'andres@andres.com' o 'superadmin@sistema.com'
-        if ($identifier === 'andres' || $identifier === 'andres@andres.com' || $identifier === 'superadmin' || $identifier === 'superadmin@sistema.com') {
-            return; // Salir sin registrar el intento fallido
-        }
 
         $stmt = $this->db->prepare("
             INSERT INTO intentos_login (ip_address, email, intentos)

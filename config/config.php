@@ -207,7 +207,7 @@ function limitText($text, $limit = 100)
 /**
  * Funcion para subir archivos
  */
-function uploadFile($file, $allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'])
+function uploadFile($file, $allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'], $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'])
 {
     if ($file['error'] !== UPLOAD_ERR_OK) {
         return ['success' => false, 'error' => 'Error al subir el archivo'];
@@ -217,12 +217,16 @@ function uploadFile($file, $allowedTypes = ['image/jpeg', 'image/png', 'image/gi
         return ['success' => false, 'error' => 'Tipo de archivo no permitido'];
     }
 
+    $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+    if (!in_array($extension, $allowedExtensions)) {
+        return ['success' => false, 'error' => 'Extensión de archivo no permitida'];
+    }
+
     // Limitar tamaño a 5MB
     if ($file['size'] > 5 * 1024 * 1024) {
         return ['success' => false, 'error' => 'El archivo excede el tamaño maximo permitido (5MB)'];
     }
 
-    $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
     $filename = uniqid() . '_' . time() . '.' . $extension;
     $uploadPath = UPLOADS_DIR . $filename;
 

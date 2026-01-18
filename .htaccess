@@ -18,3 +18,9 @@ php_value memory_limit 256M
     Order Allow,Deny
     Deny from all
 </FilesMatch>
+
+# Proteger directorio config
+<FilesMatch "config/config\.php$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
