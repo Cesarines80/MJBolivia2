@@ -1,5 +1,4 @@
-- Agregar pestaña "Informe Financiero" en la navegación
-- Agregar sección de contenido para el reporte financiero
-- Modificar JS de egresos para usar localStorage
-- Agregar JS para ingresos adicionales y egresos en la pestaña financiera
-- Calcular y mostrar totales
+- [x] Update table headers in egresos tab: change "Monto Unitario" to "Monto Bs." and "Subtotal" to "Total"
+- [x] Update colspan in footer of egresos tab from 3 to 4
+- [x] Update table headers in financiero egresos table: change "Monto Unitario" to "Monto Bs." and "Subtotal" to "Total"
+- [x] Update colspan in footer of financiero egresos table from 3 to 4

@@ -71,6 +71,23 @@ $colorAcento = $config['color_acento'] ?? '#6B5B95';
             line-height: 1.6;
             color: #333;
             background-color: #f8f9fa;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('assets/uploads/69699ad2386d4_1768528594.jpeg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.05;
+            z-index: -1;
+            pointer-events: none;
         }
 
         /* Navbar */

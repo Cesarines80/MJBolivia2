@@ -723,12 +723,12 @@ class InscripcionesEvento
         // Aplicar descuento por fecha si corresponde (sobre el costo base ya determinado)
         $today = date('Y-m-d');
 
-        if (!empty($config['descuento_fecha3']) && $today <= $config['descuento_fecha3']) {
-            $montoBase = $config['descuento_costo3'];
+        if (!empty($config['descuento_fecha1']) && $today <= $config['descuento_fecha1']) {
+            $montoBase = $config['descuento_costo1'];
         } elseif (!empty($config['descuento_fecha2']) && $today <= $config['descuento_fecha2']) {
             $montoBase = $config['descuento_costo2'];
-        } elseif (!empty($config['descuento_fecha1']) && $today <= $config['descuento_fecha1']) {
-            $montoBase = $config['descuento_costo1'];
+        } elseif (!empty($config['descuento_fecha3']) && $today <= $config['descuento_fecha3']) {
+            $montoBase = $config['descuento_costo3'];
         }
 
         $montoAlojamiento = 0;

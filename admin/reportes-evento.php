@@ -713,8 +713,8 @@ $tipoReporte = $_GET['tipo'] ?? 'todos';
                                 <tr>
                                     <th>Cantidad</th>
                                     <th>Descripción</th>
-                                    <th>Monto Unitario</th>
-                                    <th>Subtotal</th>
+                                    <th>Monto Bs.</th>
+                                    <th>Total</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -723,7 +723,7 @@ $tipoReporte = $_GET['tipo'] ?? 'todos';
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th colspan="3" class="text-end">Total:</th>
+                                    <th colspan="4" class="text-end">Total:</th>
                                     <th id="total-egresos">Bs. 0.00</th>
                                     <th></th>
                                 </tr>
@@ -828,8 +828,8 @@ $tipoReporte = $_GET['tipo'] ?? 'todos';
                                 <tr>
                                     <th>Cantidad</th>
                                     <th>Descripción</th>
-                                    <th>Monto Unitario</th>
-                                    <th>Subtotal</th>
+                                    <th>Monto Bs.</th>
+                                    <th>Total</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -838,7 +838,7 @@ $tipoReporte = $_GET['tipo'] ?? 'todos';
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th colspan="3" class="text-end">Total Egresos:</th>
+                                    <th colspan="4" class="text-end">Total Egresos:</th>
                                     <th id="total-egresos-fin">Bs. 0.00</th>
                                     <th></th>
                                 </tr>
